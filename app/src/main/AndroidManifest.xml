@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppDelivery">
-        <activity android:name=".MainActivity">
+        <activity android:name=".views.ProfileActivity"></activity>
+        <activity android:name=".views.DetailBarangActivity" />
+        <activity android:name=".views.LoginActivity" />
+        <activity android:name=".views.PublicActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

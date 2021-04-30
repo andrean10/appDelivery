@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.circularreveal.CircularRevealRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".views.DetailBarangActivity">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_track01"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="Tracking Information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_kode_pel"
+        android:layout_below="@+id/tv_track01"
+        android:textSize="13sp"
+        android:textColor="@color/black"
+        android:text="Kode Pelanggan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_kode_pelanggan"
+        android:layout_below="@+id/tv_kode_pel"
+        android:layout_marginTop="4dp"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:text="23123612365126879"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_kode_pen"
+        android:layout_below="@+id/tv_kode_pelanggan"
+        android:layout_marginTop="10dp"
+        android:textSize="13sp"
+        android:textColor="@color/black"
+        android:text="Nama Pelanggan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_kode_penerima"
+        android:layout_below="@+id/tv_kode_pen"
+        android:layout_marginTop="4dp"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:text="Aru"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_kode_no_hp"
+        android:layout_below="@+id/tv_kode_penerima"
+        android:layout_marginTop="10dp"
+        android:textSize="13sp"
+        android:textColor="@color/black"
+        android:text="Nomor Pelanggan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_no_hp_penerima"
+        android:layout_below="@+id/tv_kode_no_hp"
+        android:layout_marginTop="4dp"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:text="081174818574"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_kode_kurir"
+        android:layout_below="@+id/tv_no_hp_penerima"
+        android:layout_marginTop="10dp"
+        android:textSize="13sp"
+        android:textColor="@color/black"
+        android:text="Nama Kurir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_nama_kurir"
+        android:layout_below="@+id/tv_kode_kurir"
+        android:layout_marginTop="4dp"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:text="Armen Satri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_kode_status_barang"
+        android:layout_below="@+id/tv_nama_kurir"
+        android:layout_marginTop="10dp"
+        android:textSize="13sp"
+        android:textColor="@color/black"
+        android:text="Nama Kurir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_status_barnag"
+        android:layout_below="@+id/tv_kode_status_barang"
+        android:layout_marginTop="4dp"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:text="Barang belum Sampai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</com.google.android.material.circularreveal.CircularRevealRelativeLayout>

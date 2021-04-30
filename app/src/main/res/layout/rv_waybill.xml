@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.circularreveal.CircularRevealRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_updated"
+        android:text="2021-01-12 11:27:08"
+        android:textAlignment="center"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/bearer"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/tv_updated"
+        android:src="@drawable/ic_baseline_circle_24"
+        android:layout_width="20dp"
+        android:layout_height="20dp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_detail_shipment"
+        android:layout_toEndOf="@+id/bearer"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="[PEKANABRU] Paket Telah Diterima oleh Andrean Ramadhan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</com.google.android.material.circularreveal.CircularRevealRelativeLayout>

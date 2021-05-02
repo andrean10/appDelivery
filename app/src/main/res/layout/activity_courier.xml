@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.admin.AdminActivity"
+    tools:context=".view.courier.CourierActivity"
     tools:viewBindingIgnore="false">
 
     <fragment
@@ -13,6 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/admin_navigation" />
+        app:navGraph="@navigation/courier_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/admin_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_barangFragment"
+            app:destination="@id/barangFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_trackingBarangFragment"
+            app:destination="@id/trackingBarangFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_listCouriersFragment"
+            app:destination="@id/listCouriersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/barangFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.admin.barang.BarangFragment"
+        android:label="fragment_barang"
+        tools:layout="@layout/fragment_barang">
+        <action
+            android:id="@+id/action_barangFragment_to_detailBarangFragment"
+            app:destination="@id/detailBarangFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/trackingBarangFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.admin.tracking.TrackingBarangFragment"
+        android:label="fragment_tracking_barang"
+        tools:layout="@layout/fragment_tracking_barang">
+        <action
+            android:id="@+id/action_trackingBarangFragment_to_detailTrackingFragment"
+            app:destination="@id/detailTrackingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listCouriersFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.admin.couriers.ListCouriersFragment"
+        android:label="fragment_list_couriers"
+        tools:layout="@layout/fragment_list_couriers">
+        <action
+            android:id="@+id/action_listCouriersFragment_to_detailCouriersFragment"
+            app:destination="@id/detailCouriersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailBarangFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.admin.barang.detail.DetailBarangFragment"
+        android:label="fragment_detail_barang"
+        tools:layout="@layout/fragment_detail_barang">
+        <action
+            android:id="@+id/action_detailBarangFragment_to_manageBarangFragment"
+            app:destination="@id/manageBarangFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailTrackingFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.admin.tracking.DetailTrackingFragment"
+        android:label="fragment_detail_tracking"
+        tools:layout="@layout/fragment_detail_tracking" />
+    <fragment
+        android:id="@+id/manageBarangFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.admin.barang.managebarang.ManageBarangFragment"
+        android:label="fragment_manage_barang"
+        tools:layout="@layout/fragment_manage_barang" />
+    <fragment
+        android:id="@+id/detailCouriersFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.admin.couriers.detail.DetailCouriersFragment"
+        android:label="fragment_detail_couriers"
+        tools:layout="@layout/fragment_detail_couriers" />
+</navigation>

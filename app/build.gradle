@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'androidx.navigation.safeargs'
     id 'kotlin-parcelize'
 }
 
@@ -82,4 +81,8 @@ dependencies {
 
     // lib circleimage
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //lottie -chan
+    implementation 'com.airbnb.android:lottie:3.7.0'
+
 }

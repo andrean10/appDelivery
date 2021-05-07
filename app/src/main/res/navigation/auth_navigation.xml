@@ -10,19 +10,11 @@
         android:name="com.kontrakanprojects.appdelivery.view.auth.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
         <argument
             android:name="idRole"
             app:argType="integer"
             android:defaultValue="0" />
     </fragment>
-    <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.kontrakanprojects.appdelivery.view.auth.register.RegisterFragment"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
     <fragment
         android:id="@+id/chooseLoginFragment"
         android:name="com.kontrakanprojects.appdelivery.view.auth.ChooseLoginFragment"

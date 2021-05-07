@@ -80,4 +80,6 @@ dependencies {
     // lib swipe decorator
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
 
+    // lib circleimage
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

@@ -6,6 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_status_barang"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:text="Belum Sampai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <View
         android:id="@+id/view_barrier_03"
         android:layout_below="@+id/tv_status_barang"
@@ -53,4 +64,16 @@
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_status_package_recycler"
+        android:layout_below="@+id/view_barrier_013"
+        android:text="[27 April 2021] Paket Sedang Dikirm Oleh Kurir"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </com.google.android.material.circularreveal.CircularRevealRelativeLayout>

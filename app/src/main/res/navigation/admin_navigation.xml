@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_barangFragment_to_detailBarangFragment"
             app:destination="@id/detailBarangFragment" />
+        <action
+            android:id="@+id/action_barangFragment_to_manageBarangFragment"
+            app:destination="@id/manageBarangFragment" />
     </fragment>
     <fragment
         android:id="@+id/trackingBarangFragment"

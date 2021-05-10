@@ -8,4 +8,5 @@
     <string name="home_courier">Kurir</string>
     <string name="home_tracking">Tracking</string>
     <string name="home_box">Barang</string>
+    <string name="todo">TODO</string>
 </resources>

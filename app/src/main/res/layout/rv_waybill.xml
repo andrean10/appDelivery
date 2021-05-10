@@ -9,6 +9,7 @@
         android:id="@+id/tv_updated"
         android:text="2021-01-12 11:27:08"
         android:textAlignment="center"
+        android:textColor="@color/black"
         android:layout_width="90dp"
         android:layout_height="wrap_content"/>
 
@@ -27,6 +28,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:text="[PEKANABRU] Paket Telah Diterima oleh Andrean Ramadhan"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

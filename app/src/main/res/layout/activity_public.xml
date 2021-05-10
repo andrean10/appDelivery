@@ -4,105 +4,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     tools:context=".views.PublicActivity">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_welcome"
-        android:text="Selamat Datang"
-        android:layout_alignParentStart="true"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_marginBottom="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_name_welcoming"
-        android:layout_toEndOf="@+id/tv_welcome"
-        android:text=""
-        android:layout_marginStart="4dp"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/img_login"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_baseline_person_24"
-        android:layout_width="20dp"
-        android:layout_height="20dp"/>
-
-    <com.google.android.material.circularreveal.CircularRevealRelativeLayout
-        android:id="@+id/relativelayout_01"
-        android:layout_below="@+id/tv_welcome"
-        android:layout_marginBottom="30dp"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout01"
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/text_view01"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="3dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:text="Track Your Shipment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/text_view02"
-            android:layout_below="@+id/text_view01"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="40dp"
-            android:textSize="15sp"
-            android:textStyle="normal"
-            android:textColor="@color/black"
-            android:text="Masukan Nomor Resi Anda"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_cari_resi"
-            android:layout_below="@id/text_view02"
-            android:layout_centerHorizontal="true"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:hint="Masukan Nomor Resi"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"/>
+    <ScrollView
+        android:layout_below="@+id/appBarLayout01"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_toEndOf="@+id/et_cari_resi"
-            android:layout_below="@+id/text_view02"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/ic_baseline_search_24"
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
+        <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+            <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+                android:id="@+id/relative_layout_01"
+                android:layout_marginBottom="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_waybill"
-        android:layout_below="@+id/relativelayout_01"
-        tools:listitem="@layout/rv_waybill"
-        tools:itemCount="4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_view01"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="3dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:text="Track Your Shipment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_detail"
-        android:layout_below="@+id/rv_waybill"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:text="Detail Barang"
-        app:cornerRadius="40dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_view02"
+                    android:layout_below="@+id/text_view01"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="40dp"
+                    android:textSize="15sp"
+                    android:textStyle="normal"
+                    android:textColor="@color/black"
+                    android:text="Masukan Nomor Resi Anda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_cari_resi"
+                    android:layout_below="@id/text_view02"
+                    android:layout_centerHorizontal="true"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:hint="Masukan Nomor Resi"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_toEndOf="@+id/et_cari_resi"
+                    android:layout_below="@+id/text_view02"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/ic_baseline_search_24"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+
+            </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_waybill"
+                android:layout_below="@+id/relative_layout_01"
+                tools:listitem="@layout/rv_waybill"
+                tools:itemCount="4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_detail"
+                android:layout_below="@+id/rv_waybill"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:text="Detail Barang"
+                app:cornerRadius="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

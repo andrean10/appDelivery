@@ -5,10 +5,212 @@
     android:layout_height="match_parent"
     tools:context=".view.admin.barang.detail.DetailBarangFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.circularreveal.CircularRevealRelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout01"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ScrollView
+            android:layout_below="@+id/appBarLayout01"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_title_detail"
+                    android:layout_centerHorizontal="true"
+                    android:text="Detail Barang"
+                    android:textSize="21sp"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_edit_package"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_baseline_edit_24"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+
+                <View
+                    android:id="@+id/barrier_01"
+                    android:layout_below="@+id/tv_title_detail"
+                    android:layout_marginBottom="30dp"
+                    android:background="@color/black"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginEnd="60dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_01"
+                    android:layout_below="@+id/barrier_01"
+                    android:text="Kode Pelanggan"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_code_costumer"
+                    android:layout_below="@+id/tv_01"
+                    android:text="2132732132"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_02"
+                    android:layout_below="@+id/tv_code_costumer"
+                    android:text="Nama "
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_name_costumer"
+                    android:layout_below="@+id/tv_02"
+                    android:text="Aru"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_03"
+                    android:layout_below="@+id/tv_name_costumer"
+                    android:text="Nomor HP"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_number_phone"
+                    android:layout_below="@+id/tv_03"
+                    android:text="08645912347"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_04"
+                    android:layout_below="@+id/tv_number_phone"
+                    android:text="Alamat "
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_address_costumer"
+                    android:layout_below="@+id/tv_04"
+                    android:text="Jl. Kartama Pribadi No 110 "
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_05"
+                    android:layout_below="@+id/tv_address_costumer"
+                    android:text="Kurir Yang Mengirim"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/courier_send"
+                    android:layout_below="@+id/tv_05"
+                    android:text="Arif Irsan Ramadhan"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_06"
+                    android:layout_below="@+id/courier_send"
+                    android:text="Detail Barang"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_detail_package"
+                    android:layout_below="@+id/tv_06"
+                    android:text="Barang Mudah Pecah Janngan Dihemap"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_07"
+                    android:layout_below="@+id/tv_detail_package"
+                    android:text="Status Barang"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_status_package"
+                    android:layout_below="@+id/tv_07"
+                    android:text="Barang Sudah Sampai"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_edit_package"
+                    android:layout_below="@+id/tv_status_package"
+                    android:layout_marginTop="10dp"
+                    android:text="Edit"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+        </ScrollView>
+    </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 
 </FrameLayout>

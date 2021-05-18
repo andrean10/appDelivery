@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/public_navigation"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_detailBarangFragment2"
+            app:destination="@id/detailBarangFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailBarangFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.admin.barang.detail.DetailBarangFragment"
+        android:label="fragment_detail_barang"
+        tools:layout="@layout/fragment_detail_barang" />
+</navigation>

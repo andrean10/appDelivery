@@ -12,7 +12,17 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/pbLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/iv_login"
@@ -28,7 +38,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til01"
+                android:id="@+id/tiUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -42,7 +52,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/iv_login">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/login_email"
+                    android:id="@+id/edtUsername"
                     android:inputType="textEmailAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -50,7 +60,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til02"
+                android:id="@+id/tiPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -61,11 +71,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til01"
+                app:layout_constraintTop_toBottomOf="@+id/tiUsername"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/login_pass"
+                    android:id="@+id/edtPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword" />
@@ -83,7 +93,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til02" />
+                app:layout_constraintTop_toBottomOf="@+id/tiPassword" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_login"

@@ -1,5 +1,6 @@
 package com.kontrakanprojects.appdelivery.network
 
+import com.kontakanprojects.apptkslb.model.ResponseAuth
 import com.kontrakanprojects.appdelivery.model.kurir.ResponseKurir
 import retrofit2.Call
 import retrofit2.http.*
@@ -7,8 +8,8 @@ import retrofit2.http.*
 interface ApiService {
 
     // login
-//    @POST("login")
-//    fun login(): Call<>
+    @POST("login")
+    fun login(@FieldMap params: HashMap<String, Any>): Call<ResponseAuth>
 
     // Kurir
     @GET("kurir")

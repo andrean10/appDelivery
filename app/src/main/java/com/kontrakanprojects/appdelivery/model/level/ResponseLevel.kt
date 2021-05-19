@@ -1,8 +1,8 @@
-package com.kontrakanprojects.appdelivery.model.kurir
+package com.kontrakanprojects.appdelivery.model.level
 
 import com.google.gson.annotations.SerializedName
 
-data class ResponseKurir(
+data class ResponseLevel(
 
 	@field:SerializedName("message")
 	val message: String? = null,
@@ -16,24 +16,15 @@ data class ResponseKurir(
 
 data class ResultsItem(
 
-	@field:SerializedName("foto_profil")
-	val fotoProfil: String? = null,
-
 	@field:SerializedName("updated_at")
 	val updatedAt: String? = null,
 
-	@field:SerializedName("nama_lengkap")
-	val namaLengkap: String? = null,
+	@field:SerializedName("id_level_akses")
+	val idLevelAkses: Int? = null,
 
 	@field:SerializedName("created_at")
 	val createdAt: String? = null,
 
-	@field:SerializedName("id_kurir")
-	val idKurir: Int? = null,
-
-	@field:SerializedName("username")
-	val username: String? = null,
-
-	@field:SerializedName("alamat")
-	val alamat: String? = null
+	@field:SerializedName("tipe_aktor")
+	val tipeAktor: String? = null
 )

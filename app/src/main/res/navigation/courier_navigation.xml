@@ -2,4 +2,20 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/courier_navigation" />
+    android:id="@+id/courier_navigation"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.dashboard.DashboardFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_homeFragment_to_barangFragment2"
+            app:destination="@id/barangFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/barangFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.admin.barang.BarangFragment"
+        android:label="fragment_barang"
+        tools:layout="@layout/fragment_barang" />
+</navigation>

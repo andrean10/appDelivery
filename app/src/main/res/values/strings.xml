@@ -9,4 +9,6 @@
     <string name="home_tracking">Tracking</string>
     <string name="home_box">Barang</string>
     <string name="todo">TODO</string>
+    <string name="delete">Delete</string>
+    <string name="login">Login</string>
 </resources>

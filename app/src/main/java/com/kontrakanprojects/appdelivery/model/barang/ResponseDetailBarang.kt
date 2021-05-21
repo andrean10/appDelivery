@@ -8,13 +8,13 @@ data class ResponseDetailBarang(
 	val message: String? = null,
 
 	@field:SerializedName("results")
-	val results: List<ResultsItem?>? = null,
+	val results: List<ResultDetailBarang>? = null,
 
 	@field:SerializedName("status")
-	val status: String? = null
+	val status: Int? = null,
 )
 
-data class ResultsItem(
+data class ResultDetailBarang(
 
 	@field:SerializedName("detail_barang")
 	val detailBarang: String? = null,
@@ -50,5 +50,5 @@ data class ResultsItem(
 	val alamat: String? = null,
 
 	@field:SerializedName("longitude")
-	val longitude: String? = null
+	val longitude: String? = null,
 )

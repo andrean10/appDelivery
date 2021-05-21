@@ -67,11 +67,15 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text_view02"
                     android:layout_centerHorizontal="true"
+                    android:ems="10"
                     android:hint="Masukan Nomor Resi"
+                    android:lines="1"
+                    android:maxLines="1"
                     android:textAlignment="center"
                     android:textColor="@color/black" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_search"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_below="@+id/text_view02"
@@ -80,7 +84,27 @@
                     android:layout_toEndOf="@+id/et_cari_resi"
                     android:background="@drawable/ic_baseline_search_24" />
 
+                <TextView
+                    android:id="@+id/tvFailedResi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/et_cari_resi"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="6dp"
+                    android:text="Resi Tidak Boleh Kosong"
+                    android:textColor="@android:color/holo_red_light"
+                    android:visibility="gone" />
+
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+
+            <ProgressBar
+                android:id="@+id/pbLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="32dp"
+                android:layout_below="@+id/relative_layout_01"
+                android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_waybill"
@@ -98,6 +122,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:text="Detail Barang"
+                android:visibility="gone"
                 app:cornerRadius="40dp" />
 
         </com.google.android.material.circularreveal.CircularRevealRelativeLayout>

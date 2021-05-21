@@ -20,7 +20,7 @@
         android:theme="@style/Theme.AppDelivery"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".view.courier.CourierActivity"></activity>
+        <activity android:name=".view.courier.CourierActivity" />
         <activity android:name=".view.admin.AdminActivity" />
         <activity android:name=".view.splash.SplashActivity">
             <intent-filter>
@@ -30,6 +30,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.dashboard.DashboardActivity" />
+        <activity android:name=".view.home.HomeActivity" />
         <activity android:name=".view.auth.AuthActivity" />
     </application>
 

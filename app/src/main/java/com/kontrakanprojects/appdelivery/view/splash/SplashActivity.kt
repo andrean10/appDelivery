@@ -7,7 +7,10 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.sessions.UserPreference
-import com.kontrakanprojects.appdelivery.view.auth.AuthActivity
+import com.kontrakanprojects.appdelivery.view.admin.AdminActivity
+import com.kontrakanprojects.appdelivery.view.auth.ChooseLoginFragment
+import com.kontrakanprojects.appdelivery.view.courier.CourierActivity
+import com.kontrakanprojects.appdelivery.view.home.HomeActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -23,7 +26,6 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
 
         //hiding title bar of this activity
         window.requestFeature(Window.FEATURE_NO_TITLE)
@@ -33,6 +35,8 @@ class SplashActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
+        setContentView(R.layout.activity_splash)
+
         activityScope.launch {
             delay(DELAY)
 
@@ -40,19 +44,19 @@ class SplashActivity : AppCompatActivity() {
             val session = UserPreference(this@SplashActivity)
             if (session.getLogin().isLoginValid) {
                 when (session.getUser().idRole) {
-//                    ChooseLoginFragment.ROLE_GURU -> {
-//                        val intent = Intent(this@SplashScreenActivity, GuruActivity::class.java)
-//                        startActivity(intent)
-//                        finish()
-//                    }
-//                    ChooseLoginFragment.ROLE_SISWA -> {
-//                        val intent = Intent(this@SplashScreenActivity, SiswaActivity::class.java)
-//                        startActivity(intent)
-//                        finish()
-//                    }
+                    ChooseLoginFragment.ROLE_ADMIN -> {
+                        val intent = Intent(this@SplashActivity, AdminActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                    ChooseLoginFragment.ROLE_COURIER -> {
+                        val intent = Intent(this@SplashActivity, CourierActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
                 }
             } else {
-                val intent = Intent(this@SplashActivity, AuthActivity::class.java)
+                val intent = Intent(this@SplashActivity, HomeActivity::class.java)
                 startActivity(intent)
                 finish()
             }

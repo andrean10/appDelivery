@@ -14,7 +14,7 @@ interface ApiService {
 
     // Barang
     @GET("barang")
-    fun barang(@Field("kode_resi") kodeResi: String): Call<ResponseDetailBarang>
+    fun barang(@Field("kode_resi") kodeResi: Int): Call<ResponseDetailBarang>
 
     // Kurir
     @GET("kurir")

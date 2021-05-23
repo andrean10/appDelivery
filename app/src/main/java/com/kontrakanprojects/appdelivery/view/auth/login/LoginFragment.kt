@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.kontakanprojects.apptkslb.utils.showMessage
@@ -130,6 +131,10 @@ class LoginFragment : Fragment() {
                                             )
                                             startActivity(intent)
                                             activity?.finish()
+
+                                            Toast.makeText(requireContext(),
+                                                "Admin berhasil login",
+                                                Toast.LENGTH_SHORT).show()
                                         }
                                         ChooseLoginFragment.ROLE_COURIER -> {
                                             val intent = Intent(
@@ -138,6 +143,10 @@ class LoginFragment : Fragment() {
                                             )
                                             startActivity(intent)
                                             activity?.finish()
+
+                                            Toast.makeText(requireContext(),
+                                                "Kurir berhasil login",
+                                                Toast.LENGTH_SHORT).show()
                                         }
                                     }
                                 } else {

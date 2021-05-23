@@ -39,14 +39,12 @@ class ChooseLoginFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn_login_as_admin -> {
-                // pindah ke admin
                 val toLogin =
                     ChooseLoginFragmentDirections.actionChooseLoginFragmentToLoginFragment()
                 toLogin.idRole = ROLE_ADMIN
                 findNavController().navigate(toLogin)
             }
             R.id.btn_login_as_courier -> {
-                // pindah ke kurir
                 val toLogin =
                     ChooseLoginFragmentDirections.actionChooseLoginFragmentToLoginFragment()
                 toLogin.idRole = ROLE_COURIER

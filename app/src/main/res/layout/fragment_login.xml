@@ -82,19 +82,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_lupa_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Lupa Password"
-                android:textColor="#FF1100"
-                app:layout_constraintVertical_bias=".03"
-                app:layout_constraintHorizontal_bias="0.95"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tiPassword" />
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
@@ -112,7 +99,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_lupa_password" />
+                app:layout_constraintTop_toBottomOf="@+id/tiPassword" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

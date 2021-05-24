@@ -10,12 +10,30 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_dashboard">
         <action
-            android:id="@+id/action_homeFragment_to_barangFragment2"
+            android:id="@+id/action_homeFragment_to_barangFragment"
             app:destination="@id/barangFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailCouriersFragment2"
+            app:destination="@id/detailCouriersFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/barangFragment"
         android:name="com.kontrakanprojects.appdelivery.view.admin.barang.BarangFragment"
         android:label="fragment_barang"
-        tools:layout="@layout/fragment_barang" />
+        tools:layout="@layout/fragment_barang" >
+        <action
+            android:id="@+id/action_barangFragment_to_manageFragment"
+            app:destination="@id/manageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/manageFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.admin.tracking.manage.ManageFragment"
+        android:label="fragment_manage"
+        tools:layout="@layout/fragment_manage" />
+    <fragment
+        android:id="@+id/detailCouriersFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.admin.couriers.detail.DetailCouriersFragment"
+        android:label="fragment_detail_couriers"
+        tools:layout="@layout/fragment_detail_couriers" />
 </navigation>

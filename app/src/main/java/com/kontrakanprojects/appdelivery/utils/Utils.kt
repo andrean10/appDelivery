@@ -1,4 +1,4 @@
-package com.kontakanprojects.apptkslb.utils
+package com.kontrakanprojects.appdelivery.utils
 
 import android.app.Activity
 import android.view.View

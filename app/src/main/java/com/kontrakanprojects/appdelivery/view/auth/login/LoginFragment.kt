@@ -11,11 +11,11 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.kontakanprojects.apptkslb.utils.showMessage
 import com.kontrakanprojects.appdelivery.databinding.FragmentLoginBinding
 import com.kontrakanprojects.appdelivery.db.Login
 import com.kontrakanprojects.appdelivery.db.User
 import com.kontrakanprojects.appdelivery.sessions.UserPreference
+import com.kontrakanprojects.appdelivery.utils.showMessage
 import com.kontrakanprojects.appdelivery.view.admin.AdminActivity
 import com.kontrakanprojects.appdelivery.view.auth.AuthViewModel
 import com.kontrakanprojects.appdelivery.view.auth.ChooseLoginFragment
@@ -82,12 +82,16 @@ class LoginFragment : Fragment() {
                 }
 
                 override fun afterTextChanged(s: Editable?) {
-                    if (s?.length!! < 5) {
-                        binding.tiPassword.error = MIN_COUNTER_LENGTH_PASS
-                    } else if (s.isNullOrEmpty()) {
-                        binding.tiPassword.error = PASSWORD_NOT_NULL
-                    } else {
-                        binding.tiPassword.error = null
+                    when {
+                        s?.length!! < 5 -> {
+                            binding.tiPassword.error = MIN_COUNTER_LENGTH_PASS
+                        }
+                        s.isNullOrEmpty() -> {
+                            binding.tiPassword.error = PASSWORD_NOT_NULL
+                        }
+                        else -> {
+                            binding.tiPassword.error = null
+                        }
                     }
                 }
             })

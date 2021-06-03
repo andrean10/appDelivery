@@ -17,13 +17,13 @@ class HomeViewModel : ViewModel() {
 
     private val TAG = HomeViewModel::class.simpleName
 
-    fun search(kodeResi: String): LiveData<ResponseDetailBarang> {
+    fun search(kodeResi: Int): LiveData<ResponseDetailBarang> {
         _search = MutableLiveData<ResponseDetailBarang>()
         getSearch(kodeResi)
         return _search as MutableLiveData<ResponseDetailBarang>
     }
 
-    private fun getSearch(kodeResi: String) {
+    private fun getSearch(kodeResi: Int) {
         val client = ApiConfig.getApiService().barang(kodeResi)
         client.enqueue(object : Callback<ResponseDetailBarang> {
             override fun onResponse(

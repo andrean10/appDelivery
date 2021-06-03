@@ -7,9 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kontakanprojects.apptkslb.utils.showMessage
 import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.FragmentHomeBinding
+import com.kontrakanprojects.appdelivery.utils.showMessage
 import com.kontrakanprojects.appdelivery.view.auth.AuthActivity
 import www.sanju.motiontoast.MotionToast
 
@@ -54,14 +54,16 @@ class HomeFragment : Fragment() {
                 }
 
                 isLoading(true)
-                viewModel.search(inputResi).observe(viewLifecycleOwner, { response ->
+                viewModel.search(inputResi.toInt()).observe(viewLifecycleOwner, { response ->
                     isLoading(false)
                     if (response != null) {
                         if (response.status == 200) {
+                            isNotEmptyData(true)
                             val result = response.results
                             homeAdapter.setData(result)
                         } else {
-                            // tambahkan animasi data kosong
+                            isNotEmptyData(false)
+                            animationViewImage.visibility = View.VISIBLE
                         }
                     } else { // failed mengambil data
                         showMessage(requireActivity(), "Failed", style = MotionToast.TOAST_ERROR)
@@ -89,8 +91,21 @@ class HomeFragment : Fragment() {
         with(binding) {
             if (status) {
                 pbLoading.visibility = View.VISIBLE
+                animationViewImage.visibility = View.GONE
             } else {
                 pbLoading.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun isNotEmptyData(state: Boolean) {
+        with(binding) {
+            if (state) {
+                rvSuccess.visibility = View.VISIBLE
+                rvFailed.visibility = View.GONE
+            } else {
+                rvSuccess.visibility = View.GONE
+                rvFailed.visibility = View.VISIBLE
             }
         }
     }

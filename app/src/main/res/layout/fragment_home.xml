@@ -67,6 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text_view02"
                     android:layout_centerHorizontal="true"
+                    android:inputType="numberDecimal"
                     android:ems="10"
                     android:hint="Masukan Nomor Resi"
                     android:lines="1"
@@ -97,33 +98,56 @@
 
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 
-            <ProgressBar
-                android:id="@+id/pbLoading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="32dp"
+            <RelativeLayout
+                android:id="@+id/rvFailed"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
                 android:layout_below="@+id/relative_layout_01"
-                android:visibility="gone" />
+                android:layout_marginTop="6dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_waybill"
-                android:layout_width="wrap_content"
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animationViewImage"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_centerInParent="true"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/falling_parcel"
+                    android:visibility="gone" />
+
+                <ProgressBar
+                    android:id="@+id/pbLoading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rvSuccess"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/relative_layout_01"
-                tools:itemCount="4"
-                tools:listitem="@layout/rv_waybill" />
+                android:visibility="gone">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rv_waybill"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:text="Detail Barang"
-                android:visibility="gone"
-                app:cornerRadius="40dp" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_waybill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/rv_waybill" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rv_waybill"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:text="Detail Barang"
+                    app:cornerRadius="40dp" />
+
+            </RelativeLayout>
 
         </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 

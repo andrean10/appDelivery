@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiConfig {
     companion object {
         // hosting
-        val URL = "http://127.0.0.1:8001"
+        val URL = "http://127.0.0.1:8000"
 
         private val ENDPOINT = "$URL/api/"
 

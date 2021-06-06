@@ -24,6 +24,13 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <ProgressBar
+            android:id="@+id/pbLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="visible" />
+
         <ScrollView
             android:layout_below="@+id/appBarLayout01"
             android:layout_width="match_parent"

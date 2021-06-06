@@ -131,6 +131,16 @@
                         android:hint="Alamat Lengkap" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_save_profile_kurir"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/black"
+                    android:text="Simpan"
+                    android:layout_below="@+id/til004"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
         </ScrollView>
     </com.google.android.material.circularreveal.CircularRevealRelativeLayout>

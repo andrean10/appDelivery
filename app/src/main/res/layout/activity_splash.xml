@@ -30,12 +30,4 @@
         android:layout_centerHorizontal="true"
         android:text="Get Your Parcel More Safety" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_started"
-        android:layout_below="@+id/textView"
-        android:text="Get Started"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
 </com.google.android.material.circularreveal.CircularRevealRelativeLayout>

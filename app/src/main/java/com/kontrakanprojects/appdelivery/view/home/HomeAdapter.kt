@@ -4,17 +4,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kontrakanprojects.appdelivery.databinding.RvWaybillBinding
-import com.kontrakanprojects.appdelivery.model.barang.ResultDetailBarang
+import com.kontrakanprojects.appdelivery.model.tracking.ResultTracking
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeAdapterViewHolder>() {
 
-    private val listTrackingBarang = ArrayList<ResultDetailBarang>()
+    private val listTracking = ArrayList<ResultTracking>()
     private var onItemClickCallBack: OnItemClickCallBack? = null
 
-    fun setData(trackingBarang: List<ResultDetailBarang>?) {
+    fun setData(trackingBarang: List<ResultTracking>?) {
         if (trackingBarang == null) return
-        listTrackingBarang.clear()
-        listTrackingBarang.addAll(trackingBarang)
+        listTracking.clear()
+        listTracking.addAll(trackingBarang)
         notifyDataSetChanged()
     }
 
@@ -29,25 +29,25 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeAdapterViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: HomeAdapterViewHolder, position: Int) {
-        holder.bind(listTrackingBarang[position])
+        holder.bind(listTracking[position])
     }
 
-    override fun getItemCount() = listTrackingBarang.size
+    override fun getItemCount() = listTracking.size
 
     inner class HomeAdapterViewHolder(private val binding: RvWaybillBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(resultDetailBarang: ResultDetailBarang) {
+        fun bind(resultTracking: ResultTracking) {
             with(binding) {
-                tvUpdated.text = resultDetailBarang.updatedAt
-                tvDetailShipment.text = resultDetailBarang.statusBarang
+                tvUpdated.text = resultTracking.updatedAt
+                tvDetailShipment.text = resultTracking.detail
             }
 
-            itemView.setOnClickListener { onItemClickCallBack?.onItemClicked(resultDetailBarang) }
+            itemView.setOnClickListener { onItemClickCallBack?.onItemClicked(resultTracking) }
         }
 
     }
 
     interface OnItemClickCallBack {
-        fun onItemClicked(resultDetailBarang: ResultDetailBarang)
+        fun onItemClicked(resultDetailBarang: ResultTracking)
     }
 }

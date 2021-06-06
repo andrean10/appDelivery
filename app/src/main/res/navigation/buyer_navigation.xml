@@ -17,5 +17,10 @@
         android:id="@+id/detailBarangFragment"
         android:name="com.kontrakanprojects.appdelivery.view.admin.barang.detail.DetailBarangFragment"
         android:label="fragment_detail_barang"
-        tools:layout="@layout/fragment_detail_barang" />
+        tools:layout="@layout/fragment_detail_barang">
+        <argument
+            android:name="idBarang"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
 </navigation>

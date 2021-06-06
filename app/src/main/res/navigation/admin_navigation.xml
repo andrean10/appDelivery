@@ -25,9 +25,6 @@
         <action
             android:id="@+id/action_trackingBarangFragment_to_detailTrackingFragment"
             app:destination="@id/detailTrackingFragment" />
-        <action
-            android:id="@+id/action_trackingBarangFragment_to_manageFragment"
-            app:destination="@id/manageFragment" />
     </fragment>
     <fragment
         android:id="@+id/listCouriersFragment"
@@ -46,6 +43,10 @@
         <action
             android:id="@+id/action_detailBarangFragment_to_manageBarangFragment"
             app:destination="@id/manageBarangFragment" />
+        <argument
+            android:name="idBarang"
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/detailTrackingFragment"
@@ -61,7 +62,12 @@
         android:id="@+id/detailCouriersFragment"
         android:name="com.kontrakanprojects.appdelivery.view.admin.couriers.detail.DetailCouriersFragment"
         android:label="fragment_detail_couriers"
-        tools:layout="@layout/fragment_detail_couriers" />
+        tools:layout="@layout/fragment_detail_couriers">
+        <argument
+            android:name="idKurir"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.kontrakanprojects.appdelivery.view.dashboard.DashboardFragment"
@@ -77,18 +83,4 @@
             android:id="@+id/action_dashboardFragment_to_listCouriersFragment"
             app:destination="@id/listCouriersFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.kontrakanprojects.appdelivery.view.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_homeFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/manageFragment"
-        android:name="com.kontrakanprojects.appdelivery.view.admin.tracking.manage.ManageFragment"
-        android:label="fragment_manage"
-        tools:layout="@layout/fragment_manage" />
 </navigation>

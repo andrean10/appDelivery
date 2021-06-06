@@ -10,7 +10,8 @@ import com.kontrakanprojects.appdelivery.databinding.FragmentDetailTrackingBindi
 
 class DetailTrackingFragment : Fragment() {
 
-    private lateinit var binding: FragmentDetailTrackingBinding
+    private var _binding: FragmentDetailTrackingBinding? = null
+    private val binding get() = _binding!!
     private val viewModel by viewModels<TrackingBarangViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,10 +21,10 @@ class DetailTrackingFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentDetailTrackingBinding.inflate(inflater, container, false)
+        _binding = FragmentDetailTrackingBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -31,5 +32,10 @@ class DetailTrackingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

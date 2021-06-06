@@ -8,9 +8,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiConfig {
     companion object {
         // hosting
-        val URL = "http://127.0.0.1:8000"
+        const val URL = "http://192.168.43.42:8001"
 
-        private val ENDPOINT = "$URL/api/"
+        private const val ENDPOINT = "$URL/api/"
 
         private fun client(): OkHttpClient {
             val logging = HttpLoggingInterceptor()

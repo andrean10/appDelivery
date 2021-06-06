@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kontrakanprojects.appdelivery.model.barang.ResponseDetailBarang
+import com.kontrakanprojects.appdelivery.model.tracking.ResponseTracking
 import com.kontrakanprojects.appdelivery.network.ApiConfig
 import org.json.JSONObject
 import retrofit2.Call
@@ -13,22 +13,22 @@ import retrofit2.Response
 
 class HomeViewModel : ViewModel() {
 
-    private var _search: MutableLiveData<ResponseDetailBarang>? = null
+    private var _search: MutableLiveData<ResponseTracking>? = null
 
     private val TAG = HomeViewModel::class.simpleName
 
-    fun search(kodeResi: Int): LiveData<ResponseDetailBarang> {
-        _search = MutableLiveData<ResponseDetailBarang>()
+    fun search(kodeResi: Int): LiveData<ResponseTracking> {
+        _search = MutableLiveData<ResponseTracking>()
         getSearch(kodeResi)
-        return _search as MutableLiveData<ResponseDetailBarang>
+        return _search as MutableLiveData<ResponseTracking>
     }
 
     private fun getSearch(kodeResi: Int) {
-        val client = ApiConfig.getApiService().barang(kodeResi)
-        client.enqueue(object : Callback<ResponseDetailBarang> {
+        val client = ApiConfig.getApiService().tracking(kodeResi)
+        client.enqueue(object : Callback<ResponseTracking> {
             override fun onResponse(
-                call: Call<ResponseDetailBarang>,
-                response: Response<ResponseDetailBarang>,
+                call: Call<ResponseTracking>,
+                response: Response<ResponseTracking>,
             ) {
                 if (response.isSuccessful) {
                     val result = response.body()
@@ -37,14 +37,14 @@ class HomeViewModel : ViewModel() {
                     val errResult = response.errorBody()?.string()
                     val status = JSONObject(errResult!!).getInt("status")
                     val message = JSONObject(errResult).getString("message")
-                    val responseAuth = ResponseDetailBarang(message = message, status = status)
-                    _search?.postValue(responseAuth)
+                    val responseTracking = ResponseTracking(message = message, status = status)
+                    _search?.postValue(responseTracking)
 
-                    Log.e(TAG, "onFailure: $responseAuth")
+                    Log.e(TAG, "onFailure: $responseTracking")
                 }
             }
 
-            override fun onFailure(call: Call<ResponseDetailBarang>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseTracking>, t: Throwable) {
                 _search?.postValue(null)
                 Log.e(TAG, "onFailure: ${t.message}")
             }

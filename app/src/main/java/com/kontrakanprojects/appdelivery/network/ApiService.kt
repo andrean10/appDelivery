@@ -18,7 +18,10 @@ interface ApiService {
 
     // Kurir
     @GET("kurir")
-    fun showKurir(): Call<ResponseKurir>
+    fun listKurir(): Call<ResponseKurir>
+
+    @GET("kurir/{id}")
+    fun detailKurir(@Path("id") idKurir: Int): Call<ResponseKurir>
 
     @FormUrlEncoded
     @POST("kurir")
@@ -28,7 +31,7 @@ interface ApiService {
     @PATCH("kurir/{id}")
     fun editKurir(
         @Path("id") idKurir: Int,
-        @FieldMap dataKurir: Map<String, String>
+        @FieldMap dataKurir: Map<String, String>,
     ): Call<ResponseKurir>
 
     @DELETE("kurir/{id}")

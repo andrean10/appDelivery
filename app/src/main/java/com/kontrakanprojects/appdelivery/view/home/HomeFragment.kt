@@ -15,7 +15,8 @@ import www.sanju.motiontoast.MotionToast
 
 class HomeFragment : Fragment() {
 
-    private lateinit var binding: FragmentHomeBinding
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
     private val viewModel by viewModels<HomeViewModel>()
     private lateinit var homeAdapter: HomeAdapter
 
@@ -28,7 +29,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -115,6 +116,11 @@ class HomeFragment : Fragment() {
         if ((activity as AppCompatActivity?)!!.supportActionBar != null) {
             (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Tracking Barang"
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

@@ -3,29 +3,33 @@ package com.kontrakanprojects.appdelivery.view.admin.couriers
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.kontrakanprojects.appdelivery.databinding.ItemsCouriersBinding
+import com.bumptech.glide.Glide
+import com.kontrakanprojects.appdelivery.R
+import com.kontrakanprojects.appdelivery.databinding.RvCourierListBinding
+import com.kontrakanprojects.appdelivery.model.kurir.ResultKurir
+import com.kontrakanprojects.appdelivery.network.ApiConfig
 
 class ListCouriersAdapter :
     RecyclerView.Adapter<ListCouriersAdapter.ListCouriersAdapterViewHolder>() {
 
-    //    private val listKelas = ArrayList<ResultsKelas>()
+    private val listCourier = ArrayList<ResultKurir>()
     private var onItemClickCallBack: OnItemClickCallBack? = null
 
-//    fun setData(kelas: List<ResultsKelas>?) {
-//        if (kelas == null) return
-//        listKelas.clear()
-//        listKelas.addAll(kelas)
-//        notifyDataSetChanged()
-//    }
+    fun setData(couriers: List<ResultKurir>?) {
+        if (couriers == null) return
+        listCourier.clear()
+        listCourier.addAll(couriers)
+        notifyDataSetChanged()
+    }
 
-//    fun getData(position: Int) = listKelas[position]
+    fun getData(position: Int) = listCourier[position]
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): ListCouriersAdapterViewHolder {
         val binding =
-            ItemsCouriersBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            RvCourierListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListCouriersAdapterViewHolder(binding)
     }
 
@@ -34,27 +38,29 @@ class ListCouriersAdapter :
     }
 
     override fun onBindViewHolder(holder: ListCouriersAdapterViewHolder, position: Int) {
-//        holder.bind(listKelas[position])
+        holder.bind(listCourier[position])
     }
 
-    override fun getItemCount() = 0 // listKelas.size
+    override fun getItemCount() = listCourier.size
 
-    inner class ListCouriersAdapterViewHolder(private val binding: ItemsCouriersBinding) :
+    inner class ListCouriersAdapterViewHolder(private val binding: RvCourierListBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        fun bind(resultKurir: ResultKurir) {
+            with(binding) {
+                Glide.with(itemView.context)
+                    .load(ApiConfig.URL + resultKurir.fotoProfil)
+                    .placeholder(R.drawable.no_profile_images)
+                    .error(R.drawable.no_profile_images)
+                    .into(circlePhotoProfile)
 
-//        fun bind(resultsKelas: ResultsKelas) {
-//            with(binding) {
-//                Glide.with(itemView.context)
-//                    .load(resultsKelas.)
-//            }
+                nameCourier.text = resultKurir.namaLengkap
+            }
 
-//            binding.tvNameCouriers.text = resultsKelas.namaKelas
-
-//            itemView.setOnClickListener { onItemClickCallBack?.onItemClicked(resultsKelas) }
-//        }
+            itemView.setOnClickListener { onItemClickCallBack?.onItemClicked(resultKurir) }
+        }
     }
 
     interface OnItemClickCallBack {
-//        fun onItemClicked(resultsKelas: ResultsKelas)
+        fun onItemClicked(resultKurir: ResultKurir)
     }
 }

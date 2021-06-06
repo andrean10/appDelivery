@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.circularreveal.CircularRevealRelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.circularreveal.CircularRevealRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#DEE1E4"
     android:layout_marginBottom="10dp"
+    android:background="#DEE1E4"
     android:padding="16dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circle_photo_profile"
-        android:src="@drawable/arif"
         android:layout_width="80dp"
-        android:layout_height="80dp"/>
+        android:layout_height="80dp"
+        android:src="@drawable/arif" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/name_courier"
-        android:layout_toEndOf="@+id/circle_photo_profile"
-        android:text="Arif Irsan Ramadhan"
-        android:textSize="21sp"
-        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_toEndOf="@+id/circle_photo_profile"
+        android:text="Arif Irsan Ramadhan"
+        android:textColor="@color/black"
+        android:textSize="21sp" />
 
 </com.google.android.material.circularreveal.CircularRevealRelativeLayout>

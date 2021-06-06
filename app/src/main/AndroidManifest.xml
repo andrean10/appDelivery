@@ -21,15 +21,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name=".view.courier.CourierActivity" />
-        <activity android:name=".view.admin.AdminActivity" />
-        <activity android:name=".view.splash.SplashActivity">
+        <activity android:name=".view.admin.AdminActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.dashboard.DashboardActivity" />
+        <activity android:name=".view.splash.SplashActivity">
+
+        </activity>
         <activity android:name=".view.home.HomeActivity" />
         <activity android:name=".view.auth.AuthActivity" />
     </application>

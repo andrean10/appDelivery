@@ -82,5 +82,13 @@
         <action
             android:id="@+id/action_dashboardFragment_to_listCouriersFragment"
             app:destination="@id/listCouriersFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_adminProfileFragment"
+            app:destination="@id/adminProfileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/adminProfileFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.admin.profile.AdminProfileFragment"
+        android:label="fragment_admin_profile"
+        tools:layout="@layout/fragment_admin_profile" />
 </navigation>

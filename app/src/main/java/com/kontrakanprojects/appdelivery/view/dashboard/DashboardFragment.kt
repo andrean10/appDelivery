@@ -42,9 +42,11 @@ class DashboardFragment : Fragment(), View.OnClickListener {
             }
             R.id.btn_tracking -> {
                 // TODO: 06/06/2021
+
             }
             R.id.btn_barang -> {
                 // TODO: 06/06/2021
+                findNavController().navigate(R.id.action_dashboardFragment_to_barangFragment)
             }
         }
     }

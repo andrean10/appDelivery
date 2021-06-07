@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kontrakanprojects.appdelivery.model.kurir.ResponseKurir
 import com.kontrakanprojects.appdelivery.network.ApiConfig
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -25,15 +27,57 @@ class CouriersViewModel : ViewModel() {
 
     fun detailKurir(idKurir: Int): LiveData<ResponseKurir> {
         _kurir = MutableLiveData<ResponseKurir>()
-        kurir(idKurir)
+        kurir(idKurir, isDetailKurir = true)
         return _kurir as MutableLiveData<ResponseKurir>
     }
 
-    private fun kurir(idKurir: Int? = null) {
-        val client: Call<ResponseKurir> = if (idKurir == null) {
-            ApiConfig.getApiService().listKurir()
+    fun addKurir(
+        params: HashMap<String, RequestBody>,
+        imagesParams: MultipartBody.Part,
+    ): LiveData<ResponseKurir> {
+        _kurir = MutableLiveData<ResponseKurir>()
+        kurir(params = params, imagesParams = imagesParams)
+        return _kurir as MutableLiveData<ResponseKurir>
+    }
+
+    fun editKurir(idKurir: Int, params: HashMap<String, Any>): LiveData<ResponseKurir> {
+        _kurir = MutableLiveData<ResponseKurir>()
+//        kurir(idKurir, params)
+        return _kurir as MutableLiveData<ResponseKurir>
+    }
+
+    fun deleteKurir(idKurir: Int): LiveData<ResponseKurir> {
+        _kurir = MutableLiveData<ResponseKurir>()
+//        kurir(idKurir)
+        return _kurir as MutableLiveData<ResponseKurir>
+    }
+
+    private fun kurir(
+        idKurir: Int? = null,
+        params: HashMap<String, RequestBody>? = null,
+        imagesParams: MultipartBody.Part? = null,
+        isDetailKurir: Boolean = false,
+    ) {
+        lateinit var client: Call<ResponseKurir>
+
+        if (idKurir == null) {
+            if (params != null) {
+
+                Log.d(TAG, "kurir: $params")
+                client = ApiConfig.getApiService().addKurir(params, imagesParams) // tambah data
+            } else {
+                client = ApiConfig.getApiService().listKurir() // list data
+            }
         } else {
-            ApiConfig.getApiService().detailKurir(idKurir)
+            if (params != null) {
+//                ApiConfig.getApiService().editKurir(idKurir, params) // edit data
+            } else {
+                if (isDetailKurir) {
+                    client = ApiConfig.getApiService().detailKurir(idKurir) // detail data
+//                } else {
+//                    ApiConfig.getApiService().deleteKurir(idKurir) // hapus data
+                }
+            }
         }
 
         client.enqueue(object : Callback<ResponseKurir> {

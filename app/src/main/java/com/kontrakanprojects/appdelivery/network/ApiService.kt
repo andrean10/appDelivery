@@ -3,6 +3,8 @@ package com.kontrakanprojects.appdelivery.network
 import com.kontakanprojects.apptkslb.model.ResponseAuth
 import com.kontrakanprojects.appdelivery.model.kurir.ResponseKurir
 import com.kontrakanprojects.appdelivery.model.tracking.ResponseTracking
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -23,15 +25,18 @@ interface ApiService {
     @GET("kurir/{id}")
     fun detailKurir(@Path("id") idKurir: Int): Call<ResponseKurir>
 
-    @FormUrlEncoded
+    @Multipart
     @POST("kurir")
-    fun addKurir(@FieldMap dataKurir: Map<String, String>): Call<ResponseKurir>
+    fun addKurir(
+        @PartMap params: HashMap<String, RequestBody>,
+        @Part imagesParams: MultipartBody.Part?,
+    ): Call<ResponseKurir>
 
-    @FormUrlEncoded
+    @Multipart
     @PATCH("kurir/{id}")
     fun editKurir(
         @Path("id") idKurir: Int,
-        @FieldMap dataKurir: Map<String, String>,
+        @FieldMap dataKurir: HashMap<String, Any>,
     ): Call<ResponseKurir>
 
     @DELETE("kurir/{id}")

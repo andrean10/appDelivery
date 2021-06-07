@@ -14,8 +14,8 @@ class ChooseLoginFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentChooseLoginBinding
 
     companion object {
-        const val ROLE_ADMIN = 1
-        const val ROLE_COURIER = 2
+        const val ROLE_ADMIN = 2
+        const val ROLE_COURIER = 3
     }
 
     override fun onCreateView(

@@ -67,6 +67,10 @@
             android:name="idKurir"
             android:defaultValue="0"
             app:argType="integer" />
+        <argument
+            android:name="idRequest"
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/dashboardFragment"

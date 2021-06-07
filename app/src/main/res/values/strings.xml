@@ -11,4 +11,15 @@
     <string name="todo">TODO</string>
     <string name="delete">Delete</string>
     <string name="login">Login</string>
+    <string name="success">Sukses</string>
+    <string name="failed">Failed</string>
+    <string name="delete_kurir_title">Hapus Kurir</string>
+    <string name="delete_siswa_body">Apakah anda yakin ingin menghapus kurir ?</string>
+    <string name="cancelBottomSheet">Batal</string>
+    <string name="saveBottomSheet">Simpan</string>
+    <string name="pilihGambarBottomSheet">Pilih Gambar</string>
+    <string name="titlePassword">Masukkan Password Anda</string>
+    <string name="old_password">Password Lama</string>
+    <string name="new_password">Password Baru</string>
+    <string name="new_password_again">Ulangi Password Baru</string>
 </resources>

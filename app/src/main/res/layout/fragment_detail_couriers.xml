@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.admin.couriers.detail.DetailCouriersFragment">
 
     <com.google.android.material.circularreveal.CircularRevealRelativeLayout
@@ -58,6 +59,7 @@
                         android:src="@drawable/no_profile_images" />
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/btn_pick_image"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_below="@+id/iv_courier_photo"
@@ -104,13 +106,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/til002"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="10dp"
+                    app:endIconMode="password_toggle">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/ic_baseline_edit_24"
                         android:hint="Password"
                         android:inputType="textPassword" />
 
@@ -134,12 +136,12 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_save_profile_kurir"
-                    android:layout_marginTop="20dp"
-                    android:textColor="@color/black"
-                    android:text="Simpan"
-                    android:layout_below="@+id/til004"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/til004"
+                    android:layout_marginTop="20dp"
+                    android:text="Simpan"
+                    android:textColor="@color/black" />
 
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
         </ScrollView>

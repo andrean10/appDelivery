@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kontrakanprojects.appdelivery.databinding.FragmentListCouriersBinding
 import com.kontrakanprojects.appdelivery.model.kurir.ResultKurir
 import com.kontrakanprojects.appdelivery.utils.showMessage
+import com.kontrakanprojects.appdelivery.view.admin.couriers.detail.DetailCouriersFragment
 import www.sanju.motiontoast.MotionToast
 
 // Class untuk daftar list courier
@@ -38,14 +39,20 @@ class ListCouriersFragment : Fragment() {
         init()
 
         binding.fabAddCourier.setOnClickListener {
-//            findNavController().navigate(R.id.actionlist)
+            val toDetailCourier =
+                ListCouriersFragmentDirections.actionListCouriersFragmentToDetailCouriersFragment()
+            toDetailCourier.idRequest = DetailCouriersFragment.REQUEST_ADD
+            findNavController().navigate(toDetailCourier)
         }
 
         courierAdapter.setOnItemClickCallBack(object : ListCouriersAdapter.OnItemClickCallBack {
             override fun onItemClicked(resultKurir: ResultKurir) {
                 val toDetailCourier =
                     ListCouriersFragmentDirections.actionListCouriersFragmentToDetailCouriersFragment()
-                toDetailCourier.idKurir = resultKurir.idKurir ?: 0
+                        .apply {
+                            idKurir = resultKurir.idKurir ?: 0
+                            idRequest = DetailCouriersFragment.REQUEST_EDIT
+                        }
                 if (toDetailCourier.idKurir != 0) findNavController().navigate(toDetailCourier)
             }
         })
@@ -81,12 +88,11 @@ class ListCouriersFragment : Fragment() {
 
     private fun isLoading(status: Boolean) {
         with(binding) {
-//            if (status) {
-//                pbLoading.visibility = View.VISIBLE
-//                animationViewImage.visibility = View.GONE
-//            } else {
-//                pbLoading.visibility = View.GONE
-//            }
+            if (status) {
+                pbLoading.visibility = View.VISIBLE
+            } else {
+                pbLoading.visibility = View.GONE
+            }
         }
     }
 

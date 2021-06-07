@@ -14,6 +14,7 @@ import com.kontrakanprojects.appdelivery.model.kurir.ResultKurir
 import com.kontrakanprojects.appdelivery.utils.showMessage
 import com.kontrakanprojects.appdelivery.view.admin.couriers.ListCouriersAdapter
 import com.kontrakanprojects.appdelivery.view.admin.couriers.ListCouriersFragmentDirections
+import com.kontrakanprojects.appdelivery.view.admin.tracking.TrackingBarangFragmentDirections
 import www.sanju.motiontoast.MotionToast
 
 class BarangFragment : Fragment() {
@@ -42,6 +43,16 @@ class BarangFragment : Fragment() {
         binding.fabAddProduct.setOnClickListener {
 //            findNavController().navigate(R.id.actionlist)
         }
+
+        // ga ada direction
+//        barangAdapter.setOnItemClickCallBack(object : ListBarangAdapter.OnItemClickCallBack {
+//            override fun onItemClicked(resultDetailBarang: ResultDetailBarang) {
+//                val toDetailCourier =
+//                    BarangFragmentDirections.actionBarangFragmentToManageFragment()
+//                toDetailCourier.idKurir = resultKurir.idKurir ?: 0
+//                if (toDetailCourier.idKurir != 0) findNavController().navigate(toDetailCourier)
+//            }
+//        })
 
     }
 

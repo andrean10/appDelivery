@@ -3,54 +3,54 @@ package com.kontrakanprojects.appdelivery.view.admin.barang
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.kontrakanprojects.appdelivery.databinding.ItemsBarangBinding
+import com.kontrakanprojects.appdelivery.databinding.RvPackageListBinding
+import com.kontrakanprojects.appdelivery.model.barang.ResultDetailBarang
 
 class ListBarangAdapter : RecyclerView.Adapter<ListBarangAdapter.ListBarangAdapterViewHolder>() {
 
-    //    private val listKelas = ArrayList<ResultsKelas>()
+    private val listBarang = ArrayList<ResultDetailBarang>()
     private var onItemClickCallBack: OnItemClickCallBack? = null
 
-//    fun setData(kelas: List<ResultsKelas>?) {
-//        if (kelas == null) return
-//        listKelas.clear()
-//        listKelas.addAll(kelas)
-//        notifyDataSetChanged()
-//    }
-//
-//    fun getData(position: Int) = listKelas[position]
+    fun setData(barangs: List<ResultDetailBarang>?) {
+        if (barangs == null) return
+        listBarang.clear()
+        listBarang.addAll(barangs)
+        notifyDataSetChanged()
+    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListBarangAdapterViewHolder {
+    fun getData(position: Int) = listBarang[position]
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ListBarangAdapter.ListBarangAdapterViewHolder {
         val binding =
-            ItemsBarangBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            RvPackageListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListBarangAdapterViewHolder(binding)
     }
 
-    fun setOnItemClickCallBack(onItemClickCallBack: OnItemClickCallBack) {
+    fun setOnItemClickCallBack(onItemClickCallBack: ListBarangAdapter.OnItemClickCallBack) {
         this.onItemClickCallBack = onItemClickCallBack
     }
 
-    override fun onBindViewHolder(holder: ListBarangAdapterViewHolder, position: Int) {
-//        holder.bind(listKelas[position])
+    override fun onBindViewHolder(holder: ListBarangAdapter.ListBarangAdapterViewHolder, position: Int) {
+        holder.bind(listBarang[position])
     }
 
-    override fun getItemCount() = 0 // listKelas.size
+    override fun getItemCount() = listBarang.size
 
-    inner class ListBarangAdapterViewHolder(private val binding: ItemsBarangBinding) :
+    inner class ListBarangAdapterViewHolder(private val binding: RvPackageListBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        fun bind(resultDetailBarang: ResultDetailBarang) {
+            with(binding) {
+                tvNameCostumerRecycler.text = resultDetailBarang.penerima
+            }
 
-//        fun bind(resultsKelas: ResultsKelas) {
-//            with(binding) {
-//                Glide.with(itemView.context)
-//                    .load(resultsKelas.)
-//            }
-
-//            binding.tvNameCouriers.text = resultsKelas.namaKelas
-
-//            itemView.setOnClickListener { onItemClickCallBack?.onItemClicked(resultsKelas) }
-//        }
+            itemView.setOnClickListener { onItemClickCallBack?.onItemClicked(resultDetailBarang) }
+        }
     }
 
     interface OnItemClickCallBack {
-//        fun onItemClicked(resultsKelas: ResultsKelas)
+        fun onItemClicked(resultDetailBarang: ResultDetailBarang)
     }
 }

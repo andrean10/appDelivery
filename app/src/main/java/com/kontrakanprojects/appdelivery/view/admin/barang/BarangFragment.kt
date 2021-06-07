@@ -38,7 +38,7 @@ class BarangFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        init()
         binding.fabAddProduct.setOnClickListener {
 //            findNavController().navigate(R.id.actionlist)
         }

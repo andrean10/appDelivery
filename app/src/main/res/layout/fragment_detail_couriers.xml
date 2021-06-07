@@ -58,6 +58,7 @@
                         android:src="@drawable/no_profile_images" />
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/btn_pick_image"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_below="@+id/iv_courier_photo"
@@ -134,12 +135,12 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_save_profile_kurir"
-                    android:layout_marginTop="20dp"
-                    android:textColor="@color/black"
-                    android:text="Simpan"
-                    android:layout_below="@+id/til004"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/til004"
+                    android:layout_marginTop="20dp"
+                    android:text="Simpan"
+                    android:textColor="@color/black" />
 
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
         </ScrollView>

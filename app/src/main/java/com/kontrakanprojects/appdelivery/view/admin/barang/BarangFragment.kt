@@ -1,20 +1,18 @@
 package com.kontrakanprojects.appdelivery.view.admin.barang
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.FragmentBarangBinding
-import com.kontrakanprojects.appdelivery.databinding.FragmentListCouriersBinding
 import com.kontrakanprojects.appdelivery.model.barang.ResultDetailBarang
-import com.kontrakanprojects.appdelivery.model.kurir.ResultKurir
 import com.kontrakanprojects.appdelivery.utils.showMessage
-import com.kontrakanprojects.appdelivery.view.admin.couriers.ListCouriersAdapter
-import com.kontrakanprojects.appdelivery.view.admin.couriers.ListCouriersFragmentDirections
-import com.kontrakanprojects.appdelivery.view.admin.tracking.TrackingBarangFragmentDirections
 import www.sanju.motiontoast.MotionToast
 
 class BarangFragment : Fragment() {
@@ -39,21 +37,21 @@ class BarangFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setToolbarTitle()
         init()
+
         binding.fabAddProduct.setOnClickListener {
-//            findNavController().navigate(R.id.actionlist)
+            findNavController().navigate(R.id.action_barangFragment_to_manageBarangFragment)
         }
 
-        // ga ada direction
-//        barangAdapter.setOnItemClickCallBack(object : ListBarangAdapter.OnItemClickCallBack {
-//            override fun onItemClicked(resultDetailBarang: ResultDetailBarang) {
-//                val toDetailCourier =
-//                    BarangFragmentDirections.actionBarangFragmentToManageFragment()
-//                toDetailCourier.idKurir = resultKurir.idKurir ?: 0
-//                if (toDetailCourier.idKurir != 0) findNavController().navigate(toDetailCourier)
-//            }
-//        })
-
+        barangAdapter.setOnItemClickCallBack(object : ListBarangAdapter.OnItemClickCallBack {
+            override fun onItemClicked(resultDetailBarang: ResultDetailBarang) {
+                val toDetailBarang =
+                    BarangFragmentDirections.actionBarangFragmentToDetailBarangFragment()
+                toDetailBarang.idBarang = resultDetailBarang.idBarang ?: 0
+                if (toDetailBarang.idBarang != 0) findNavController().navigate(toDetailBarang)
+            }
+        })
     }
 
     private fun init() {
@@ -70,12 +68,13 @@ class BarangFragment : Fragment() {
                 isLoading(false)
                 if (response != null) {
                     if (response.status == 200) {
-                        isNotEmptyData(true)
                         val result = response.results
                         barangAdapter.setData(result)
                     } else {
-                        isNotEmptyData(false)
-//                        animationViewImage.visibility = View.VISIBLE
+                        showMessage(requireActivity(),
+                            "Failed",
+                            response.message,
+                            MotionToast.TOAST_ERROR)
                     }
                 } else { // failed mengambil data
                     showMessage(requireActivity(), "Failed", style = MotionToast.TOAST_ERROR)
@@ -86,24 +85,11 @@ class BarangFragment : Fragment() {
 
     private fun isLoading(status: Boolean) {
         with(binding) {
-//            if (status) {
-//                pbLoading.visibility = View.VISIBLE
-//                animationViewImage.visibility = View.GONE
-//            } else {
-//                pbLoading.visibility = View.GONE
-//            }
-        }
-    }
-
-    private fun isNotEmptyData(state: Boolean) {
-        with(binding) {
-//            if (state) {
-//                rvSuccess.visibility = View.VISIBLE
-//                rvFailed.visibility = View.GONE
-//            } else {
-//                rvSuccess.visibility = View.GONE
-//                rvFailed.visibility = View.VISIBLE
-//            }
+            if (status) {
+                pbLoading.visibility = View.VISIBLE
+            } else {
+                pbLoading.visibility = View.GONE
+            }
         }
     }
 
@@ -113,15 +99,6 @@ class BarangFragment : Fragment() {
             (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Detail Barang"
         }
     }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
-    }
-
 
     override fun onDestroy() {
         super.onDestroy()

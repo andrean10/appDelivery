@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class ResponseDetailBarang(
 
 	@field:SerializedName("message")
-	val message: String? = null,
+	val message: String,
 
 	@field:SerializedName("results")
 	val results: List<ResultDetailBarang>? = null,

@@ -48,6 +48,8 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentDetailCouriersBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<CouriersViewModel>()
+    private var bottomSheetDialog: BottomSheetDialog? = null
+    private lateinit var etUiUpdated: TextInputEditText
 
     private var resultDetailCourier: ResultKurir? = null
 
@@ -110,6 +112,14 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
                 REQUEST_EDIT -> {
                     titleToolbar = "Edit Data Kurir"
                     init()
+                    etNamaLengkapKurir.isFocusable = false
+                    etNamaLengkapKurir.isClickable = false
+                    etUsername.isFocusable = false
+                    etUsername.isClickable = false
+                    etPassword.isFocusable = false
+                    etPassword.isClickable = false
+                    etAlamatLengkapKurir.isFocusable = false
+                    etAlamatLengkapKurir.isClickable = false
                     btnSaveProfileKurir.visibility = View.GONE
                 }
             }
@@ -117,18 +127,50 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
             setToolbarTitle(titleToolbar)
 
             btnPickImage.setOnClickListener(this@DetailCouriersFragment)
+            etNamaLengkapKurir.setOnClickListener(this@DetailCouriersFragment)
+            etUsername.setOnClickListener(this@DetailCouriersFragment)
+            etPassword.setOnClickListener(this@DetailCouriersFragment)
+            etAlamatLengkapKurir.setOnClickListener(this@DetailCouriersFragment)
             btnSaveProfileKurir.setOnClickListener(this@DetailCouriersFragment)
         }
     }
 
     override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.btn_pick_image -> {
-                permission()
-                showBottomSheet(isEditProfile = false)
-            }
-            R.id.btn_save_profile_kurir -> {
-                prepareAdd()
+        with(binding) {
+            when (v?.id) {
+                R.id.btn_pick_image -> {
+                    permission()
+                    showBottomSheet(isEditProfile = false)
+                }
+                R.id.et_nama_lengkap_kurir -> {
+                    val itemProfile = etNamaLengkapKurir.text.toString().trim()
+                    val titleSheet = resources.getString(R.string.titleName)
+                    etUiUpdated = etNamaLengkapKurir
+                    showBottomSheet(itemProfile, titleSheet, "nama_lengkap", true)
+                }
+                R.id.et_username -> {
+                    val itemProfile = etUsername.text.toString().trim()
+                    val titleSheet = resources.getString(R.string.titleUsername)
+                    etUiUpdated = etUsername
+                    showBottomSheet(itemProfile, titleSheet, "username", true)
+                }
+                R.id.et_password -> {
+                    val itemProfile = etPassword.text.toString().trim()
+                    etUiUpdated = etPassword
+                    showBottomSheet(
+                        itemProfile, param = "password", isEditProfile = true,
+                        isEditPassword = true
+                    )
+                }
+                R.id.et_alamat_lengkap_kurir -> {
+                    val itemProfile = etAlamatLengkapKurir.text.toString().trim()
+                    val titleSheet = resources.getString(R.string.titleAlamat)
+                    etUiUpdated = etAlamatLengkapKurir
+                    showBottomSheet(itemProfile, titleSheet, "alamat", true)
+                }
+                R.id.btn_save_profile_kurir -> {
+                    prepareAdd()
+                }
             }
         }
     }
@@ -203,8 +245,6 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
                 }
 
                 addKurir(params, imagesParams)
-
-                Log.d(TAG, "prepareAdd: $params")
             }
         }
     }
@@ -217,8 +257,16 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun prepareEdit() {
-        // TODO: 07/06/2021
+    private fun checkValueBottomSheet(
+        value: String?,
+        edtInput: TextInputLayout,
+        messageError: String,
+    ) {
+        if (value.isNullOrEmpty()) {
+            edtInput.error = messageError
+            valid = false
+            return
+        }
     }
 
     // gambar
@@ -227,30 +275,25 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
         param: String? = null, isEditProfile: Boolean,
         isEditPassword: Boolean = false,
     ) {
-        val bottomSheetDialog = BottomSheetDialog(requireActivity(), R.style.BottomSheetDialogTheme)
+        bottomSheetDialog = BottomSheetDialog(requireActivity(), R.style.BottomSheetDialogTheme)
 
         bottomSheetView = LayoutInflater.from(requireActivity()).inflate(
             R.layout.bottom_sheet_pick, activity?.findViewById(R.id.bottomSheetContainer)
         )
 
-        val chooseImage: ImageView = bottomSheetView.findViewById(R.id.imgCamera)
-        chooseImage.setOnClickListener {
-            dispatchCaptureImageIntent()
-            bottomSheetDialog.dismiss()
-        }
-
-        val chooseGaleri: ImageView = bottomSheetView.findViewById(R.id.imgGaleri)
-        chooseGaleri.setOnClickListener {
-            selectImageIntent()
-            bottomSheetDialog.dismiss()
-        }
-
         initLayoutBottomSheet(isEditProfile, isEditPassword)
-        saveBottomSheet(itemProfile, titleSheet, isEditProfile, isEditPassword, bottomSheetDialog)
+
+        // untuk edit profile bukan foto
+        saveBottomSheet(itemProfile,
+            titleSheet,
+            param,
+            isEditProfile,
+            isEditPassword,
+            bottomSheetDialog!!)
 
         // set ke view
-        bottomSheetDialog.setContentView(bottomSheetView)
-        bottomSheetDialog.show()
+        bottomSheetDialog!!.setContentView(bottomSheetView)
+        bottomSheetDialog!!.show()
     }
 
     private fun initLayoutBottomSheet(isEditProfile: Boolean, isEditPassword: Boolean) {
@@ -277,20 +320,21 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
     private fun saveBottomSheet(
         itemProfile: String?,
         titleSheet: String?,
+        param: String? = null,
         isEditProfile: Boolean,
-        isEditPassword: Boolean,
+        isEditPassword: Boolean = false,
         bottomSheetDialog: BottomSheetDialog,
     ) {
         if (isEditProfile) {
             // ubah head bottom sheet selain password
             // set data ke bottomsheet
             var edtInput: TextInputLayout? = null
-            if (!isEditPassword) {
+            if (!isEditPassword) { // init bukan edit password
                 val tvTitle: TextView = bottomSheetView.findViewById(R.id.titleInput)
                 edtInput = bottomSheetView.findViewById(R.id.tiEditProfile)
                 tvTitle.text = titleSheet
                 edtInput.editText?.setText(itemProfile)
-            } else {
+            } else { // init password
                 val edtOldPassword: TextInputLayout =
                     bottomSheetView.findViewById(R.id.tiOldPassword)
                 val edtNewPassword: TextInputLayout =
@@ -323,7 +367,8 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
                 }
             }
 
-//            save(edtInput, itemProfile, param, isEditKelas, isEditPassword)
+            // save ke viewmodel
+            save(edtInput, itemProfile, param, isEditPassword)
 
             // cancel bottomsheet
             val btnCancel: Button = bottomSheetView.findViewById(R.id.btnCancel)
@@ -355,10 +400,11 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
 
             bottomSheetView.findViewById<ImageView>(R.id.imgDelete).setOnClickListener {
                 // hapus data ke server
-//                changeFotoProfile()
+                editPhotoProfile()
 
                 // hapus value camera, pickimages and result.gambar yang ada di model
                 gambarPath = null
+                resultDetailCourier?.fotoProfil = null
             }
         }
     }
@@ -459,15 +505,13 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
             if (resultCode == RESULT_OK) {
                 gambarPath = getPathImage(UCrop.getOutput(data!!)!!)
 
-//                val resultUriCrop = data.let { UCrop.getOutput(it) }
-
-                Glide.with(requireActivity())
-                    .load(gambarPath)
-                    .into(binding.ivCourierPhoto)
-
-                if (requestCode == REQUEST_EDIT) {
-                    // ubah data ke server
-//                    changeFotoProfile(gambarPath)
+                if (request == REQUEST_EDIT) {
+                    // ubah data gambar ke server
+                    editPhotoProfile(gambarPath)
+                } else {
+                    Glide.with(requireActivity())
+                        .load(gambarPath)
+                        .into(binding.ivCourierPhoto)
                 }
             } else if (resultCode == UCrop.RESULT_ERROR) {
                 val cropError = UCrop.getError(data!!)
@@ -485,69 +529,6 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
         }
         return false
     }
-
-//    private fun changeFotoProfile(result: Uri? = null) {
-//        with(binding) {
-//            pbLoadingPicture.visibility = View.VISIBLE
-//            if (result != null) {
-//                val selectedImageFile = File(getPathFromUri(result)!!)
-//                val reqFile =
-//                    selectedImageFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
-//                val body = MultipartBody.Part.createFormData(
-//                    "foto_profile", selectedImageFile.name, reqFile
-//                )
-//
-//                viewModel.changeFotoProfile(idSiswa, body).observe(viewLifecycleOwner, { response ->
-//                    pbLoadingPicture.visibility = View.GONE
-//                    if (response != null) {
-//                        if (response.status == 200) {
-////                        observeDetailSiswa()
-//                            bottomSheetDialog.dismiss()
-//
-//                            Glide.with(requireContext())
-//                                .load(result)
-//                                .into(imgSiswa)
-//                        } else {
-//                            showMessage(
-//                                requireActivity(),
-//                                "Gagal",
-//                                response.message,
-//                                MotionToast.TOAST_ERROR
-//                            )
-//                        }
-//                    } else {
-//                        showMessage(requireActivity(), "Gagal", style = MotionToast.TOAST_ERROR)
-//                    }
-//                })
-//            } else {
-//                val reqFile = ""
-//                    .toRequestBody("image/*".toMediaTypeOrNull())
-//                val body = MultipartBody.Part
-//                    .createFormData("foto_profile", "", reqFile)
-//
-//                viewModel.changeFotoProfile(idSiswa, body).observe(viewLifecycleOwner, { response ->
-//                    pbLoadingPicture.visibility = View.GONE
-//                    if (response != null) {
-//                        if (response.status == 200) {
-//                            binding.imgSiswa.setImageResource(R.drawable.no_profile_images)
-//                            bottomSheetDialog.dismiss()
-//
-//                            resultDetailSiswa.fotoProfile = null
-//                        } else {
-//                            showMessage(
-//                                requireActivity(),
-//                                "Gagal",
-//                                response.message,
-//                                MotionToast.TOAST_ERROR
-//                            )
-//                        }
-//                    } else {
-//                        showMessage(requireActivity(), "Gagal", style = MotionToast.TOAST_ERROR)
-//                    }
-//                })
-//            }
-//        }
-//    }
 
     private fun startCrop(uri: Uri) {
         val uCrop = UCrop.of(uri, Uri.fromFile(createImageFile()))
@@ -609,6 +590,102 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    private fun save(
+        edtInput: TextInputLayout?, itemProfile: String?, param: String?,
+        isEditPassword: Boolean = false,
+    ) {
+        // save data
+        val btnSave: Button = bottomSheetView.findViewById(R.id.btnSave)
+        btnSave.setOnClickListener {
+            val parameters = HashMap<String, String>()
+            var getInput = ""
+
+            if (isEditPassword) { // cek jika edit password arahkan logic kesini
+                // init
+                val edtOldPassword: TextInputLayout =
+                    bottomSheetView.findViewById(R.id.tiOldPassword)
+                val edtNewPassword: TextInputLayout =
+                    bottomSheetView.findViewById(R.id.tiNewPassword)
+                val edtNewPasswordAgain: TextInputLayout =
+                    bottomSheetView.findViewById(R.id.tiNewPasswordAgain)
+
+                val oldPassword = edtOldPassword.editText?.text.toString().trim()
+                val newPassword = edtNewPassword.editText?.text.toString().trim()
+                val newPasswordAgain = edtNewPasswordAgain.editText?.text.toString().trim()
+
+                // cek kondisi field pada password
+                checkValueBottomSheet(oldPassword, edtOldPassword, OLD_PASSWORD_IS_REQUIRED)
+                checkValueBottomSheet(newPassword, edtNewPassword, NEW_PASSWORD_IS_REQUIRED)
+                checkValueBottomSheet(newPasswordAgain,
+                    edtNewPasswordAgain,
+                    NEWAGAIN_PASSWORD_IS_REQUIRED)
+
+                if (valid) {
+                    // kirim data password baru ke viewmodel
+                    // apakah password lama sesuai dengan password di edittext jika iya teruskan
+
+                    if (oldPassword == itemProfile) {
+                        if (newPassword == newPasswordAgain) { // jika password match
+                            // get input password
+                            getInput = newPassword // teruskan ke variabel getinput untuk di submit
+                        } else {
+                            edtNewPasswordAgain.error = WRONG_NEW_PASSWORD_AGAIN
+                            return@setOnClickListener
+                        }
+                    } else { // password lama tidak cocok
+                        edtOldPassword.error = WRONG_OLD_PASSWORD
+                        return@setOnClickListener
+                    }
+                }
+            } else { // ambil inputan jika bukan edit password
+                val inputData = edtInput?.editText?.text.toString().trim()
+
+                checkValueBottomSheet(inputData, edtInput!!, NOT_NULL)
+
+                if (valid) {
+                    getInput = inputData
+                }
+            }
+
+            // set ke hashmap
+            parameters[param!!] = getInput
+
+            // save dan observe (hide btn save)
+            loadingInBottomSheet(true)
+            editKurir(getInput, parameters)
+        }
+    }
+
+    private fun editKurir(
+        newInputData: String? = null, newData: HashMap<String, String>,
+    ) {
+
+        viewModel.editKurir(idKurir, newData).observe(viewLifecycleOwner, { response ->
+            if (response != null) {
+                if (response.status == 200) {
+                    etUiUpdated.setText(newInputData)
+                    bottomSheetDialog?.dismiss()
+                } else {
+                    showMessage(
+                        requireActivity(),
+                        getString(R.string.failed),
+                        response.message,
+                        MotionToast.TOAST_ERROR
+                    )
+
+                    bottomSheetView.findViewById<ProgressBar>(R.id.progressBar).visibility =
+                        View.GONE
+                    bottomSheetView.findViewById<Button>(R.id.btnSave).visibility =
+                        View.VISIBLE
+                }
+            } else {
+                showMessage(requireActivity(),
+                    getString(R.string.failed),
+                    style = MotionToast.TOAST_ERROR)
+            }
+        })
+    }
+
     private fun addKurir(params: HashMap<String, RequestBody>, imagesParams: MultipartBody.Part) {
         viewModel.addKurir(params, imagesParams).observe(viewLifecycleOwner, { response ->
             if (response != null) {
@@ -627,29 +704,63 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
         })
     }
 
-    private fun editKurir(idKurir: Int, params: HashMap<String, Any>) {
-        viewModel.editKurir(idKurir, params).observe(viewLifecycleOwner, { response ->
-            if (response != null) {
-                if (response.status == 200) {
-                    findNavController().navigateUp()
-                    showMessage(
-                        requireActivity(), getString(R.string.success),
-                        response.message, MotionToast.TOAST_SUCCESS
-                    )
-                } else {
-                    showMessage(
-                        requireActivity(), getString(R.string.failed), response.message,
-                        MotionToast.TOAST_ERROR
-                    )
-                }
-            } else {
-                showMessage(
-                    requireActivity(),
-                    getString(R.string.failed),
-                    style = MotionToast.TOAST_ERROR
-                )
+    private fun editPhotoProfile(gambarPath: String? = null) {
+        with(binding) {
+//            pbLoadingPicture.visibility = View.VISIBLE
+            if (gambarPath != null) { // ubah gambar
+                val imageParams = reqFileImage(gambarPath, "foto_profil")
+
+                viewModel.editPhotoProfile(idKurir, imageParams)
+                    .observe(viewLifecycleOwner, { response ->
+//                    pbLoadingPicture.visibility = View.GONE
+                        if (response != null) {
+                            if (response.status == 200) {
+                                Glide.with(requireContext())
+                                    .load(gambarPath)
+                                    .into(ivCourierPhoto)
+
+                                bottomSheetDialog?.dismiss()
+                            } else {
+                                showMessage(
+                                    requireActivity(),
+                                    getString(R.string.failed),
+                                    response.message,
+                                    MotionToast.TOAST_ERROR
+                                )
+                            }
+                        } else {
+                            showMessage(requireActivity(),
+                                getString(R.string.failed),
+                                style = MotionToast.TOAST_ERROR)
+                        }
+                    })
+            } else { // hapus gambar
+                Log.d(TAG, "editPhotoProfile: Hapus Foto")
+
+                viewModel.deletePhotoProfile(idKurir).observe(viewLifecycleOwner, { response ->
+//                    pbLoadingPicture.visibility = View.GONE
+                    if (response != null) {
+                        if (response.status == 200) {
+                            ivCourierPhoto.setImageResource(R.drawable.no_profile_images)
+                            bottomSheetDialog?.dismiss()
+
+                            resultDetailCourier?.fotoProfil = null
+                        } else {
+                            showMessage(
+                                requireActivity(),
+                                getString(R.string.failed),
+                                response.message,
+                                MotionToast.TOAST_ERROR
+                            )
+                        }
+                    } else {
+                        showMessage(requireActivity(),
+                            getString(R.string.failed),
+                            style = MotionToast.TOAST_ERROR)
+                    }
+                })
             }
-        })
+        }
     }
 
     private fun deleteKurir(idKurir: Int) {

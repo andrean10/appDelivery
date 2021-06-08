@@ -89,5 +89,4 @@ dependencies {
 
     // lib cropimage
     implementation 'com.github.yalantis:ucrop:2.2.6-native'
-
 }

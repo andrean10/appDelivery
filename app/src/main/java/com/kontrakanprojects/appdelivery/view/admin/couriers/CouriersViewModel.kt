@@ -36,46 +36,56 @@ class CouriersViewModel : ViewModel() {
         imagesParams: MultipartBody.Part,
     ): LiveData<ResponseKurir> {
         _kurir = MutableLiveData<ResponseKurir>()
-        kurir(params = params, imagesParams = imagesParams)
+        kurir(paramsTambahKurir = params, imagesParams = imagesParams)
         return _kurir as MutableLiveData<ResponseKurir>
     }
 
-    fun editKurir(idKurir: Int, params: HashMap<String, Any>): LiveData<ResponseKurir> {
+    fun editKurir(idKurir: Int, params: HashMap<String, String>): LiveData<ResponseKurir> {
         _kurir = MutableLiveData<ResponseKurir>()
-//        kurir(idKurir, params)
+        kurir(idKurir, paramsEditKurir = params)
+        return _kurir as MutableLiveData<ResponseKurir>
+    }
+
+    fun editPhotoProfile(idKurir: Int, imagesParams: MultipartBody.Part): LiveData<ResponseKurir> {
+        _kurir = MutableLiveData<ResponseKurir>()
+        editPhotoKurir(idKurir, imagesParams)
+        return _kurir as MutableLiveData<ResponseKurir>
+    }
+
+    fun deletePhotoProfile(idKurir: Int): LiveData<ResponseKurir> {
+        _kurir = MutableLiveData<ResponseKurir>()
+        editPhotoKurir(idKurir)
         return _kurir as MutableLiveData<ResponseKurir>
     }
 
     fun deleteKurir(idKurir: Int): LiveData<ResponseKurir> {
         _kurir = MutableLiveData<ResponseKurir>()
-//        kurir(idKurir)
+        kurir(idKurir)
         return _kurir as MutableLiveData<ResponseKurir>
     }
 
     private fun kurir(
         idKurir: Int? = null,
-        params: HashMap<String, RequestBody>? = null,
+        paramsTambahKurir: HashMap<String, RequestBody>? = null,
+        paramsEditKurir: HashMap<String, String>? = null,
         imagesParams: MultipartBody.Part? = null,
         isDetailKurir: Boolean = false,
     ) {
-        lateinit var client: Call<ResponseKurir>
 
-        if (idKurir == null) {
-            if (params != null) {
-
-                Log.d(TAG, "kurir: $params")
-                client = ApiConfig.getApiService().addKurir(params, imagesParams) // tambah data
+        val client: Call<ResponseKurir> = if (idKurir == null) {
+            if (paramsTambahKurir != null) {
+                ApiConfig.getApiService().addKurir(paramsTambahKurir, imagesParams) // tambah data
             } else {
-                client = ApiConfig.getApiService().listKurir() // list data
+                ApiConfig.getApiService().listKurir() // list data
             }
         } else {
-            if (params != null) {
-//                ApiConfig.getApiService().editKurir(idKurir, params) // edit data
+            if (paramsEditKurir != null) {
+                ApiConfig.getApiService().editKurir(idKurir, paramsEditKurir) // edit data
             } else {
                 if (isDetailKurir) {
-                    client = ApiConfig.getApiService().detailKurir(idKurir) // detail data
-//                } else {
-//                    ApiConfig.getApiService().deleteKurir(idKurir) // hapus data
+                    ApiConfig.getApiService().detailKurir(idKurir) // detail data
+                } else {
+                    ApiConfig.getApiService().deleteKurir(idKurir) // hapus data
                 }
             }
         }
@@ -85,6 +95,36 @@ class CouriersViewModel : ViewModel() {
                 call: Call<ResponseKurir>,
                 response: Response<ResponseKurir>,
             ) {
+                if (response.isSuccessful) {
+                    val result = response.body()
+                    _kurir?.postValue(result!!)
+                } else {
+                    val errResult = response.errorBody()?.string()
+                    val status = JSONObject(errResult!!).getInt("status")
+                    val message = JSONObject(errResult).getString("message")
+                    val responseKurir = ResponseKurir(message = message, status = status)
+                    _kurir?.postValue(responseKurir)
+
+                    Log.e(TAG, "onFailure: $responseKurir")
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseKurir>, t: Throwable) {
+                _kurir?.postValue(null)
+                Log.e(TAG, "onFailure: ${t.message}")
+            }
+        })
+    }
+
+    private fun editPhotoKurir(idKurir: Int, imagesParams: MultipartBody.Part? = null) {
+        val client = if (imagesParams != null) {
+            ApiConfig.getApiService().editPhotoProfil(idKurir, imagesParams)
+        } else {
+            ApiConfig.getApiService().deletePhotoProfil(idKurir)
+        }
+
+        client.enqueue(object : Callback<ResponseKurir> {
+            override fun onResponse(call: Call<ResponseKurir>, response: Response<ResponseKurir>) {
                 if (response.isSuccessful) {
                     val result = response.body()
                     _kurir?.postValue(result!!)

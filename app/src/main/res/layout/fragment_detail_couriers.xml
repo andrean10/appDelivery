@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.admin.couriers.detail.DetailCouriersFragment">
 
     <com.google.android.material.circularreveal.CircularRevealRelativeLayout
@@ -70,7 +71,7 @@
                 </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til001"
+                    android:id="@+id/ti_nama_lengkap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/rellay_02"
@@ -86,10 +87,10 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til002"
+                    android:id="@+id/ti_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/til001"
+                    android:layout_below="@+id/ti_nama_lengkap"
                     android:layout_marginBottom="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -101,27 +102,27 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til003"
+                    android:id="@+id/ti_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/til002"
+                    android:layout_below="@+id/ti_username"
+                    app:endIconMode="password_toggle"
                     android:layout_marginBottom="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/ic_baseline_edit_24"
                         android:hint="Password"
                         android:inputType="textPassword" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til004"
+                    android:id="@+id/ti_alamat_lengkap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/til003"
+                    android:layout_below="@+id/ti_password"
                     android:layout_marginBottom="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -137,7 +138,7 @@
                     android:id="@+id/btn_save_profile_kurir"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/til004"
+                    android:layout_below="@+id/ti_alamat_lengkap"
                     android:layout_marginTop="20dp"
                     android:text="Simpan"
                     android:textColor="@color/black" />

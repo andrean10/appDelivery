@@ -12,7 +12,7 @@
     <string name="delete">Delete</string>
     <string name="login">Login</string>
     <string name="success">Sukses</string>
-    <string name="failed">Failed</string>
+    <string name="failed">Gagal</string>
     <string name="delete_kurir_title">Hapus Kurir</string>
     <string name="delete_siswa_body">Apakah anda yakin ingin menghapus kurir ?</string>
     <string name="cancelBottomSheet">Batal</string>
@@ -22,4 +22,7 @@
     <string name="old_password">Password Lama</string>
     <string name="new_password">Password Baru</string>
     <string name="new_password_again">Ulangi Password Baru</string>
+    <string name="titleName">Masukkan Nama Lengkap Anda</string>
+    <string name="titleUsername">Masukkan Username Anda</string>
+    <string name="titleAlamat">Masukkan Alamat Anda</string>
 </resources>

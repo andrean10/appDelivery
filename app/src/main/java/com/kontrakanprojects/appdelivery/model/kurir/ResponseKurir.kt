@@ -17,7 +17,7 @@ data class ResponseKurir(
 data class ResultKurir(
 
     @field:SerializedName("foto_profil")
-    val fotoProfil: String? = null,
+    var fotoProfil: String? = null,
 
     @field:SerializedName("updated_at")
     val updatedAt: String? = null,

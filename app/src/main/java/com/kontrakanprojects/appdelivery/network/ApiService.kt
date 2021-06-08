@@ -33,18 +33,29 @@ interface ApiService {
         @Part imagesParams: MultipartBody.Part?,
     ): Call<ResponseKurir>
 
-    @Multipart
+    @FormUrlEncoded
     @PATCH("kurir/{id}")
     fun editKurir(
         @Path("id") idKurir: Int,
-        @FieldMap dataKurir: HashMap<String, Any>,
+        @FieldMap params: HashMap<String, String>,
     ): Call<ResponseKurir>
+
+    @Multipart
+    @POST("kurir/gantifoto/{id}")
+    fun editPhotoProfil(
+        @Path("id") idKurir: Int,
+        @Part imagesParams: MultipartBody.Part?,
+    ): Call<ResponseKurir>
+
+    @PATCH("kurir/hapusfoto/{id}")
+    fun deletePhotoProfil(@Path("id") idKurir: Int): Call<ResponseKurir>
 
     @DELETE("kurir/{id}")
     fun deleteKurir(@Path("id") idKurir: Int): Call<ResponseKurir>
 
     // Barang
     @GET("detail-barang")
+    @DELETE("kurir/{id}")
     fun listDetailBarang(): Call<ResponseDetailBarang>
 
     @GET("detail-barangs/{id_barang}")

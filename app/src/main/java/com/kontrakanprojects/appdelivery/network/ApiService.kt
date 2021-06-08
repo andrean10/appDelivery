@@ -47,6 +47,6 @@ interface ApiService {
     @GET("detail-barang")
     fun listDetailBarang(): Call<ResponseDetailBarang>
 
-    @GET("detail-barang/{id_barang}")
+    @GET("detail-barangs/{id_barang}")
     fun detailBarang(@Path("id_barang") idDetailBarang: Int): Call<ResponseDetailBarang>
 }

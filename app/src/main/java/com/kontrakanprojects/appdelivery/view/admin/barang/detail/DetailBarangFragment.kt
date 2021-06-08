@@ -57,7 +57,7 @@ class DetailBarangFragment : Fragment() {
                 } else {
                     showMessage(requireActivity(),
                         "Not Found",
-                        response.message.toString(),
+                        response.message,
                         MotionToast.TOAST_ERROR)
                 }
             } else { // failed mengambil data

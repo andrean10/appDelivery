@@ -3,7 +3,7 @@ package com.kontrakanprojects.appdelivery.network
 import com.kontakanprojects.apptkslb.model.ResponseAuth
 import com.kontrakanprojects.appdelivery.model.barang.ResponseDetailBarang
 import com.kontrakanprojects.appdelivery.model.kurir.ResponseKurir
-import com.kontrakanprojects.appdelivery.model.tracking.ResponseTracking
+import com.kontrakanprojects.appdelivery.model.tracking.ResponseTrackings
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -17,7 +17,7 @@ interface ApiService {
 
     // Tracking
     @GET("tracking")
-    fun tracking(@Query("kode_pelanggan") kodeResi: Int): Call<ResponseTracking>
+    fun tracking(@Query("kode_pelanggan") kodeResi: Int): Call<ResponseTrackings>
 
     // Kurir
     @GET("kurir")
@@ -55,9 +55,12 @@ interface ApiService {
 
     // Barang
     @GET("detail-barang")
-    @DELETE("kurir/{id}")
     fun listDetailBarang(): Call<ResponseDetailBarang>
 
     @GET("detail-barangs/{id_barang}")
     fun detailBarang(@Path("id_barang") idDetailBarang: Int): Call<ResponseDetailBarang>
+
+    // Barang
+    @GET("trackings")
+    fun listTracking(): Call<ResponseTrackings>
 }

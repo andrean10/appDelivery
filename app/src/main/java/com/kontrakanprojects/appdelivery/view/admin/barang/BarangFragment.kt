@@ -1,4 +1,4 @@
-package com.kontrakanprojects.appdelivery.view.admin.barang
+ package com.kontrakanprojects.appdelivery.view.admin.barang
 
 import android.os.Bundle
 import android.view.LayoutInflater

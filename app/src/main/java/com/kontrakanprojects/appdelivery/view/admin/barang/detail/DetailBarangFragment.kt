@@ -70,11 +70,11 @@ class DetailBarangFragment : Fragment() {
         if (result != null) {
             with(binding) {
 
-                result.kodePelanggan?.let { tvCodeCostumer.setText(it) }
+                tvCodeCostumer.setText(Integer.toString(result.kodePelanggan!!))
                 tvNameCostumer.setText(result.penerima)
                 tvNumberPhone.setText(result.nomorHp)
                 tvAddressCostumer.setText(result.alamat)
-                result.idKurir?.let { courierSend.setText(it) }
+                courierSend.setText(Integer.toString(result.idKurir!!))
                 tvDetailPackage.setText(result.detailBarang)
                 tvStatusPackage.setText(result.statusBarang)
             }

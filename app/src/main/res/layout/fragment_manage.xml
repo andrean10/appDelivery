@@ -67,21 +67,28 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
-                        android:text="Barang Sedang Diambil Oleh Kurir Di Gudang" />
+                        android:text="@string/rb_001" />
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:id="@+id/rb_track_02"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
-                        android:text="Barang Sedang Di perjalanan" />
+                        android:text="@string/rb_002" />
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:id="@+id/rb_track_03"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
-                        android:text="Barang Sudah Diterima Pembeli" />
+                        android:text="@string/rb_003" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rb_track_04"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/rb_004" />
 
                 </RadioGroup>
 

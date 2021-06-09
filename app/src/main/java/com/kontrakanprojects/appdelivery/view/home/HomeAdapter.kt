@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kontrakanprojects.appdelivery.databinding.RvWaybillBinding
+import com.kontrakanprojects.appdelivery.model.tracking.ResponseTracking
 import com.kontrakanprojects.appdelivery.model.tracking.ResultTracking
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeAdapterViewHolder>() {
@@ -48,6 +49,6 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeAdapterViewHolder>() {
     }
 
     interface OnItemClickCallBack {
-        fun onItemClicked(resultDetailBarang: ResultTracking)
+        fun onItemClicked(resultTracking: ResultTracking)
     }
 }

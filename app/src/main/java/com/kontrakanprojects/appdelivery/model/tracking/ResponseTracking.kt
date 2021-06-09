@@ -11,7 +11,7 @@ data class ResponseTracking(
 	val results: List<ResultTracking>? = null,
 
 	@field:SerializedName("status")
-	val status: Int? = null,
+	val status: Int? = null
 )
 
 data class ResultTracking(
@@ -35,5 +35,5 @@ data class ResultTracking(
 	val detail: String? = null,
 
 	@field:SerializedName("longitude")
-	val longitude: String? = null,
+	val longitude: String? = null
 )

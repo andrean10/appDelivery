@@ -25,4 +25,8 @@
     <string name="titleName">Masukkan Nama Lengkap Anda</string>
     <string name="titleUsername">Masukkan Username Anda</string>
     <string name="titleAlamat">Masukkan Alamat Anda</string>
+    <string name="rb_001">Barang Masih Gudang</string>
+    <string name="rb_002">Barang Sedang Diambil Oleh Kurir Di Gudang</string>
+    <string name="rb_003">Barang Sedang Di perjalanan</string>
+    <string name="rb_004">Barang Sudah Diterima Pembeli</string>
 </resources>

@@ -69,6 +69,15 @@ class DetailBarangFragment : Fragment() {
     private fun prepare(result: ResultDetailBarang?) {
         if (result != null) {
             with(binding) {
+                if (result.statusBarang == "1"){
+                    tvStatusPackage.setText(getString(R.string.rb_001))
+                }else if (result.statusBarang == "2"){
+                    tvStatusPackage.setText(getString(R.string.rb_002))
+                }else if (result.statusBarang == "3"){
+                    tvStatusPackage.setText(getString(R.string.rb_003))
+                }else if (result.statusBarang == "4"){
+                    tvStatusPackage.setText(getString(R.string.rb_004))
+                }
 
                 tvCodeCostumer.setText(Integer.toString(result.kodePelanggan!!))
                 tvNameCostumer.setText(result.penerima)
@@ -76,7 +85,6 @@ class DetailBarangFragment : Fragment() {
                 tvAddressCostumer.setText(result.alamat)
                 courierSend.setText(Integer.toString(result.idKurir!!))
                 tvDetailPackage.setText(result.detailBarang)
-                tvStatusPackage.setText(result.statusBarang)
             }
         }
     }

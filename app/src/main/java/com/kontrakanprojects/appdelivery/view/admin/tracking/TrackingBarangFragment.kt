@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kontrakanprojects.appdelivery.databinding.FragmentTrackingBarangBinding
+import com.kontrakanprojects.appdelivery.model.tracking.ResultsItem
 import com.kontrakanprojects.appdelivery.utils.showMessage
 import www.sanju.motiontoast.MotionToast
 
@@ -37,11 +39,22 @@ class TrackingBarangFragment : Fragment() {
 
         setToolbarTitle()
         init()
+
+        trackingBarangAdapter.setOnItemClickCallBack(object : TrackingBarangAdapter.OnItemClickCallBack{
+            override fun onItemClicked(resultsItem: ResultsItem) {
+
+                val toDetailTracking = TrackingBarangFragmentDirections.
+                actionTrackingBarangFragmentToDetailTrackingFragment().apply {
+                    idBarang = resultsItem.idBarang ?: 0
+                }
+                if (toDetailTracking.idBarang != 0) findNavController().navigate(toDetailTracking)
+            }
+        })
     }
 
     private fun init() {
         with(binding) {
-            trackingBarangAdapter = TrackingBarangAdapter()
+            trackingBarangAdapter = TrackingBarangAdapter(requireActivity())
             with(rvAllTracking) {
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)

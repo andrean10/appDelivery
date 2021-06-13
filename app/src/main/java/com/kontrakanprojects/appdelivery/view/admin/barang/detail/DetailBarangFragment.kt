@@ -47,9 +47,11 @@ class DetailBarangFragment : Fragment() {
         init()
     }
 
+
     private fun init() {
+        isLoading(true)
         viewModel.detalBarang(idBarang).observe(viewLifecycleOwner, { response ->
-//            isLoading(false)
+            isLoading(false)
             if (response != null) {
                 if (response.status == 200) {
                     val result = response.results
@@ -64,6 +66,16 @@ class DetailBarangFragment : Fragment() {
                 showMessage(requireActivity(), "Failed", style = MotionToast.TOAST_ERROR)
             }
         })
+    }
+
+    private fun isLoading(status: Boolean) {
+        with(binding) {
+            if (status) {
+                pbLoading.visibility = View.VISIBLE
+            } else {
+                pbLoading.visibility = View.GONE
+            }
+        }
     }
 
     private fun prepare(result: ResultDetailBarang?) {

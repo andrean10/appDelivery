@@ -61,7 +61,12 @@
         android:id="@+id/detailTrackingFragment"
         android:name="com.kontrakanprojects.appdelivery.view.admin.tracking.DetailTrackingFragment"
         android:label="fragment_detail_tracking"
-        tools:layout="@layout/fragment_detail_tracking" />
+        tools:layout="@layout/fragment_detail_tracking" >
+        <argument
+            android:name="idBarang"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/manageBarangFragment"
         android:name="com.kontrakanprojects.appdelivery.view.admin.barang.managebarang.ManageBarangFragment"

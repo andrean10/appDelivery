@@ -64,4 +64,8 @@ interface ApiService {
     // Barang
     @GET("trackings")
     fun listTracking(): Call<ResponseTrackings>
+
+    // dapatkan tracking berdasarkan id barang DESC
+    @GET("trackings/{id_barang}")
+    fun listTrackingbrg(@Path("id_barang") idBarang: Int): Call<ResponseTracking>
 }

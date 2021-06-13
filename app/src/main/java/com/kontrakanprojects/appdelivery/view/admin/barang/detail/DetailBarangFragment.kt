@@ -63,16 +63,6 @@ class DetailBarangFragment : Fragment() {
         })
     }
 
-    private fun isLoading(status: Boolean) {
-        with(binding) {
-            if (status) {
-                pbLoading.visibility = View.VISIBLE
-            } else {
-                pbLoading.visibility = View.GONE
-            }
-        }
-    }
-
     private fun prepare(result: ResultDetailBarang?) {
         if (result != null) {
             with(binding) {

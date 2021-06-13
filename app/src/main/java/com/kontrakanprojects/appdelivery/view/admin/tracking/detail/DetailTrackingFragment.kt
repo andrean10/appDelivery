@@ -1,4 +1,4 @@
-package com.kontrakanprojects.appdelivery.view.admin.tracking
+package com.kontrakanprojects.appdelivery.view.admin.tracking.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kontrakanprojects.appdelivery.databinding.FragmentDetailTrackingBinding
 import com.kontrakanprojects.appdelivery.model.tracking.ResultTracking
 import com.kontrakanprojects.appdelivery.utils.showMessage
+import com.kontrakanprojects.appdelivery.view.admin.tracking.DetailTrackingAdapter
+import com.kontrakanprojects.appdelivery.view.admin.tracking.TrackingBarangViewModel
 import www.sanju.motiontoast.MotionToast
 
 class DetailTrackingFragment : Fragment() {

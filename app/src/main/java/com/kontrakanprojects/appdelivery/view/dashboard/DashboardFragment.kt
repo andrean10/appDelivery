@@ -83,9 +83,16 @@ class DashboardFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
+        val user = UserPreference(requireContext()).getUser()
         when (v?.id) {
+
             R.id.btn_courier -> {
-                findNavController().navigate(R.id.action_dashboardFragment_to_listCouriersFragment)
+                if (user.idRole == 2){
+                    findNavController().navigate(R.id.action_dashboardFragment_to_listCouriersFragment)
+                }else if (user.idRole == 3){
+                    findNavController().navigate(R.id.action_homeFragment_to_detailCouriersFragment2)
+                }
+
             }
             R.id.btn_tracking -> {
                 findNavController().navigate(R.id.action_dashboardFragment_to_trackingBarangFragment)

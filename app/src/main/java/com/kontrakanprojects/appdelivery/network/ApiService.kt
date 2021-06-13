@@ -4,6 +4,7 @@ import com.kontrakanprojects.appdelivery.model.auth.ResponseAuth
 import com.kontrakanprojects.appdelivery.model.barang.ResponseDetailBarang
 import com.kontrakanprojects.appdelivery.model.kurir.ResponseKurir
 import com.kontrakanprojects.appdelivery.model.profile.ResponseProfileDetail
+import com.kontrakanprojects.appdelivery.model.tracking.ResponseTracking
 import com.kontrakanprojects.appdelivery.model.tracking.ResponseTrackings
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -18,7 +19,7 @@ interface ApiService {
     fun loginAdmin(@FieldMap params: HashMap<String, String>): Call<ResponseAuth>
 
     @FormUrlEncoded
-    @POST("kurir/login")
+    @POST("login")
     fun loginKurir(@FieldMap params: HashMap<String, String>): Call<ResponseAuth>
 
     // Tracking
@@ -26,7 +27,7 @@ interface ApiService {
     fun tracking(@Path("kode_pelanggan") kodeResi: Int): Call<ResponseTrackings>
 
     // Admin
-    @GET("admin/{id_profile}")
+    @GET("admin/detail/{id_profile}")
     fun detailProfileAdmin(@Path("id_profile") idProfile: Int): Call<ResponseProfileDetail>
 
     // Kurir

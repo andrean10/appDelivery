@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">AppDelivery</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home_welcome">Selamat Datang</string>
-    <string name="home_admin">Admin</string>
+    <string name="home_admin">Selamat Datang,\n%s</string>
     <string name="home_choose">Pilih Menu</string>
     <string name="home_courier">Kurir</string>
     <string name="home_tracking">Tracking</string>

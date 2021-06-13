@@ -4,15 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kontrakanprojects.appdelivery.databinding.RvWaybillBinding
-import com.kontrakanprojects.appdelivery.model.tracking.ResponseTracking
-import com.kontrakanprojects.appdelivery.model.tracking.ResultTracking
+import com.kontrakanprojects.appdelivery.model.tracking.TrackingItem
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeAdapterViewHolder>() {
 
-    private val listTracking = ArrayList<ResultTracking>()
+    private val listTracking = ArrayList<TrackingItem>()
     private var onItemClickCallBack: OnItemClickCallBack? = null
 
-    fun setData(trackingBarang: List<ResultTracking>?) {
+    fun setData(trackingBarang: List<TrackingItem>?) {
         if (trackingBarang == null) return
         listTracking.clear()
         listTracking.addAll(trackingBarang)
@@ -37,18 +36,18 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeAdapterViewHolder>() {
 
     inner class HomeAdapterViewHolder(private val binding: RvWaybillBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(resultTracking: ResultTracking) {
+        fun bind(trackingItem: TrackingItem) {
             with(binding) {
-                tvUpdated.text = resultTracking.updatedAt
-                tvDetailShipment.text = resultTracking.detail
+                tvUpdated.text = trackingItem.updatedAt
+                tvDetailShipment.text = trackingItem.detail
             }
 
-            itemView.setOnClickListener { onItemClickCallBack?.onItemClicked(resultTracking) }
+            itemView.setOnClickListener { onItemClickCallBack?.onItemClicked(trackingItem) }
         }
 
     }
 
     interface OnItemClickCallBack {
-        fun onItemClicked(resultTracking: ResultTracking)
+        fun onItemClicked(trackingItem: TrackingItem)
     }
 }

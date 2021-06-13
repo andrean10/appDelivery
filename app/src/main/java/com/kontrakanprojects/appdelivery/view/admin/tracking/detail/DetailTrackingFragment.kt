@@ -1,4 +1,4 @@
-package com.kontrakanprojects.appdelivery.view.admin.tracking
+package com.kontrakanprojects.appdelivery.view.admin.tracking.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.kontrakanprojects.appdelivery.databinding.FragmentDetailTrackingBinding
+import com.kontrakanprojects.appdelivery.view.admin.tracking.TrackingBarangViewModel
 
 class DetailTrackingFragment : Fragment() {
 

@@ -32,7 +32,7 @@ data class ResultsItem(
     val idKurir: Int? = null,
 
     @field:SerializedName("tracking")
-    val tracking: List<TrackingItem?>? = null,
+    val tracking: List<TrackingItem>? = null,
 
     @field:SerializedName("alamat")
     val alamat: String? = null,

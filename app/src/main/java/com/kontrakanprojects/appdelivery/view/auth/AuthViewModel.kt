@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kontakanprojects.apptkslb.model.ResponseAuth
+import com.kontrakanprojects.appdelivery.model.auth.ResponseAuth
 import com.kontrakanprojects.appdelivery.network.ApiConfig
 import org.json.JSONObject
 import retrofit2.Call
@@ -13,18 +13,26 @@ import retrofit2.Response
 
 class AuthViewModel : ViewModel() {
 
-    private var _login = MutableLiveData<ResponseAuth>()
+    private var _login = MutableLiveData<ResponseAuth?>()
 
     private val TAG = AuthViewModel::class.simpleName
 
-    fun login(params: HashMap<String, Any>): LiveData<ResponseAuth> {
-        _login = getLogin(params)
+    fun login(params: HashMap<String, String>, idRole: Int): LiveData<ResponseAuth?> {
+        _login = getLogin(params, idRole)
         return _login
     }
 
-    private fun getLogin(params: HashMap<String, Any>): MutableLiveData<ResponseAuth> {
-        val client = ApiConfig.getApiService().login(params)
-        client.enqueue(object : Callback<ResponseAuth> {
+    private fun getLogin(
+        params: HashMap<String, String>,
+        idRole: Int,
+    ): MutableLiveData<ResponseAuth?> {
+        val client: Call<ResponseAuth>? = when (idRole) {
+            ChooseLoginFragment.ROLE_ADMIN -> ApiConfig.getApiService().loginAdmin(params)
+            ChooseLoginFragment.ROLE_COURIER -> ApiConfig.getApiService().loginKurir(params)
+            else -> null
+        }
+
+        client?.enqueue(object : Callback<ResponseAuth> {
             override fun onResponse(call: Call<ResponseAuth>, response: Response<ResponseAuth>) {
                 if (response.isSuccessful) {
                     val result = response.body()
@@ -41,6 +49,7 @@ class AuthViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<ResponseAuth>, t: Throwable) {
+                _login.postValue(null)
                 Log.e(TAG, "onFailure: ${t.message}")
             }
         })

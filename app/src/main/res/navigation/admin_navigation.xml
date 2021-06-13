@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailTrackingFragment"
-        android:name="com.kontrakanprojects.appdelivery.view.admin.tracking.DetailTrackingFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.admin.tracking.detail.DetailTrackingFragment"
         android:label="fragment_detail_tracking"
         tools:layout="@layout/fragment_detail_tracking" >
         <argument
@@ -71,7 +71,16 @@
         android:id="@+id/manageBarangFragment"
         android:name="com.kontrakanprojects.appdelivery.view.admin.barang.managebarang.ManageBarangFragment"
         android:label="fragment_manage_barang"
-        tools:layout="@layout/fragment_manage_barang" />
+        tools:layout="@layout/fragment_manage_barang">
+        <argument
+            android:name="idRequest"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
+            android:name="idBarang"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/detailCouriersFragment"
         android:name="com.kontrakanprojects.appdelivery.view.admin.couriers.detail.DetailCouriersFragment"

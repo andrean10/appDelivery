@@ -9,23 +9,23 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.FragmentBarangBinding
 import com.kontrakanprojects.appdelivery.model.barang.ResultDetailBarang
 import com.kontrakanprojects.appdelivery.utils.showMessage
+import com.kontrakanprojects.appdelivery.view.admin.barang.managebarang.ManageBarangFragment
 import www.sanju.motiontoast.MotionToast
 
-class BarangFragment : Fragment() {
+ class BarangFragment : Fragment() {
 
-    private var _binding: FragmentBarangBinding? = null
-    private val binding get() = _binding!!
-    private val viewModel by viewModels<BarangViewModel>()
-    private lateinit var barangAdapter: ListBarangAdapter
+     private var _binding: FragmentBarangBinding? = null
+     private val binding get() = _binding!!
+     private val viewModel by viewModels<BarangViewModel>()
+     private lateinit var barangAdapter: ListBarangAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+         setHasOptionsMenu(true)
+     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +41,11 @@ class BarangFragment : Fragment() {
         init()
 
         binding.fabAddProduct.setOnClickListener {
-            findNavController().navigate(R.id.action_barangFragment_to_manageBarangFragment)
+            findNavController().navigate(
+                BarangFragmentDirections.actionBarangFragmentToManageBarangFragment(
+                    ManageBarangFragment.REQUEST_ADD
+                )
+            )
         }
 
         barangAdapter.setOnItemClickCallBack(object : ListBarangAdapter.OnItemClickCallBack {

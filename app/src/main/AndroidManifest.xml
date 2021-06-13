@@ -5,6 +5,8 @@
 
     <uses-feature android:name="android.hardware.camera" />
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -22,14 +24,14 @@
         tools:targetApi="m">
         <activity android:name=".view.courier.CourierActivity" />
         <activity android:name=".view.admin.AdminActivity">
+
+        </activity>
+        <activity android:name=".view.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".view.splash.SplashActivity">
-
         </activity>
         <activity android:name=".view.home.HomeActivity" />
         <activity android:name=".view.auth.AuthActivity" />
@@ -48,6 +50,10 @@
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDDnJoaQwnn5HEbeNnZPQDHVRCDGZ20j-U" />
     </application>
 
 </manifest>

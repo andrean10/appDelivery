@@ -1,30 +1,36 @@
-package com.kontakanprojects.apptkslb.model
+package com.kontrakanprojects.appdelivery.model.auth
 
 import com.google.gson.annotations.SerializedName
 
 data class ResponseAuth(
 
-    @field:SerializedName("message")
-    val message: String,
+	@field:SerializedName("result")
+	val result: Result? = null,
 
-    @field:SerializedName("results")
-    val results: Results? = null,
+	@field:SerializedName("message")
+	val message: String? = null,
 
-    @field:SerializedName("status")
-    val status: Int,
+	@field:SerializedName("status")
+	val status: Int? = null,
 )
 
-data class Results(
+data class Result(
 
-    @field:SerializedName("id_role")
-    val idRole: Int,
+	@field:SerializedName("password")
+	val password: String? = null,
 
-    @field:SerializedName("id_user")
-    val id: Int,
+	@field:SerializedName("nama_lengkap")
+	val namaLengkap: String? = null,
 
-    @field:SerializedName("nama")
-    val nama: String,
+	@field:SerializedName("id_level_akses")
+	val idLevelAkses: Int? = null,
 
-    @field:SerializedName("foto_profile")
-    val fotoProfile: String,
+	@field:SerializedName("id_login")
+	val idLogin: Int? = null,
+
+	@field:SerializedName("id_kurir")
+	val idKurir: Int? = null,
+
+	@field:SerializedName("username")
+	val username: String? = null,
 )

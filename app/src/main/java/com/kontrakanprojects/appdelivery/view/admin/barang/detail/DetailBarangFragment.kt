@@ -6,16 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
 import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.FragmentDetailBarangBinding
 import com.kontrakanprojects.appdelivery.model.barang.ResultDetailBarang
-import com.kontrakanprojects.appdelivery.model.kurir.ResultKurir
-import com.kontrakanprojects.appdelivery.network.ApiConfig
 import com.kontrakanprojects.appdelivery.utils.showMessage
 import com.kontrakanprojects.appdelivery.view.admin.barang.BarangViewModel
-import com.kontrakanprojects.appdelivery.view.admin.couriers.detail.DetailCouriersFragment
-import com.kontrakanprojects.appdelivery.view.admin.couriers.detail.DetailCouriersFragmentArgs
 import www.sanju.motiontoast.MotionToast
 
 class DetailBarangFragment : Fragment() {
@@ -81,22 +76,37 @@ class DetailBarangFragment : Fragment() {
     private fun prepare(result: ResultDetailBarang?) {
         if (result != null) {
             with(binding) {
-                if (result.statusBarang == "1"){
-                    tvStatusPackage.setText(getString(R.string.rb_001))
-                }else if (result.statusBarang == "2"){
-                    tvStatusPackage.setText(getString(R.string.rb_002))
-                }else if (result.statusBarang == "3"){
-                    tvStatusPackage.setText(getString(R.string.rb_003))
-                }else if (result.statusBarang == "4"){
-                    tvStatusPackage.setText(getString(R.string.rb_004))
+                when (result.statusBarang) {
+                    "1" -> {
+                        tvStatusPackage.text = getString(R.string.rb_001)
+                    }
+                    "2" -> {
+                        tvStatusPackage.text = getString(R.string.rb_002)
+                    }
+                    "3" -> {
+                        tvStatusPackage.text = getString(R.string.rb_003)
+                    }
+                    "4" -> {
+                        tvStatusPackage.text = getString(R.string.rb_004)
+                    }
                 }
 
-                tvCodeCostumer.setText(Integer.toString(result.kodePelanggan!!))
-                tvNameCostumer.setText(result.penerima)
-                tvNumberPhone.setText(result.nomorHp)
-                tvAddressCostumer.setText(result.alamat)
-                courierSend.setText(Integer.toString(result.idKurir!!))
-                tvDetailPackage.setText(result.detailBarang)
+                tvCodeCostumer.text = result.kodePelanggan.toString()
+                tvNameCostumer.text = result.penerima
+                tvNumberPhone.text = result.nomorHp
+                tvAddressCostumer.text = result.alamat
+                courierSend.text = result.idKurir.toString()
+                tvDetailPackage.text = result.detailBarang
+            }
+        }
+    }
+
+    private fun isLoading(status: Boolean) {
+        with(binding) {
+            if (status) {
+                progressBar.visibility = View.VISIBLE
+            } else {
+                progressBar.visibility = View.GONE
             }
         }
     }

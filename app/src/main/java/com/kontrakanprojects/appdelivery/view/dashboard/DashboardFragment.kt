@@ -85,7 +85,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn_courier -> {
-                findNavController().navigate(R.id.action_dashboardFragment_to_listCouriersFragment)
+                findNavController().navigate(R.id.action_homeFragment_to_detailCouriersFragment)
             }
             R.id.btn_tracking -> {
                 findNavController().navigate(R.id.action_dashboardFragment_to_trackingBarangFragment)

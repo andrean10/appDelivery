@@ -41,11 +41,10 @@ import www.sanju.motiontoast.MotionToast
         init()
 
         binding.fabAddProduct.setOnClickListener {
-            findNavController().navigate(
-                BarangFragmentDirections.actionBarangFragmentToManageBarangFragment(
-                    ManageBarangFragment.REQUEST_ADD
-                )
-            )
+            val toManageBarang =
+                BarangFragmentDirections.actionBarangFragmentToManageBarangFragment()
+            toManageBarang.idRequest = ManageBarangFragment.REQUEST_ADD
+            findNavController().navigate(toManageBarang)
         }
 
         barangAdapter.setOnItemClickCallBack(object : ListBarangAdapter.OnItemClickCallBack {

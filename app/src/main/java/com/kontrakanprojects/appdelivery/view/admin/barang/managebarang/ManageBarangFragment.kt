@@ -81,7 +81,7 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
     private val resultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
-//            val place = Place
+//            val place = getP
         }
     }
 

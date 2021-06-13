@@ -2,7 +2,6 @@ package com.kontrakanprojects.appdelivery.view.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -67,8 +66,6 @@ class HomeFragment : Fragment() {
                             val result = response.results?.get(0)
                             val listTracking = result?.tracking
                             homeAdapter.setData(listTracking)
-
-                            Log.d(TAG, "onViewCreated: $listTracking")
 
                             btnDetail.setOnClickListener {
                                 val toDetailBarang =

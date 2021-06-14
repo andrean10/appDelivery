@@ -34,7 +34,12 @@
         android:id="@+id/manageFragment"
         android:name="com.kontrakanprojects.appdelivery.view.admin.tracking.manage.ManageFragment"
         android:label="fragment_manage"
-        tools:layout="@layout/fragment_manage_tracking" />
+        tools:layout="@layout/fragment_manage_tracking" >
+        <argument
+            android:name="idBarang"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
     <fragment
         android:id="@+id/detailCouriersFragment"
         android:name="com.kontrakanprojects.appdelivery.view.admin.couriers.detail.DetailCouriersFragment"
@@ -53,5 +58,9 @@
         <action
             android:id="@+id/action_detailBarangFragment_to_manageFragment"
             app:destination="@id/manageFragment" />
+        <argument
+            android:name="idBarang"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>

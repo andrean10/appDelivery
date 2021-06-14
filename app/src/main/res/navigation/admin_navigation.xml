@@ -64,8 +64,8 @@
         tools:layout="@layout/fragment_detail_tracking" >
         <argument
             android:name="idBarang"
-            android:defaultValue="0"
-            app:argType="integer" />
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/manageBarangFragment"

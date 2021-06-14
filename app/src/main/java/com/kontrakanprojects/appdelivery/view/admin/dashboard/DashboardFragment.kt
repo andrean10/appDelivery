@@ -16,6 +16,7 @@ import com.kontrakanprojects.appdelivery.model.profile.ResultsItem
 import com.kontrakanprojects.appdelivery.network.ApiConfig
 import com.kontrakanprojects.appdelivery.sessions.UserPreference
 import com.kontrakanprojects.appdelivery.utils.showMessage
+import com.kontrakanprojects.appdelivery.view.admin.couriers.detail.DetailCouriersFragment
 import com.kontrakanprojects.appdelivery.view.auth.ChooseLoginFragment
 import com.kontrakanprojects.appdelivery.view.home.HomeActivity
 import www.sanju.motiontoast.MotionToast
@@ -93,10 +94,21 @@ class DashboardFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.img_profile -> {
-                val toDetailAdmin =
-                    DashboardFragmentDirections.actionDashboardFragmentToAdminProfileFragment()
-                toDetailAdmin.idAdmin = user.idUser ?: 0
-                findNavController().navigate(toDetailAdmin)
+                when (user.idRole) {
+                    ChooseLoginFragment.ROLE_ADMIN -> {
+                        val toDetailAdmin =
+                            DashboardFragmentDirections.actionDashboardFragmentToAdminProfileFragment()
+                        toDetailAdmin.idAdmin = user.idUser ?: 0
+                        findNavController().navigate(toDetailAdmin)
+                    }
+                    ChooseLoginFragment.ROLE_COURIER -> {
+                        val toDetailCourier =
+                            DashboardFragmentDirections.actionDashboardFragmentToDetailCouriersFragment()
+                        toDetailCourier.idKurir = user.idUser ?: 0
+                        toDetailCourier.idRequest = DetailCouriersFragment.REQUEST_EDIT
+                        findNavController().navigate(toDetailCourier)
+                    }
+                }
             }
             R.id.btn_courier -> {
                 findNavController().navigate(R.id.action_dashboardFragment_to_listCouriersFragment)

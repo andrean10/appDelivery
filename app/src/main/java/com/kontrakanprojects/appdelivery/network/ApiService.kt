@@ -27,6 +27,13 @@ interface ApiService {
     @GET("admin/detail/{id_profile}")
     fun detailProfileAdmin(@Path("id_profile") idProfile: Int): Call<ResponseProfileDetail>
 
+    @FormUrlEncoded
+    @PUT("admin/edit/{id_profile}")
+    fun editProfileAdmin(
+        @Path("id_profile") idProfile: Int,
+        params: HashMap<String, String>,
+    ): Call<ResponseProfileDetail>
+
     // Kurir
     @GET("kurir")
     fun listKurir(): Call<ResponseKurir>

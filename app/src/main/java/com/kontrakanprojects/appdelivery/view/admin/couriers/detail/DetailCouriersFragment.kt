@@ -27,13 +27,15 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.FragmentDetailCouriersBinding
+import com.kontrakanprojects.appdelivery.db.User
 import com.kontrakanprojects.appdelivery.model.kurir.ResultKurir
 import com.kontrakanprojects.appdelivery.network.ApiConfig
+import com.kontrakanprojects.appdelivery.sessions.UserPreference
 import com.kontrakanprojects.appdelivery.utils.createPartFromString
 import com.kontrakanprojects.appdelivery.utils.reqFileImage
-import com.kontrakanprojects.appdelivery.utils.reqFileImageEmpty
 import com.kontrakanprojects.appdelivery.utils.showMessage
 import com.kontrakanprojects.appdelivery.view.admin.couriers.CouriersViewModel
+import com.kontrakanprojects.appdelivery.view.auth.ChooseLoginFragment
 import com.yalantis.ucrop.UCrop
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -51,6 +53,7 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
     private var bottomSheetDialog: BottomSheetDialog? = null
     private lateinit var etUiUpdated: TextInputEditText
 
+    private lateinit var user: User
     private var resultDetailCourier: ResultKurir? = null
 
     private var idKurir = 0
@@ -179,6 +182,8 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
     }
 
     private fun init() {
+        user = UserPreference(requireContext()).getUser()
+
         viewModel.detailKurir(idKurir).observe(viewLifecycleOwner, { response ->
 //            isLoading(false)
             if (response != null) {
@@ -228,11 +233,11 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
             checkValue(username, etUsername)
             checkValue(password, etPassword)
             checkValue(alamat, etAlamatLengkapKurir)
-            val image: MultipartBody.Part = if (gambarPath != null) {
-                reqFileImage(gambarPath, "foto_profile")
-            } else {
-                reqFileImageEmpty("foto_profile")
-            }
+//            val image: MultipartBody.Part = if (gambarPath != null) {
+//                reqFileImage(gambarPath, "foto_profile")
+//            } else {
+//                reqFileImageEmpty("foto_profile")
+//            }
 
             if (valid) {
                 val params = hashMapOf(
@@ -796,7 +801,9 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         if (request == REQUEST_EDIT) {
-            inflater.inflate(R.menu.delete, menu)
+            if (user.idRole == ChooseLoginFragment.ROLE_ADMIN) {
+                inflater.inflate(R.menu.delete, menu)
+            }
         }
     }
 

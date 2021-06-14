@@ -20,7 +20,6 @@ import com.kontrakanprojects.appdelivery.utils.showMessage
 import com.kontrakanprojects.appdelivery.view.admin.AdminActivity
 import com.kontrakanprojects.appdelivery.view.auth.AuthViewModel
 import com.kontrakanprojects.appdelivery.view.auth.ChooseLoginFragment
-import com.kontrakanprojects.appdelivery.view.courier.CourierActivity
 import www.sanju.motiontoast.MotionToast
 
 class LoginFragment : Fragment() {
@@ -95,24 +94,9 @@ class LoginFragment : Fragment() {
                                         setLogin(Login(loginSuccess))
                                     }
 
-                                    when (idRole) {
-                                        ChooseLoginFragment.ROLE_ADMIN -> {
-                                            val intent = Intent(
-                                                requireContext(),
-                                                AdminActivity::class.java
-                                            )
-                                            startActivity(intent)
-                                            activity?.finish()
-                                        }
-                                        ChooseLoginFragment.ROLE_COURIER -> {
-                                            val intent = Intent(
-                                                requireContext(),
-                                                CourierActivity::class.java
-                                            )
-                                            startActivity(intent)
-                                            activity?.finish()
-                                        }
-                                    }
+                                    val intent = Intent(requireContext(), AdminActivity::class.java)
+                                    startActivity(intent)
+                                    activity?.finish()
                                 } else {
                                     tvMessageFailed.visibility = View.VISIBLE
                                     tvMessageFailed.text = response.message

@@ -213,7 +213,7 @@ class AdminProfileFragment : Fragment(), View.OnClickListener {
         // save data
         val btnSave: Button = bottomSheetView.findViewById(R.id.btnSave)
         btnSave.setOnClickListener {
-            val parameters = java.util.HashMap<String, String>()
+            val parameters = HashMap<String, String>()
             var getInput = ""
 
             if (isEditPassword) { // cek jika edit password arahkan logic kesini

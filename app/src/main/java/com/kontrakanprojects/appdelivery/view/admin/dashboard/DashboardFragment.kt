@@ -1,4 +1,4 @@
-package com.kontrakanprojects.appdelivery.view.dashboard
+package com.kontrakanprojects.appdelivery.view.admin.dashboard
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,10 +11,12 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.FragmentDashboardBinding
+import com.kontrakanprojects.appdelivery.db.User
 import com.kontrakanprojects.appdelivery.model.profile.ResultsItem
 import com.kontrakanprojects.appdelivery.network.ApiConfig
 import com.kontrakanprojects.appdelivery.sessions.UserPreference
 import com.kontrakanprojects.appdelivery.utils.showMessage
+import com.kontrakanprojects.appdelivery.view.auth.ChooseLoginFragment
 import com.kontrakanprojects.appdelivery.view.home.HomeActivity
 import www.sanju.motiontoast.MotionToast
 
@@ -25,10 +27,8 @@ class DashboardFragment : Fragment(), View.OnClickListener {
     private val binding get() = _binding!!
     private val viewModel by viewModels<DashboardViewModel>()
 
-    companion object {
-        const val LOGIN_AS_ADMIN = 1
-        const val LOGIN_AS_COURIER = 2
-    }
+    private lateinit var resultDetail: ResultsItem
+    private lateinit var user: User
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +44,12 @@ class DashboardFragment : Fragment(), View.OnClickListener {
         observeDetailProfile()
 
         with(binding) {
+            if (user.idRole == ChooseLoginFragment.ROLE_COURIER) {
+                btnTracking.visibility = View.GONE
+                btnCourier.visibility = View.GONE
+            }
+
+            imgProfile.setOnClickListener(this@DashboardFragment)
             btnCourier.setOnClickListener(this@DashboardFragment)
             btnTracking.setOnClickListener(this@DashboardFragment)
             btnBarang.setOnClickListener(this@DashboardFragment)
@@ -52,7 +58,8 @@ class DashboardFragment : Fragment(), View.OnClickListener {
     }
 
     private fun observeDetailProfile() {
-        val user = UserPreference(requireContext()).getUser()
+        user = UserPreference(requireContext()).getUser()
+
         viewModel.profile(user.idUser!!, user.idRole!!).observe(viewLifecycleOwner, { response ->
             if (response != null) {
                 if (response.status == 200) {
@@ -71,6 +78,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
     }
 
     private fun prepare(result: ResultsItem) {
+        resultDetail = result
         with(binding) {
             Glide.with(requireContext())
                 .load(ApiConfig.URL + result.fotoProfil)
@@ -84,8 +92,14 @@ class DashboardFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.img_profile -> {
+                val toDetailAdmin =
+                    DashboardFragmentDirections.actionDashboardFragmentToAdminProfileFragment()
+                toDetailAdmin.idAdmin = user.idUser ?: 0
+                findNavController().navigate(toDetailAdmin)
+            }
             R.id.btn_courier -> {
-                findNavController().navigate(R.id.action_dashboardFragment_to_detailCouriersFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_listCouriersFragment)
             }
             R.id.btn_tracking -> {
                 findNavController().navigate(R.id.action_dashboardFragment_to_trackingBarangFragment)

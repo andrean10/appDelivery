@@ -17,22 +17,16 @@ class AuthViewModel : ViewModel() {
 
     private val TAG = AuthViewModel::class.simpleName
 
-    fun login(params: HashMap<String, String>, idRole: Int): LiveData<ResponseAuth?> {
-        _login = getLogin(params, idRole)
+    fun login(params: HashMap<String, String>): LiveData<ResponseAuth?> {
+        _login = getLogin(params)
         return _login
     }
 
     private fun getLogin(
         params: HashMap<String, String>,
-        idRole: Int,
     ): MutableLiveData<ResponseAuth?> {
-        val client: Call<ResponseAuth>? = when (idRole) {
-            ChooseLoginFragment.ROLE_ADMIN -> ApiConfig.getApiService().loginAdmin(params)
-            ChooseLoginFragment.ROLE_COURIER -> ApiConfig.getApiService().loginKurir(params)
-            else -> null
-        }
-
-        client?.enqueue(object : Callback<ResponseAuth> {
+        val client = ApiConfig.getApiService().login(params)
+        client.enqueue(object : Callback<ResponseAuth> {
             override fun onResponse(call: Call<ResponseAuth>, response: Response<ResponseAuth>) {
                 if (response.isSuccessful) {
                     val result = response.body()

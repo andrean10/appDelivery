@@ -3,42 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/courier_navigation"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/dashboardFragment">
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.kontrakanprojects.appdelivery.view.dashboard.DashboardFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.admin.dashboard.DashboardFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_dashboard">
         <action
             android:id="@+id/action_dashboardFragment_to_detailCouriersFragment"
             app:destination="@id/detailCouriersFragment" />
-        <action
-            android:id="@+id/action_dashboardFragment_to_barangFragment"
-            app:destination="@id/barangFragment" />
-
-    </fragment>
-    <fragment
-        android:id="@+id/barangFragment"
-        android:name="com.kontrakanprojects.appdelivery.view.admin.barang.BarangFragment"
-        android:label="fragment_barang"
-        tools:layout="@layout/fragment_barang">
-        <argument
-            android:name="idBarang"
-            android:defaultValue="0"
-            app:argType="integer" />
-        <action
-            android:id="@+id/action_barangFragment_to_detailBarangFragment2"
-            app:destination="@id/detailBarangFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/manageFragment"
-        android:name="com.kontrakanprojects.appdelivery.view.admin.tracking.manage.ManageFragment"
-        android:label="fragment_manage"
-        tools:layout="@layout/fragment_manage_tracking" >
-        <argument
-            android:name="idBarang"
-            app:argType="integer"
-            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/detailCouriersFragment"
@@ -46,21 +19,12 @@
         android:label="fragment_detail_couriers"
         tools:layout="@layout/fragment_detail_couriers">
         <argument
+            android:name="idRequest"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
             android:name="idKurir"
             android:defaultValue="0"
             app:argType="integer" />
-    </fragment>
-    <fragment
-        android:id="@+id/detailBarangFragment"
-        android:name="com.kontrakanprojects.appdelivery.view.admin.barang.detail.DetailBarangFragment"
-        android:label="fragment_detail_barang"
-        tools:layout="@layout/fragment_detail_barang">
-        <action
-            android:id="@+id/action_detailBarangFragment_to_manageFragment"
-            app:destination="@id/manageFragment" />
-        <argument
-            android:name="idBarang"
-            app:argType="integer"
-            android:defaultValue="0" />
     </fragment>
 </navigation>

@@ -103,6 +103,8 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
         idKurir = args.idKurir
         request = args.idRequest
 
+        Log.d(TAG, "onViewCreated: $request")
+
         lateinit var titleToolbar: String
         with(binding) {
             when (request) {
@@ -121,16 +123,17 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
                     etAlamatLengkapKurir.isFocusable = false
                     etAlamatLengkapKurir.isClickable = false
                     btnSaveProfileKurir.visibility = View.GONE
+
+                    etNamaLengkapKurir.setOnClickListener(this@DetailCouriersFragment)
+                    etUsername.setOnClickListener(this@DetailCouriersFragment)
+                    etPassword.setOnClickListener(this@DetailCouriersFragment)
+                    etAlamatLengkapKurir.setOnClickListener(this@DetailCouriersFragment)
                 }
             }
 
             setToolbarTitle(titleToolbar)
 
             btnPickImage.setOnClickListener(this@DetailCouriersFragment)
-            etNamaLengkapKurir.setOnClickListener(this@DetailCouriersFragment)
-            etUsername.setOnClickListener(this@DetailCouriersFragment)
-            etPassword.setOnClickListener(this@DetailCouriersFragment)
-            etAlamatLengkapKurir.setOnClickListener(this@DetailCouriersFragment)
             btnSaveProfileKurir.setOnClickListener(this@DetailCouriersFragment)
         }
     }
@@ -239,7 +242,7 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
                     "alamat" to createPartFromString(alamat)
                 )
 
-                lateinit var imagesParams: MultipartBody.Part
+                var imagesParams: MultipartBody.Part? = null
                 if (gambarPath != null) {
                     imagesParams = reqFileImage(gambarPath, "foto_profil")
                 }
@@ -686,7 +689,7 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
         })
     }
 
-    private fun addKurir(params: HashMap<String, RequestBody>, imagesParams: MultipartBody.Part) {
+    private fun addKurir(params: HashMap<String, RequestBody>, imagesParams: MultipartBody.Part?) {
         viewModel.addKurir(params, imagesParams).observe(viewLifecycleOwner, { response ->
             if (response != null) {
                 if (response.status == 200) {

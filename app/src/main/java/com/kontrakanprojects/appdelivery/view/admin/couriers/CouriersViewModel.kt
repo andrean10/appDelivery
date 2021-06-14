@@ -33,7 +33,7 @@ class CouriersViewModel : ViewModel() {
 
     fun addKurir(
         params: HashMap<String, RequestBody>,
-        imagesParams: MultipartBody.Part,
+        imagesParams: MultipartBody.Part?,
     ): LiveData<ResponseKurir> {
         _kurir = MutableLiveData<ResponseKurir>()
         kurir(paramsTambahKurir = params, imagesParams = imagesParams)

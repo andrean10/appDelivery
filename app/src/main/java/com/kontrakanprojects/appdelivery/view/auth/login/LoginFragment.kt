@@ -71,7 +71,7 @@ class LoginFragment : Fragment() {
                         params["username"] = username
                         params["password"] = password
 
-                        viewModel.login(params, idRole).observe(viewLifecycleOwner, { response ->
+                        viewModel.login(params).observe(viewLifecycleOwner, { response ->
                             isLoading(false)
                             if (response != null) {
                                 if (response.status == 200) {

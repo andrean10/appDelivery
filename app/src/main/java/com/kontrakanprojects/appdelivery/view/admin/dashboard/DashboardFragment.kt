@@ -129,6 +129,10 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                 startActivity(Intent(requireContext(), HomeActivity::class.java))
                 activity?.finish()
             }
+
+            R.id.tv_menu_selection -> {
+                findNavController().navigate(R.id.action_dashboardFragment_to_barangKurirFragment)
+            }
         }
     }
 

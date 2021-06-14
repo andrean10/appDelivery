@@ -37,7 +37,7 @@ class AdminProfileViewModel : ViewModel() {
         val client: Call<ResponseProfileDetail> = if (isDetailAdmin) {
             ApiConfig.getApiService().detailProfileAdmin(idAdmin) // detail data
         } else {
-            ApiConfig.getApiService().editProfileAdmin(idAdmin, params!!) // hapus data
+            ApiConfig.getApiService().editProfileAdmin(idAdmin, params!!) // edit data
         }
 
         client.enqueue(object : Callback<ResponseProfileDetail> {

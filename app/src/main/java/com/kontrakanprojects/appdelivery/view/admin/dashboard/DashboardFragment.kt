@@ -111,7 +111,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                 }
             }
             R.id.btn_courier -> {
-                findNavController().navigate(R.id.action_dashboardFragment_to_listCouriersFragment)
+                findNavController().navigate(R.id.action_dashboardFragment_to_barangKurirFragment)
             }
             R.id.btn_tracking -> {
                 findNavController().navigate(R.id.action_dashboardFragment_to_trackingBarangFragment)

@@ -101,6 +101,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_adminProfileFragment"
             app:destination="@id/adminProfileFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_detailCouriersFragment"
+            app:destination="@id/detailCouriersFragment" />
     </fragment>
     <fragment
         android:id="@+id/adminProfileFragment"

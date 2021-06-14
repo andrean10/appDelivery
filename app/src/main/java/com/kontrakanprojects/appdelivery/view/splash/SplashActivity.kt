@@ -8,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.sessions.UserPreference
 import com.kontrakanprojects.appdelivery.view.admin.AdminActivity
-import com.kontrakanprojects.appdelivery.view.auth.ChooseLoginFragment
-import com.kontrakanprojects.appdelivery.view.courier.CourierActivity
 import com.kontrakanprojects.appdelivery.view.home.HomeActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -43,18 +41,9 @@ class SplashActivity : AppCompatActivity() {
             // check session login
             val session = UserPreference(this@SplashActivity)
             if (session.getLogin().isLoginValid) {
-                when (session.getUser().idRole) {
-                    ChooseLoginFragment.ROLE_ADMIN -> {
-                        val intent = Intent(this@SplashActivity, AdminActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    }
-                    ChooseLoginFragment.ROLE_COURIER -> {
-                        val intent = Intent(this@SplashActivity, CourierActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    }
-                }
+                val intent = Intent(this@SplashActivity, AdminActivity::class.java)
+                startActivity(intent)
+                finish()
             } else {
                 val intent = Intent(this@SplashActivity, HomeActivity::class.java)
                 startActivity(intent)

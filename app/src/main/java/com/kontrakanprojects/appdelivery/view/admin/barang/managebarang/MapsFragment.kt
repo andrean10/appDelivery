@@ -30,6 +30,10 @@ import com.kontrakanprojects.appdelivery.view.admin.barang.BarangViewModel
 import www.sanju.motiontoast.MotionToast
 import java.util.*
 import kotlin.collections.HashMap
+import kotlin.math.PI
+import kotlin.math.acos
+import kotlin.math.cos
+import kotlin.math.sin
 
 
 class MapsFragment : Fragment() {
@@ -248,6 +252,32 @@ class MapsFragment : Fragment() {
 //            permission()
 //        }
 //    }
+
+    private fun distance(lat1: Double, long1: Double, lat2: Double, long2: Double): String {
+        // hitung perbedaan longitude
+        val longDiff = long1 - long2
+        // hitung jarak
+        var distance = sin(deg2rad(lat1)) *
+                sin(deg2rad(lat2)) +
+                cos(deg2rad(lat1)) *
+                cos(deg2rad(lat2)) *
+                cos(deg2rad(longDiff))
+        distance = acos(distance)
+
+        // konversi jarak radian ke degree
+        distance = rad2deg(distance)
+        // jarak dalam m
+        distance *= 60 * 1.1515
+        // jarak dalam km
+        distance *= 1.609344
+        // set to distance
+        return String.format(Locale.US, "%2f Kilometer", distance)
+    }
+
+    private fun rad2deg(distance: Double) = (distance * 180.0 / PI)
+
+    // konversi degree ke radian
+    private fun deg2rad(lat1: Double) = (lat1 * PI / 180.0)
 
 
     override fun onDestroy() {

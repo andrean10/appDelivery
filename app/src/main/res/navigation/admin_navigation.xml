@@ -11,20 +11,11 @@
         android:label="fragment_barang"
         tools:layout="@layout/fragment_barang">
         <action
-            android:id="@+id/action_barangFragment_to_manageBarangFragment"
-            app:destination="@id/manageBarangFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-        <action
             android:id="@+id/action_barangFragment_to_detailBarangFragment"
-            app:destination="@id/detailBarangFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-
+            app:destination="@id/detailBarangFragment" />
+        <action
+            android:id="@+id/action_barangFragment_to_manageBarangFragment"
+            app:destination="@id/manageBarangFragment" />
     </fragment>
     <fragment
         android:id="@+id/trackingBarangFragment"
@@ -75,6 +66,9 @@
             android:name="idBarang"
             android:defaultValue="0"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_manageBarangFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailCouriersFragment"
@@ -92,7 +86,7 @@
     </fragment>
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.kontrakanprojects.appdelivery.view.dashboard.DashboardFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.admin.dashboard.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard">
         <action
@@ -112,5 +106,15 @@
         android:id="@+id/adminProfileFragment"
         android:name="com.kontrakanprojects.appdelivery.view.admin.profile.AdminProfileFragment"
         android:label="fragment_admin_profile"
-        tools:layout="@layout/fragment_admin_profile" />
+        tools:layout="@layout/fragment_admin_profile">
+        <argument
+            android:name="idAdmin"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.admin.barang.managebarang.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
 </navigation>

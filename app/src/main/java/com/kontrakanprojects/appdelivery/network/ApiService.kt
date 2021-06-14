@@ -15,18 +15,14 @@ interface ApiService {
     // login
     @FormUrlEncoded
     @POST("login")
-    fun loginAdmin(@FieldMap params: HashMap<String, String>): Call<ResponseAuth>
-
-    @FormUrlEncoded
-    @POST("kurir/login")
-    fun loginKurir(@FieldMap params: HashMap<String, String>): Call<ResponseAuth>
+    fun login(@FieldMap params: HashMap<String, String>): Call<ResponseAuth>
 
     // Tracking
     @GET("tracking/{kode_pelanggan}")
     fun tracking(@Path("kode_pelanggan") kodeResi: Int): Call<ResponseTrackings>
 
     // Admin
-    @GET("admin/{id_profile}")
+    @GET("admin/detail/{id_profile}")
     fun detailProfileAdmin(@Path("id_profile") idProfile: Int): Call<ResponseProfileDetail>
 
     // Kurir
@@ -70,7 +66,7 @@ interface ApiService {
     @GET("detail-barang")
     fun listDetailBarang(): Call<ResponseDetailBarang>
 
-    @GET("detail-barang/{id_barang}")
+    @GET("detail-barangs/{id_barang}")
     fun detailBarang(@Path("id_barang") idDetailBarang: Int): Call<ResponseDetailBarang>
 
     //  Barang

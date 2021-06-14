@@ -1,4 +1,4 @@
-package com.kontrakanprojects.appdelivery.view.dashboard
+package com.kontrakanprojects.appdelivery.view.admin.dashboard
 
 import android.util.Log
 import androidx.lifecycle.LiveData

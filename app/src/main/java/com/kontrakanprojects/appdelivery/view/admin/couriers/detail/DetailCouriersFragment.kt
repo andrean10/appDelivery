@@ -65,7 +65,6 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
     private var imageFile: File? = null
     private var imageUri: Uri? = null
     private var gambarPath: String? = null
-    private var resultUriCrop: Uri? = null
 
     private val TAG = DetailCouriersFragment::class.simpleName
 
@@ -105,8 +104,6 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
         val args = DetailCouriersFragmentArgs.fromBundle(arguments as Bundle)
         idKurir = args.idKurir
         request = args.idRequest
-
-        Log.d(TAG, "onViewCreated: $request")
 
         lateinit var titleToolbar: String
         with(binding) {

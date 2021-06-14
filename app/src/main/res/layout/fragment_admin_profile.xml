@@ -82,6 +82,8 @@
                         android:id="@+id/et_nama_lengkap_admin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
                         android:hint="Nama Lengkap" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -97,6 +99,8 @@
                         android:id="@+id/et_username_admin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
                         android:hint="Username" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -114,18 +118,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Password"
+                        android:clickable="false"
+                        android:focusable="false"
                         android:inputType="textPassword" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_save_profile_admin"
-                    android:layout_marginTop="20dp"
-                    android:textColor="@color/black"
-                    android:text="Simpan"
-                    android:layout_below="@+id/til003"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
 
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
         </ScrollView>

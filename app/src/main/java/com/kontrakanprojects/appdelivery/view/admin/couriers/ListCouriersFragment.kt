@@ -38,6 +38,7 @@ class ListCouriersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
 
+        setToolbarTitle()
         binding.fabAddCourier.setOnClickListener {
             val toDetailCourier =
                 ListCouriersFragmentDirections.actionListCouriersFragmentToDetailCouriersFragment()
@@ -111,7 +112,7 @@ class ListCouriersFragment : Fragment() {
     private fun setToolbarTitle() {
         (activity as AppCompatActivity?)!!.setSupportActionBar(binding.topAppBar)
         if ((activity as AppCompatActivity?)!!.supportActionBar != null) {
-            (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Tracking Barang"
+            (activity as AppCompatActivity?)!!.supportActionBar!!.title = "List Kurir"
         }
     }
 

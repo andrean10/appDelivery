@@ -105,6 +105,8 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
         idKurir = args.idKurir
         request = args.idRequest
 
+
+
         lateinit var titleToolbar: String
         with(binding) {
             when (request) {

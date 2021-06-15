@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -55,6 +56,7 @@ class AdminProfileFragment : Fragment(), View.OnClickListener {
 
         idAdmin = AdminProfileFragmentArgs.fromBundle(arguments as Bundle).idAdmin
         observe(idAdmin)
+        setToolbarTitle()
 
         with(binding) {
             etNamaLengkapAdmin.setOnClickListener(this@AdminProfileFragment)
@@ -362,6 +364,13 @@ class AdminProfileFragment : Fragment(), View.OnClickListener {
             edtInput.error = messageError
             valid = false
             return
+        }
+    }
+
+    private fun setToolbarTitle() {
+        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.topAppBar)
+        if ((activity as AppCompatActivity?)!!.supportActionBar != null) {
+            (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Profil Admin"
         }
     }
 

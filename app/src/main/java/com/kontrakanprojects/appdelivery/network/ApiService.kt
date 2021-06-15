@@ -2,8 +2,11 @@ package com.kontrakanprojects.appdelivery.network
 
 import com.kontrakanprojects.appdelivery.model.auth.ResponseAuth
 import com.kontrakanprojects.appdelivery.model.barang.ResponseDetailBarang
+import com.kontrakanprojects.appdelivery.model.kurir.ResponseBarangKurir
 import com.kontrakanprojects.appdelivery.model.kurir.ResponseKurir
+import com.kontrakanprojects.appdelivery.model.profile.ResponseProfileAdmin
 import com.kontrakanprojects.appdelivery.model.profile.ResponseProfileDetail
+import com.kontrakanprojects.appdelivery.model.tracking.ResponseTracking
 import com.kontrakanprojects.appdelivery.model.tracking.ResponseTrackings
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -73,7 +76,7 @@ interface ApiService {
     @GET("detail-barang")
     fun listBarang(): Call<ResponseDetailBarang>
 
-    @GET("detail-barangs/{id_barang}")
+    @GET("detail-barang/{id_barang}")
     fun detailBarang(@Path("id_barang") idDetailBarang: Int): Call<ResponseDetailBarang>
 
     @FormUrlEncoded
@@ -93,4 +96,22 @@ interface ApiService {
     //  Barang
     @GET("trackings")
     fun listTracking(): Call<ResponseTrackings>
+
+    // dapatkan tracking berdasarkan id barang DESC
+    @GET("trackings/{id_barang}")
+    fun listTrackingbrg(@Path("id_barang") idBarang: Int): Call<ResponseTracking>
+
+    //detail admin
+    @GET("admin/detail/{id_login}")
+    fun detailAdmin(@Path("id_login") idLogin: Int): Call<ResponseProfileAdmin>
+
+    @FormUrlEncoded
+    @PATCH("admin/edit/{id_login}")
+    fun editAdmin(
+        @Path("id") idLogin: Int,
+        @FieldMap params: HashMap<String, String>,
+    ): Call<ResponseProfileAdmin>
+
+    @GET("kurir/tracking/{id_kurir}")
+    fun listDataBarangAdmin(@Path("id_kurir") idKurir: Int): Call<ResponseBarangKurir>
 }

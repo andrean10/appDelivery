@@ -69,18 +69,6 @@
 
         </ScrollView>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_add_tracking"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="20dp"
-            android:layout_marginEnd="10dp"
-            android:layout_width="60dp"
-            android:src="@drawable/ic_baseline_add_24"
-            android:layout_height="60dp"
-            app:elevation="8dp"
-            android:contentDescription="@string/todo" />
-
     </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 
 </FrameLayout>

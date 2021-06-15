@@ -52,7 +52,12 @@
         android:id="@+id/detailTrackingFragment"
         android:name="com.kontrakanprojects.appdelivery.view.admin.tracking.detail.DetailTrackingFragment"
         android:label="fragment_detail_tracking"
-        tools:layout="@layout/fragment_detail_tracking" />
+        tools:layout="@layout/fragment_detail_tracking" >
+        <argument
+            android:name="idBarang"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
     <fragment
         android:id="@+id/manageBarangFragment"
         android:name="com.kontrakanprojects.appdelivery.view.admin.barang.managebarang.ManageBarangFragment"
@@ -104,6 +109,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_detailCouriersFragment"
             app:destination="@id/detailCouriersFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_barangKurirFragment"
+            app:destination="@id/barangKurirFragment" />
     </fragment>
     <fragment
         android:id="@+id/adminProfileFragment"
@@ -120,4 +128,31 @@
         android:name="com.kontrakanprojects.appdelivery.view.admin.barang.managebarang.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/barangKurirFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.courier.barang.BarangKurirFragment"
+        android:label="fragment_barang_kurir"
+        tools:layout="@layout/fragment_barang_kurir" >
+        <argument
+            android:name="idKurir"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_barangKurirFragment_to_firstProsesFragment"
+            app:destination="@id/firstProsesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/firstProsesFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.courier.barang.FirstProsesFragment"
+        android:label="fragment_first_proses"
+        tools:layout="@layout/fragment_first_proses" >
+        <action
+            android:id="@+id/action_firstProsesFragment_to_manageFragment"
+            app:destination="@id/manageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/manageFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.admin.tracking.manage.ManageFragment"
+        android:label="fragment_manage_tracking"
+        tools:layout="@layout/fragment_manage_tracking" />
 </navigation>

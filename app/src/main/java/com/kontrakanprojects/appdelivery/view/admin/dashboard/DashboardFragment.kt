@@ -111,13 +111,27 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                 }
             }
             R.id.btn_courier -> {
-                findNavController().navigate(R.id.action_dashboardFragment_to_listCouriersFragment)
+                val toAdmin =
+                    DashboardFragmentDirections.actionDashboardFragmentToListCouriersFragment()
+                findNavController().navigate(toAdmin)
             }
             R.id.btn_tracking -> {
                 findNavController().navigate(R.id.action_dashboardFragment_to_trackingBarangFragment)
             }
             R.id.btn_barang -> {
-                findNavController().navigate(R.id.action_dashboardFragment_to_barangFragment)
+                when (user.idRole) {
+                    ChooseLoginFragment.ROLE_ADMIN -> {
+                        val toAdmin =
+                            DashboardFragmentDirections.actionDashboardFragmentToBarangFragment()
+                        findNavController().navigate(toAdmin)
+                    }
+                    ChooseLoginFragment.ROLE_COURIER -> {
+                        val toCourier =
+                            DashboardFragmentDirections.actionDashboardFragmentToBarangKurirFragment()
+                        toCourier.idKurir = user.idUser ?:0
+                        findNavController().navigate(toCourier)
+                    }
+                }
             }
             R.id.btn_logout -> {
                 // delete preferences
@@ -128,6 +142,10 @@ class DashboardFragment : Fragment(), View.OnClickListener {
 
                 startActivity(Intent(requireContext(), HomeActivity::class.java))
                 activity?.finish()
+            }
+
+            R.id.tv_menu_selection -> {
+                findNavController().navigate(R.id.action_dashboardFragment_to_barangKurirFragment)
             }
         }
     }

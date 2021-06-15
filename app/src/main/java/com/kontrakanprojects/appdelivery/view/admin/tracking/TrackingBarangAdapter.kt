@@ -1,8 +1,10 @@
 package com.kontrakanprojects.appdelivery.view.admin.tracking
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.RvTrackingListBinding
 import com.kontrakanprojects.appdelivery.model.kurir.ResultKurir
 import com.kontrakanprojects.appdelivery.model.tracking.ResponseTrackings
@@ -10,7 +12,7 @@ import com.kontrakanprojects.appdelivery.model.tracking.ResultsItem
 import com.kontrakanprojects.appdelivery.network.ApiConfig
 import com.kontrakanprojects.appdelivery.view.admin.couriers.ListCouriersAdapter
 
-class TrackingBarangAdapter: RecyclerView.Adapter<TrackingBarangAdapter.TrackingBarangAdapterViewHolder>() {
+class TrackingBarangAdapter(val activity:Activity): RecyclerView.Adapter<TrackingBarangAdapter.TrackingBarangAdapterViewHolder>() {
 
     private val listItem = ArrayList<ResultsItem>()
     private val listTracking = ArrayList<ResultsItem>()
@@ -55,7 +57,23 @@ class TrackingBarangAdapter: RecyclerView.Adapter<TrackingBarangAdapter.Tracking
 //                    .into(circlePhotoProfile)
 
                 tvNameCostumerRecycler.text = resultsItem.penerima
-                tvStatusPackageRecycler.text = resultsItem.updatedAt
+                var z = resultsItem.kodePelanggan.toString()
+                var a = ""
+                if (resultsItem.statusBarang == "1"){
+                    a = activity.getString(R.string.rb_001)
+                    tvStatusBarang.setText("Nomor Resi : $z")
+                }else if (resultsItem.statusBarang == "2"){
+                    a = activity.getString(R.string.rb_002)
+                    tvStatusBarang.setText("Nomor Resi : $z")
+                }else if (resultsItem.statusBarang == "3"){
+                    a = activity.getString(R.string.rb_003)
+                    tvStatusBarang.setText("Nomor Resi : $z")
+                }else if (resultsItem.statusBarang == "4"){
+                    a = activity.getString(R.string.rb_004)
+                    tvStatusBarang.setText("Nomor Resi : $z")
+                }
+
+                tvStatusPackageRecycler.setText("[${resultsItem.createdAt}] $a")
             }
 
             itemView.setOnClickListener { onItemClickCallBack?.onItemClicked(resultsItem) }

@@ -39,4 +39,8 @@ data class ResultKurir(
 
     @field:SerializedName("alamat")
     val alamat: String? = null,
-)
+) {
+    override fun toString(): String {
+        return namaLengkap ?: "NULL"
+    }
+}

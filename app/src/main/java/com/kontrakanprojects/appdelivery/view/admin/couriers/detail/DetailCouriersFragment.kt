@@ -338,6 +338,16 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
                 val tvTitle: TextView = bottomSheetView.findViewById(R.id.titleInput)
                 edtInput = bottomSheetView.findViewById(R.id.tiEditProfile)
                 tvTitle.text = titleSheet
+
+                // watcher text
+                edtInput.editText?.addTextChangedListener { s ->
+                    edtInput.error = if (s.isNullOrEmpty()) {
+                        NOT_NULL
+                    } else {
+                        null
+                    }
+                }
+
                 edtInput.editText?.setText(itemProfile)
             } else { // init password
                 val edtOldPassword: TextInputLayout =
@@ -655,9 +665,11 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
             // set ke hashmap
             parameters[param!!] = getInput
 
-            // save dan observe (hide btn save)
-            loadingInBottomSheet(true)
-            editKurir(getInput, parameters)
+            if (valid) {
+                // save dan observe (hide btn save)
+                loadingInBottomSheet(true)
+                editKurir(getInput, parameters)
+            }
         }
     }
 

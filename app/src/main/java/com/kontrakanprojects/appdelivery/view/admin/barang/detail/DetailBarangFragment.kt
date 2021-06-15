@@ -1,16 +1,17 @@
 package com.kontrakanprojects.appdelivery.view.admin.barang.detail
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.FragmentDetailBarangBinding
 import com.kontrakanprojects.appdelivery.model.barang.ResultDetailBarang
 import com.kontrakanprojects.appdelivery.utils.showMessage
 import com.kontrakanprojects.appdelivery.view.admin.barang.BarangViewModel
+import com.kontrakanprojects.appdelivery.view.admin.barang.managebarang.ManageBarangFragment
 import www.sanju.motiontoast.MotionToast
 
 class DetailBarangFragment : Fragment() {
@@ -38,13 +39,14 @@ class DetailBarangFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setToolbarTitle()
         idBarang = DetailBarangFragmentArgs.fromBundle(arguments as Bundle).idBarang
         init()
     }
 
     private fun init() {
         isLoading(true)
-        viewModel.detalBarang(idBarang).observe(viewLifecycleOwner, { response ->
+        viewModel.detailBarang(idBarang).observe(viewLifecycleOwner, { response ->
             isLoading(false)
             if (response != null) {
                 if (response.status == 200) {
@@ -97,6 +99,33 @@ class DetailBarangFragment : Fragment() {
             } else {
                 progressBar.visibility = View.GONE
             }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.edit, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> findNavController().navigateUp()
+            R.id.edit -> {
+                val toManageBarang =
+                    DetailBarangFragmentDirections.actionDetailBarangFragmentToManageBarangFragment()
+                toManageBarang.idBarang = idBarang
+                toManageBarang.idRequest = ManageBarangFragment.REQUEST_EDIT
+                findNavController().navigate(toManageBarang)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setToolbarTitle() {
+        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.topAppBar)
+        if ((activity as AppCompatActivity?)!!.supportActionBar != null) {
+            (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Detail Barang"
+            (activity as AppCompatActivity?)!!.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         }
     }
 

@@ -71,10 +71,24 @@ interface ApiService {
 
     // Barang
     @GET("detail-barang")
-    fun listDetailBarang(): Call<ResponseDetailBarang>
+    fun listBarang(): Call<ResponseDetailBarang>
 
     @GET("detail-barangs/{id_barang}")
     fun detailBarang(@Path("id_barang") idDetailBarang: Int): Call<ResponseDetailBarang>
+
+    @FormUrlEncoded
+    @POST("detail-barang")
+    fun addBarang(@FieldMap params: HashMap<String, String>): Call<ResponseDetailBarang>
+
+    @FormUrlEncoded
+    @PUT("detail-barang/{id}")
+    fun editBarang(
+        @Path("id") idDetailBarang: Int,
+        @FieldMap params: HashMap<String, String>,
+    ): Call<ResponseDetailBarang>
+
+    @DELETE("detail-barang/{id}")
+    fun deleteBarang(@Path("id") idDetailBarang: Int): Call<ResponseDetailBarang>
 
     //  Barang
     @GET("trackings")

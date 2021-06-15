@@ -29,4 +29,10 @@
     <string name="rb_004">Barang Sudah Diterima Pembeli</string>
     <string name="default_info_title">Default Location</string>
     <string name="default_info_snippet">No places found, because location permission is disabled</string>
+    <string name="distance">Jarak Dari Lokasi Ke Destinasi Tujuan</string>
+    <string name="pick_route_location">Pilih Lokasi Rute</string>
+    <string name="nama_kurir">Nama Kurir</string>
+    <string name="edit">Edit</string>
+    <string name="km">%s Km</string>
+    <string name="latlong">Latitude: %s\nLongitude: %s</string>
 </resources>

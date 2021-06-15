@@ -4,15 +4,16 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.IntentSender
 import android.location.Geocoder
-import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
@@ -23,8 +24,10 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.FragmentMapsBinding
+import com.kontrakanprojects.appdelivery.db.LatLong
 import com.kontrakanprojects.appdelivery.utils.showMessage
 import com.kontrakanprojects.appdelivery.view.admin.barang.BarangViewModel
 import www.sanju.motiontoast.MotionToast
@@ -43,53 +46,75 @@ class MapsFragment : Fragment() {
     private var viewModel: BarangViewModel? = null
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private var mLastKnownLocation: Location? = null
     private lateinit var locationRequest: LocationRequest
     private var gMap: GoogleMap? = null
-    private var mCurrentMarker: Marker? = null
+    private var myLocationMarker: Marker? = null
+    private var destinationMarker: Marker? = null
+    private var myLocationLatLong: LatLng? = null
+    private var myDirectionLatLong: LatLng? = null
+    private var distance: String = ""
+
 
     private var isLocationPermissionGranted = false
 
     companion object {
         private val DEFAULT_INDONESIA = LatLng(-2.3196972, 99.4100731)
-        private const val DEFAULT_ZOOM = 3f
+        private const val DEFAULT_ZOOM = 5f
     }
 
     private val TAG = MapsFragment::class.simpleName
 
+    @SuppressLint("MissingPermission")
     private val callback = OnMapReadyCallback { googleMap ->
         gMap = googleMap
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
-//        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_INDONESIA, DEFAULT_ZOOM))
+        if (!isLocationPermissionGranted) {
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_INDONESIA,
+                DEFAULT_ZOOM))
+        }
 
         // enable zoom controls for the map
         googleMap.uiSettings.apply {
             isCompassEnabled = true
+            isMapToolbarEnabled = false
         }
         googleMap.isTrafficEnabled = true
         googleMap.isBuildingsEnabled = true
-        googleMap.setOnMapClickListener { latLng ->
-            mCurrentMarker?.remove()
+//        googleMap.isMyLocationEnabled = true
+//        googleMap.setOnMyLocationButtonClickListener {
+//            Toast.makeText(requireContext(), "MyLocation button clicked", Toast.LENGTH_SHORT)
+//                .show()
+//            // Return false so that we don't consume the event and the default behavior still occurs
+//            // (the camera animates to the user's current position).
+//            false
+//        }
+//        googleMap.setOnMyLocationClickListener { location ->
+//            Toast.makeText(requireContext(), "Current location:\n$location", Toast.LENGTH_LONG)
+//                .show()
+//        }
 
-            val markerOptions = MarkerOptions().position(LatLng(latLng.latitude, latLng.longitude))
-//            markerOptions.title("Latitude: ${latLng.latitude}\nLongitude: ${latLng.longitude}")
-            mCurrentMarker = googleMap.addMarker(markerOptions)
+        googleMap.setOnMapClickListener { latLng ->
+            myDirectionLatLong = latLng
+            destinationMarker?.remove()
+
+            val markerOptions = MarkerOptions().apply {
+                position(LatLng(latLng.latitude, latLng.longitude))
+                title("My Destination")
+            }
+            destinationMarker = googleMap.addMarker(markerOptions)
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
 
-            // set to viewmodel
-            val latLong = HashMap<String, String>()
-            latLong["latitude"] = latLng.latitude.toString()
-            latLong["longitude"] = latLng.longitude.toString()
-            viewModel?.setLocation(latLong)
+            // init distance
+            distance = distance(
+                myLocationLatLong!!.latitude,
+                myLocationLatLong!!.longitude,
+                myDirectionLatLong!!.latitude,
+                myDirectionLatLong!!.longitude,
+            )
+
+            with(binding) {
+                cvMaps.visibility = View.VISIBLE
+                tvDistanceLocation.text = getString(R.string.km, distance)
+            }
         }
     }
 
@@ -116,9 +141,29 @@ class MapsFragment : Fragment() {
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        binding.fabMyLocation.setOnClickListener {
-            if (isLocationPermissionGranted) {
-                checkGPS()
+        with(binding) {
+            fabMyLocation.setOnClickListener {
+                if (isLocationPermissionGranted) {
+                    checkGPS()
+                }
+            }
+
+            btnPickRouteLocation.setOnClickListener {
+                if (myLocationLatLong != null && myDirectionLatLong != null) { // check null latlong
+                    // set to viewmodel
+                    val location = HashMap<String, Any>()
+                    location["location"] =
+                        LatLong(myLocationLatLong!!.latitude, myLocationLatLong!!.longitude)
+                    location["destination"] =
+                        LatLong(myDirectionLatLong!!.latitude, myDirectionLatLong!!.longitude)
+                    location["distance"] = distance
+                    viewModel?.setLocation(location)
+
+                    // kembali ke halaman manage fragment
+                    findNavController().navigateUp()
+
+//                showBottomSheet(distance)
+                }
             }
         }
     }
@@ -170,10 +215,26 @@ class MapsFragment : Fragment() {
             val addresses = geoCoder.getFromLocation(
                 location.latitude, location.longitude, 1
             )
-            val latLong = LatLng(addresses.first().latitude, addresses.first().longitude)
-            mCurrentMarker = gMap!!.addMarker(MarkerOptions().position(latLong))
-            gMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(latLong, 15f))
+            myLocationLatLong = LatLng(addresses.first().latitude, addresses.first().longitude)
+            myLocationMarker =
+                gMap!!.addMarker(MarkerOptions().position(myLocationLatLong).title("My Location"))
+            gMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocationLatLong, 15f))
         }
+    }
+
+    private fun showBottomSheet(distance: String) {
+        // init bottomsheet distance
+        val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        val bottomSheetView = LayoutInflater.from(requireContext()).inflate(
+            R.layout.bottom_sheet_distance, activity?.findViewById(R.id.bottomSheetContainer)
+        )
+
+        // set to textview
+        val tvDistance = bottomSheetView.findViewById<TextView>(R.id.tv_distance_location)
+        tvDistance.text = distance
+
+        bottomSheetDialog.setContentView(bottomSheetView)
+        bottomSheetDialog.show()
     }
 
     private fun permission() {
@@ -190,8 +251,7 @@ class MapsFragment : Fragment() {
                     permission[Manifest.permission.ACCESS_FINE_LOCATION] == true
                 ) {
                     isLocationPermissionGranted = true
-//                showMessage(requireActivity(), getString(R.string.success), "Izin diberikan",
-//                    MotionToast.TOAST_SUCCESS)
+                    checkGPS()
                 } else {
                     isLocationPermissionGranted = false
                     showMessage(requireActivity(), "Warning", "Izin lokasi dibutuhkan!",
@@ -200,67 +260,19 @@ class MapsFragment : Fragment() {
             }
         }
 
-//    private fun getDeviceLocation() {
-//        /*
-//         * Get the best and most recent location of the device, which may be null in rare
-//         * cases when a location is not available.
-//         */
-//        try {
-//            if (isLocationPermissionGranted) {
-//                val locationResult: Task<Location> = mFusedLocationProviderClient!!.lastLocation
-//                locationResult.addOnCompleteListener(requireActivity()) { task ->
-//                    if (task.isSuccessful) {
-//                        // Set the map's camera position to the current location of the device.
-//                        mLastKnownLocation = task.result
-//                        Log.d(TAG, "Latitude: " + mLastKnownLocation.getLatitude())
-//                        Log.d(TAG, "Longitude: " + mLastKnownLocation.getLongitude())
-//                        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-//                            LatLng(mLastKnownLocation.getLatitude(),
-//                                mLastKnownLocation.getLongitude()), DEFAULT_ZOOM))
-//                    } else {
-//                        Log.d(TAG, "Current location is null. Using defaults.")
-//                        Log.e(TAG, "Exception: %s", task.exception)
-//                        gMap.moveCamera(CameraUpdateFactory
-//                            .newLatLngZoom(DEFAULT_INDONESIA, DEFAULT_ZOOM))
-//                    }
-//                    getCurrentPlaceLikelihoods()
-//                }
-//            }
-//        } catch (e: SecurityException) {
-//            Log.e("Exception: %s", e.message)
-//        }
-//    }
-
-//    private fun pickCurrentPlace() {
-//        if (gMap == null) {
-//            return
-//        }
-//
-//        if (isLocationPermissionGranted) {
-//            getDeviceLocation()
-//        } else {
-//            // The user has not granted permission.
-//            Log.i(TAG, "The user did not grant location permission.")
-//
-//            // Add a default marker, because the user hasn't selected a place.
-//            gMap!!.addMarker(MarkerOptions()
-//                .title(getString(R.string.default_info_title))
-//                .position(DEFAULT_INDONESIA)
-//                .snippet(getString(R.string.default_info_snippet)))
-//
-//            // Prompt the user for permission.
-//            permission()
-//        }
-//    }
-
-    private fun distance(lat1: Double, long1: Double, lat2: Double, long2: Double): String {
+    private fun distance(
+        latLocation: Double,
+        longLocation: Double,
+        latDestination: Double,
+        longDestination: Double,
+    ): String {
         // hitung perbedaan longitude
-        val longDiff = long1 - long2
+        val longDiff = longLocation - longDestination
         // hitung jarak
-        var distance = sin(deg2rad(lat1)) *
-                sin(deg2rad(lat2)) +
-                cos(deg2rad(lat1)) *
-                cos(deg2rad(lat2)) *
+        var distance = sin(deg2rad(latLocation)) *
+                sin(deg2rad(latDestination)) +
+                cos(deg2rad(latLocation)) *
+                cos(deg2rad(latDestination)) *
                 cos(deg2rad(longDiff))
         distance = acos(distance)
 
@@ -271,7 +283,7 @@ class MapsFragment : Fragment() {
         // jarak dalam km
         distance *= 1.609344
         // set to distance
-        return String.format(Locale.US, "%2f Kilometer", distance)
+        return String.format(Locale.US, "%.2f", distance)
     }
 
     private fun rad2deg(distance: Double) = (distance * 180.0 / PI)

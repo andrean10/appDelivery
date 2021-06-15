@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,22 +12,22 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout01"
-            android:layout_alignParentTop="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/topAppBar"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+                android:layout_height="wrap_content" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
         <ScrollView
-            android:layout_below="@+id/appBarLayout01"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/appBarLayout01"
             android:padding="16dp">
 
             <com.google.android.material.circularreveal.CircularRevealLinearLayout
@@ -35,153 +36,147 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:text="Manage Barang"
-                    android:textSize="21sp"
-                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <View
-                    android:background="@color/black"
-                    android:layout_marginEnd="200dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"/>
-
-                <com.google.android.material.textview.MaterialTextView
+                    android:layout_height="wrap_content"
                     android:text="Kode Pelanggan"
-                    android:textSize="15sp"
                     android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="15sp" />
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_costumer_code"
-                    android:hint="Masukan Kode Pelanggan"
-                    android:layout_marginBottom="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:text="Peenerima"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_costumer_name"
-                    android:hint="Masukan Nama Penerima"
-                    android:layout_marginBottom="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:text="Nomor Handphone"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_phone_number"
-                    android:hint="Masukan Nomor Handphone"
-                    android:layout_marginBottom="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:text="Alamat Lengkap"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_full_address"
-                    android:hint="Masukan Alamat"
-                    android:layout_marginBottom="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:text="Pilih Lokasi"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_choose_location"
-                    android:hint="Lokasi"
-                    android:textColor="@color/black"
-                    android:layout_marginBottom="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:text="Nama Kurir Pengirim"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_courier_name"
-                    android:hint="Masukan Nama Kurir"
-                    android:layout_marginBottom="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:text="Detail Barang"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_package_detail"
-                    android:hint="Masukan Detail Barang"
-                    android:layout_marginBottom="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:text="Status Barang"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <RadioGroup
-                    android:id="@+id/rg_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:orientation="horizontal">
+                    android:hint="Masukan Kode Pelanggan"
+                    android:inputType="numberDecimal" />
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rb_done"
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Penerima"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_costumer_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="Masukan Nama Penerima"
+                    android:inputType="textPersonName" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nomor Handphone"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="Masukan Nomor Handphone"
+                    android:inputType="phone"
+                    android:maxLength="12" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alamat Lengkap"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_full_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="Masukan Alamat"
+                    android:inputType="textLongMessage" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pilih Lokasi"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_choose_location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:text="Sudah Sampai" />
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rb_not_done"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:text="Belum Sampai" />
+                        android:text="Lokasi"
+                        android:textColor="@color/black" />
 
-                </RadioGroup>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_failed_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="6dp"
+                        android:layout_toEndOf="@+id/btn_choose_location"
+                        android:gravity="center"
+                        android:text="Pilih Lokasi Terlebih Dahulu"
+                        android:textColor="@android:color/holo_red_light"
+                        android:textSize="15sp"
+                        android:visibility="gone" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_location_latlong"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="6dp"
+                        android:layout_toEndOf="@+id/btn_choose_location"
+                        android:gravity="center"
+                        android:textSize="15sp"
+                        tools:text="Latitude: -1.91231239\nLongitude: 1.12312311" />
+                </RelativeLayout>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Kurir Pengirim"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                    android:id="@+id/spinner_kurir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:spinnerMode="dropdown"
+                    app:smsp_hint="@string/nama_kurir" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Detail Barang"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_package_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="Masukan Detail Barang"
+                    android:inputType="textLongMessage" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_save_package"
-                    android:text="Simpan"
-                    android:textColor="@color/black"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:text="Simpan"
+                    android:textColor="@color/black" />
 
             </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 

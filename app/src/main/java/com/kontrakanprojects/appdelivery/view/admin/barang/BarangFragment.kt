@@ -99,7 +99,7 @@ import www.sanju.motiontoast.MotionToast
     private fun setToolbarTitle() {
         (activity as AppCompatActivity?)!!.setSupportActionBar(binding.topAppBar)
         if ((activity as AppCompatActivity?)!!.supportActionBar != null) {
-            (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Detail Barang"
+            (activity as AppCompatActivity?)!!.supportActionBar!!.title = "List Barang"
         }
     }
 

@@ -2,6 +2,7 @@ package com.kontrakanprojects.appdelivery.network
 
 import com.kontrakanprojects.appdelivery.model.auth.ResponseAuth
 import com.kontrakanprojects.appdelivery.model.barang.ResponseDetailBarang
+import com.kontrakanprojects.appdelivery.model.kurir.ResponseBarangKurir
 import com.kontrakanprojects.appdelivery.model.kurir.ResponseKurir
 import com.kontrakanprojects.appdelivery.model.profile.ResponseProfileAdmin
 import com.kontrakanprojects.appdelivery.model.profile.ResponseProfileDetail
@@ -96,4 +97,7 @@ interface ApiService {
         @Path("id") idLogin: Int,
         @FieldMap params: HashMap<String, String>,
     ): Call<ResponseProfileAdmin>
+
+    @GET("kurir/tracking/{id_kurir}")
+    fun listDataBarangAdmin(@Path("id_kurir") idKurir: Int): Call<ResponseBarangKurir>
 }

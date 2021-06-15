@@ -36,4 +36,6 @@ class BarangKurirFragment : Fragment() {
             tabs.setupWithViewPager(viewPager)
         }
     }
+
+    
 }

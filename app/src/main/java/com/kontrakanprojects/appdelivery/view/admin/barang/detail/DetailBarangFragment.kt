@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.kontrakanprojects.appdelivery.R
@@ -38,6 +39,7 @@ class DetailBarangFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setToolbarTitle()
         idBarang = DetailBarangFragmentArgs.fromBundle(arguments as Bundle).idBarang
         init()
     }
@@ -98,6 +100,13 @@ class DetailBarangFragment : Fragment() {
             } else {
                 progressBar.visibility = View.GONE
             }
+        }
+    }
+
+    private fun setToolbarTitle() {
+        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.topAppBar)
+        if ((activity as AppCompatActivity?)!!.supportActionBar != null) {
+            (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Detail Barang"
         }
     }
 

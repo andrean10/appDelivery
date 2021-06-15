@@ -11,13 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_011"
-            android:text="Barang Yang Diterima Pembeli"
-            android:layout_centerHorizontal="true"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginBottom="40dp"
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -25,7 +21,7 @@
             android:id="@+id/rv_courir_list_first"
             tools:listitem="@layout/rv_courier_package_list_second"
             tools:itemCount="5"
-            android:layout_below="@+id/tv_011"
+            android:layout_below="@+id/view0111"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

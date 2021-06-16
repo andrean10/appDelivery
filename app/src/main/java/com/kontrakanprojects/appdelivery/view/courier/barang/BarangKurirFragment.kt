@@ -32,10 +32,10 @@ class BarangKurirFragment : Fragment() {
 
     private fun adapter() {
         with(binding){
-            viewPager.adapter = ViewPagerAdapter(this@BarangKurirFragment, parentFragmentManager)
-            tabs.setupWithViewPager(viewPager)
+//            viewPager.adapter = ViewPagerAdapter(this@BarangKurirFragment, parentFragmentManager)
+//            tabs.setupWithViewPager(viewPager)
         }
     }
 
-    
+
 }

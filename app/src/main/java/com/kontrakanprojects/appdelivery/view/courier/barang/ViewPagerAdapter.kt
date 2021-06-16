@@ -1,12 +1,13 @@
 package com.kontrakanprojects.appdelivery.view.courier.barang
 
+import android.content.Context
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.kontrakanprojects.appdelivery.R
 
-class ViewPagerAdapter(private val mContext: BarangKurirFragment, fm: FragmentManager): FragmentPagerAdapter(fm) {
+class ViewPagerAdapter(private val mContext: Context, fm: FragmentManager): FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
         return if (position == 0) {
             FirstProsesFragment.newInstance()

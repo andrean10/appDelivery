@@ -155,7 +155,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                     }
                     ChooseLoginFragment.ROLE_COURIER -> {
                         val toCourier =
-                            DashboardFragmentDirections.actionDashboardFragmentToBarangKurirFragment()
+                            DashboardFragmentDirections.actionDashboardFragmentToKurirBarangActivity()
                         toCourier.idKurir = user.idUser ?: 0
                         findNavController().navigate(toCourier)
                     }
@@ -172,9 +172,6 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                 activity?.finish()
             }
 
-            R.id.tv_menu_selection -> {
-                findNavController().navigate(R.id.action_dashboardFragment_to_barangKurirFragment)
-            }
         }
     }
 

@@ -9,6 +9,8 @@ import androidx.navigation.fragment.findNavController
 import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.FragmentDetailBarangBinding
 import com.kontrakanprojects.appdelivery.model.barang.ResultDetailBarang
+import com.kontrakanprojects.appdelivery.model.kurir.ResultKurir
+import com.kontrakanprojects.appdelivery.sessions.UserPreference
 import com.kontrakanprojects.appdelivery.utils.showMessage
 import com.kontrakanprojects.appdelivery.view.admin.barang.BarangViewModel
 import com.kontrakanprojects.appdelivery.view.admin.barang.managebarang.ManageBarangFragment
@@ -64,7 +66,7 @@ class DetailBarangFragment : Fragment() {
         })
     }
 
-    private fun prepare(result: ResultDetailBarang?) {
+    private fun prepare(result: ResultDetailBarang?, resultKurir: ResultKurir? = null) {
         if (result != null) {
             with(binding) {
                 when (result.statusBarang) {
@@ -82,11 +84,15 @@ class DetailBarangFragment : Fragment() {
                     }
                 }
 
+                if (result.distance?.toDouble()!! >= 1.00) {
+                    tvDistance.text = getString(R.string.km, result.distance)
+                }
+
                 tvCodeCostumer.text = result.kodePelanggan.toString()
                 tvNameCostumer.text = result.penerima
                 tvNumberPhone.text = result.nomorHp
                 tvAddressCostumer.text = result.alamat
-                courierSend.text = result.idKurir.toString()
+                courierSend.text = result.namaLengkap
                 tvDetailPackage.text = result.detailBarang
             }
         }
@@ -104,7 +110,10 @@ class DetailBarangFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.edit, menu)
+        // cek jika dah login tampilkan, jika belum jangan tampilkan
+        if (UserPreference(requireContext()).getLogin().isLoginValid) {
+            inflater.inflate(R.menu.edit, menu)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

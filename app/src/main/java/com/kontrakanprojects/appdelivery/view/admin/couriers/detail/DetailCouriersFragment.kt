@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -22,6 +23,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -105,8 +110,6 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
         idKurir = args.idKurir
         request = args.idRequest
 
-
-
         lateinit var titleToolbar: String
         with(binding) {
             when (request) {
@@ -126,8 +129,11 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
                     etAlamatLengkapKurir.isClickable = false
                     btnSaveProfileKurir.visibility = View.GONE
 
+                    val idRole = UserPreference(requireContext()).getUser().idRole
+                    if (idRole == ChooseLoginFragment.ROLE_ADMIN) {
+                        etUsername.setOnClickListener(this@DetailCouriersFragment)
+                    }
                     etNamaLengkapKurir.setOnClickListener(this@DetailCouriersFragment)
-                    etUsername.setOnClickListener(this@DetailCouriersFragment)
                     etPassword.setOnClickListener(this@DetailCouriersFragment)
                     etAlamatLengkapKurir.setOnClickListener(this@DetailCouriersFragment)
                 }
@@ -181,10 +187,11 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
     }
 
     private fun init() {
+        isLoading(true)
         user = UserPreference(requireContext()).getUser()
 
         viewModel.detailKurir(idKurir).observe(viewLifecycleOwner, { response ->
-//            isLoading(false)
+            isLoading(false)
             if (response != null) {
                 if (response.status == 200) {
                     val result = response.results
@@ -208,7 +215,8 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
         if (result != null) {
             with(binding) {
                 Glide.with(requireActivity())
-                    .load(ApiConfig.URL + result.fotoProfil)
+                    .load(ApiConfig.IMG_URL + result.fotoProfil)
+                    .listener(listenerImage)
                     .placeholder(R.drawable.no_profile_images)
                     .error(R.drawable.no_profile_images)
                     .into(ivCourierPhoto)
@@ -221,8 +229,33 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    private val listenerImage = object : RequestListener<Drawable> {
+        override fun onLoadFailed(
+            e: GlideException?,
+            model: Any?,
+            target: Target<Drawable>?,
+            isFirstResource: Boolean,
+        ): Boolean {
+            binding.progressBarImage.visibility = View.GONE
+            return false
+        }
+
+        override fun onResourceReady(
+            resource: Drawable?,
+            model: Any?,
+            target: Target<Drawable>?,
+            dataSource: DataSource?,
+            isFirstResource: Boolean,
+        ): Boolean {
+            binding.progressBarImage.visibility = View.GONE
+            return false
+        }
+    }
+
     private fun prepareAdd() {
         with(binding) {
+            progressBarSave.visibility = View.VISIBLE
+
             val namaLengkap = etNamaLengkapKurir.text.toString().trim()
             val username = etUsername.text.toString().trim()
             val password = etPassword.text.toString().trim()
@@ -232,11 +265,6 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
             checkValue(username, etUsername)
             checkValue(password, etPassword)
             checkValue(alamat, etAlamatLengkapKurir)
-//            val image: MultipartBody.Part = if (gambarPath != null) {
-//                reqFileImage(gambarPath, "foto_profile")
-//            } else {
-//                reqFileImageEmpty("foto_profile")
-//            }
 
             if (valid) {
                 val params = hashMapOf(
@@ -252,6 +280,8 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
                 }
 
                 addKurir(params, imagesParams)
+            } else {
+                progressBarSave.visibility = View.GONE
             }
         }
     }
@@ -678,60 +708,73 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
     private fun editKurir(
         newInputData: String? = null, newData: HashMap<String, String>,
     ) {
+        with(binding) {
+            progressBarSave.visibility = View.VISIBLE
+            viewModel.editKurir(idKurir, newData).observe(viewLifecycleOwner, { response ->
+                progressBarSave.visibility = View.GONE
+                if (response != null) {
+                    if (response.status == 200) {
+                        etUiUpdated.setText(newInputData)
+                        bottomSheetDialog?.dismiss()
+                    } else {
+                        showMessage(
+                            requireActivity(),
+                            getString(R.string.failed),
+                            response.message,
+                            MotionToast.TOAST_ERROR
+                        )
 
-        viewModel.editKurir(idKurir, newData).observe(viewLifecycleOwner, { response ->
-            if (response != null) {
-                if (response.status == 200) {
-                    etUiUpdated.setText(newInputData)
-                    bottomSheetDialog?.dismiss()
+                        bottomSheetView.findViewById<ProgressBar>(R.id.progressBar).visibility =
+                            View.GONE
+                        bottomSheetView.findViewById<Button>(R.id.btnSave).visibility =
+                            View.VISIBLE
+                    }
                 } else {
-                    showMessage(
-                        requireActivity(),
+                    showMessage(requireActivity(),
                         getString(R.string.failed),
-                        response.message,
-                        MotionToast.TOAST_ERROR
-                    )
-
-                    bottomSheetView.findViewById<ProgressBar>(R.id.progressBar).visibility =
-                        View.GONE
-                    bottomSheetView.findViewById<Button>(R.id.btnSave).visibility =
-                        View.VISIBLE
+                        style = MotionToast.TOAST_ERROR)
                 }
-            } else {
-                showMessage(requireActivity(),
-                    getString(R.string.failed),
-                    style = MotionToast.TOAST_ERROR)
-            }
-        })
+            })
+        }
     }
 
     private fun addKurir(params: HashMap<String, RequestBody>, imagesParams: MultipartBody.Part?) {
-        viewModel.addKurir(params, imagesParams).observe(viewLifecycleOwner, { response ->
-            if (response != null) {
-                if (response.status == 200) {
-                    findNavController().navigateUp()
-                    showMessage(requireActivity(), getString(R.string.success), response.message,
-                        MotionToast.TOAST_SUCCESS)
+        with(binding) {
+            progressBarSave.visibility = View.VISIBLE
+            viewModel.addKurir(params, imagesParams).observe(viewLifecycleOwner, { response ->
+                progressBarSave.visibility = View.GONE
+                if (response != null) {
+                    if (response.status == 200) {
+                        progressBarSave.visibility = View.GONE
+
+                        findNavController().navigateUp()
+                        showMessage(requireActivity(),
+                            getString(R.string.success),
+                            response.message,
+                            MotionToast.TOAST_SUCCESS)
+                    } else {
+                        showMessage(requireActivity(), getString(R.string.failed), response.message,
+                            MotionToast.TOAST_ERROR)
+                    }
                 } else {
-                    showMessage(requireActivity(), getString(R.string.failed), response.message,
-                        MotionToast.TOAST_ERROR)
+                    showMessage(requireActivity(), getString(R.string.failed),
+                        style = MotionToast.TOAST_ERROR)
                 }
-            } else {
-                showMessage(requireActivity(), getString(R.string.failed),
-                    style = MotionToast.TOAST_ERROR)
-            }
-        })
+            })
+        }
     }
 
     private fun editPhotoProfile(gambarPath: String? = null) {
         with(binding) {
-//            pbLoadingPicture.visibility = View.VISIBLE
+            progressBarImage.visibility = View.VISIBLE
+
             if (gambarPath != null) { // ubah gambar
                 val imageParams = reqFileImage(gambarPath, "foto_profil")
 
                 viewModel.editPhotoProfile(idKurir, imageParams)
                     .observe(viewLifecycleOwner, { response ->
-//                    pbLoadingPicture.visibility = View.GONE
+                        progressBarImage.visibility = View.GONE
+                        progressBarSave.visibility = View.GONE
                         if (response != null) {
                             if (response.status == 200) {
                                 Glide.with(requireContext())
@@ -754,10 +797,8 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
                         }
                     })
             } else { // hapus gambar
-                Log.d(TAG, "editPhotoProfile: Hapus Foto")
-
                 viewModel.deletePhotoProfile(idKurir).observe(viewLifecycleOwner, { response ->
-//                    pbLoadingPicture.visibility = View.GONE
+                    progressBarImage.visibility = View.GONE
                     if (response != null) {
                         if (response.status == 200) {
                             ivCourierPhoto.setImageResource(R.drawable.no_profile_images)
@@ -783,30 +824,32 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
     }
 
     private fun deleteKurir(idKurir: Int) {
-//        with(binding) {
-        viewModel.deleteKurir(idKurir).observe(viewLifecycleOwner, { response ->
-            if (response != null) {
-                if (response.status == 200) { // berhasil hapus siswa
-                    findNavController().navigateUp()
-                    showMessage(
-                        requireActivity(), getString(R.string.success),
-                        response.message, MotionToast.TOAST_SUCCESS
-                    )
+        with(binding) {
+            progressBarSave.visibility = View.VISIBLE
+            viewModel.deleteKurir(idKurir).observe(viewLifecycleOwner, { response ->
+                binding.progressBarSave.visibility = View.GONE
+                if (response != null) {
+                    if (response.status == 200) { // berhasil hapus siswa
+                        findNavController().navigateUp()
+                        showMessage(
+                            requireActivity(), getString(R.string.success),
+                            response.message, MotionToast.TOAST_SUCCESS
+                        )
+                    } else {
+                        showMessage(
+                            requireActivity(), getString(R.string.failed), response.message,
+                            MotionToast.TOAST_ERROR
+                        )
+                    }
                 } else {
                     showMessage(
-                        requireActivity(), getString(R.string.failed), response.message,
-                        MotionToast.TOAST_ERROR
+                        requireActivity(),
+                        getString(R.string.failed),
+                        style = MotionToast.TOAST_ERROR
                     )
                 }
-            } else {
-                showMessage(
-                    requireActivity(),
-                    getString(R.string.failed),
-                    style = MotionToast.TOAST_ERROR
-                )
-            }
-        })
-//        }
+            })
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -853,6 +896,16 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
         } else {
             btnSave.visibility = View.GONE
             progressBarSheet.visibility = View.GONE
+        }
+    }
+
+    private fun isLoading(status: Boolean) {
+        with(binding) {
+            if (status) {
+                progressBar.visibility = View.VISIBLE
+            } else {
+                progressBar.visibility = View.GONE
+            }
         }
     }
 

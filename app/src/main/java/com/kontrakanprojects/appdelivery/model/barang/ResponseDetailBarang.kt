@@ -26,19 +26,19 @@ data class ResultDetailBarang(
     val idBarang: Int? = null,
 
     @field:SerializedName("penerima")
-	val penerima: String? = null,
+    val penerima: String? = null,
 
     @field:SerializedName("kode_pelanggan")
-	val kodePelanggan: Int? = null,
+    val kodePelanggan: Int? = null,
 
     @field:SerializedName("latitude")
-	val latitude: String? = null,
+    val latitude: String? = null,
 
     @field:SerializedName("created_at")
-	val createdAt: String? = null,
+    val createdAt: String? = null,
 
     @field:SerializedName("status_barang")
-	val statusBarang: String? = null,
+    val statusBarang: String? = null,
 
     @field:SerializedName("id_kurir")
     val idKurir: Int? = null,
@@ -54,4 +54,7 @@ data class ResultDetailBarang(
 
     @field:SerializedName("distance")
     val distance: String? = null,
+
+    @field:SerializedName("nama_lengkap")
+    val namaLengkap: String? = null,
 )

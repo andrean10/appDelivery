@@ -127,7 +127,17 @@
         android:id="@+id/mapsFragment"
         android:name="com.kontrakanprojects.appdelivery.view.admin.barang.managebarang.MapsFragment"
         android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/fragment_maps">
+        <argument
+            android:name="latLong"
+            android:defaultValue="@null"
+            app:argType="com.kontrakanprojects.appdelivery.db.LatLong"
+            app:nullable="true" />
+        <argument
+            android:name="idRequest"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/barangKurirFragment"
         android:name="com.kontrakanprojects.appdelivery.view.courier.barang.BarangKurirFragment"

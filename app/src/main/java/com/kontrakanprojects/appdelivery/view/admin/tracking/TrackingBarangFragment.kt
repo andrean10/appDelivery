@@ -42,7 +42,6 @@ class TrackingBarangFragment : Fragment() {
 
         trackingBarangAdapter.setOnItemClickCallBack(object : TrackingBarangAdapter.OnItemClickCallBack{
             override fun onItemClicked(resultsItem: ResultsItem) {
-
                 val toDetailTracking = TrackingBarangFragmentDirections.
                 actionTrackingBarangFragmentToDetailTrackingFragment().apply {
                     idBarang = resultsItem.idBarang ?: 0
@@ -94,7 +93,7 @@ class TrackingBarangFragment : Fragment() {
     private fun setToolbarTitle() {
         (activity as AppCompatActivity?)!!.setSupportActionBar(binding.topAppBar)
         if ((activity as AppCompatActivity?)!!.supportActionBar != null) {
-            (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Tracking Barang"
+            (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Data Tracking Barang"
         }
     }
 

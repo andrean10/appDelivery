@@ -2,6 +2,7 @@ package com.kontrakanprojects.appdelivery.view.admin.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -40,6 +42,11 @@ class AdminProfileFragment : Fragment(), View.OnClickListener {
         private const val WRONG_NEW_PASSWORD_AGAIN = "Password Baru Tidak Sesuai!"
         private const val MIN_COUNTER_LENGTH_PASS = "Minimal 5 karakter password"
         private const val NOT_NULL = "Field tidak boleh kosong!"
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -367,10 +374,18 @@ class AdminProfileFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            findNavController().navigateUp()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun setToolbarTitle() {
         (activity as AppCompatActivity?)!!.setSupportActionBar(binding.topAppBar)
         if ((activity as AppCompatActivity?)!!.supportActionBar != null) {
             (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Profil Admin"
+            (activity as AppCompatActivity?)!!.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         }
     }
 

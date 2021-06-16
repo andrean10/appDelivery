@@ -20,7 +20,8 @@
                 android:id="@+id/topAppBar"
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:titleTextColor="@color/black" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -33,16 +34,6 @@
             <com.google.android.material.circularreveal.CircularRevealRelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_08"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="10dp"
-                    android:text="Profil Admin"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
 
                 <com.google.android.material.circularreveal.CircularRevealRelativeLayout
                     android:id="@+id/rellay_02"

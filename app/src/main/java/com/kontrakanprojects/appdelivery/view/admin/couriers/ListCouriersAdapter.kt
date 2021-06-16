@@ -1,9 +1,15 @@
 package com.kontrakanprojects.appdelivery.view.admin.couriers
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.RvCourierListBinding
 import com.kontrakanprojects.appdelivery.model.kurir.ResultKurir
@@ -48,7 +54,8 @@ class ListCouriersAdapter :
         fun bind(resultKurir: ResultKurir) {
             with(binding) {
                 Glide.with(itemView.context)
-                    .load(ApiConfig.URL + resultKurir.fotoProfil)
+                    .load(ApiConfig.IMG_URL + resultKurir.fotoProfil)
+                    .listener(listener(this))
                     .placeholder(R.drawable.no_profile_images)
                     .error(R.drawable.no_profile_images)
                     .into(circlePhotoProfile)
@@ -57,6 +64,29 @@ class ListCouriersAdapter :
             }
 
             itemView.setOnClickListener { onItemClickCallBack?.onItemClicked(resultKurir) }
+        }
+    }
+
+    private fun listener(binding: RvCourierListBinding) = object : RequestListener<Drawable> {
+        override fun onLoadFailed(
+            e: GlideException?,
+            model: Any?,
+            target: Target<Drawable>?,
+            isFirstResource: Boolean,
+        ): Boolean {
+            binding.progressBar.visibility = View.GONE
+            return false
+        }
+
+        override fun onResourceReady(
+            resource: Drawable?,
+            model: Any?,
+            target: Target<Drawable>?,
+            dataSource: DataSource?,
+            isFirstResource: Boolean,
+        ): Boolean {
+            binding.progressBar.visibility = View.GONE
+            return false
         }
     }
 

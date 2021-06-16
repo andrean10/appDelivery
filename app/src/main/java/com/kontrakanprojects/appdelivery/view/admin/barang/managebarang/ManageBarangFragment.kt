@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.AdapterView
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -48,6 +49,16 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProviders.of(requireActivity())[BarangViewModel::class.java]
+        setHasOptionsMenu(true)
+
+        val cb = activity?.onBackPressedDispatcher?.addCallback(this) {
+            viewModel = null
+
+            findNavController().navigateUp()
+        }
+
+        Log.d(TAG, "onCreate: $cb")
+        Log.d(TAG, "onCreate: Tombol kembali dijalankan")
     }
 
     override fun onCreateView(
@@ -95,6 +106,7 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
                 val myLocation = results["location"] as LatLong
                 myLocationLat = myLocation.latitude.toString()
                 myLocationLong = myLocation.longitude.toString()
+
                 val myDestination = results["destination"] as LatLong
                 destinationLat = myDestination.latitude.toString()
                 destinationLong = myDestination.longitude.toString()
@@ -111,7 +123,19 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn_choose_location -> {
-                findNavController().navigate(R.id.action_manageBarangFragment_to_mapsFragment)
+                when (request) {
+                    REQUEST_ADD -> {
+                        findNavController().navigate(R.id.action_manageBarangFragment_to_mapsFragment)
+                    }
+                    REQUEST_EDIT -> {
+                        val toMaps =
+                            ManageBarangFragmentDirections.actionManageBarangFragmentToMapsFragment()
+                        toMaps.idRequest = MapsFragment.REQUEST_EDIT
+                        toMaps.latLong =
+                            LatLong(destinationLat.toDouble(), destinationLong.toDouble())
+                        findNavController().navigate(toMaps)
+                    }
+                }
             }
             R.id.btn_save_package -> {
                 if (request == REQUEST_ADD) {
@@ -120,7 +144,6 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
                     checkField()
                 }
             }
-
         }
     }
 
@@ -274,7 +297,9 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
     }
 
     private fun addBarang(params: HashMap<String, String>) {
+        isLoading(true)
         viewModel!!.addbarang(params).observe(viewLifecycleOwner, { response ->
+            isLoading(false)
             if (response != null) {
                 if (response.status == 200) {
                     findNavController().navigateUp()
@@ -292,7 +317,9 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
     }
 
     private fun editBarang(idBarang: Int, params: HashMap<String, String>) {
+        isLoading(true)
         viewModel!!.editBarang(idBarang, params).observe(viewLifecycleOwner, { response ->
+            isLoading(false)
             if (response != null) {
                 if (response.status == 200) {
                     findNavController().navigateUp()
@@ -310,7 +337,9 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
     }
 
     private fun deleteBarang(idBarang: Int) {
+        isLoading(true)
         viewModel!!.deleteBarang(idBarang).observe(viewLifecycleOwner, { response ->
+            isLoading(false)
             if (response != null) {
                 if (response.status == 200) {
                     findNavController().navigateUp()
@@ -346,14 +375,31 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    private fun isLoading(status: Boolean) {
+        with(binding) {
+            if (status) {
+                progressBar.visibility = View.VISIBLE
+                btnSavePackage.visibility = View.GONE
+            } else {
+                progressBar.visibility = View.GONE
+                btnSavePackage.visibility = View.VISIBLE
+            }
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.delete, menu)
+        if (request == REQUEST_EDIT) {
+            inflater.inflate(R.menu.delete, menu)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> findNavController().navigateUp()
+            android.R.id.home -> {
+                viewModel = null
+                findNavController().navigateUp()
+            }
             R.id.delete -> deleteBarang(idBarang)
         }
         return super.onOptionsItemSelected(item)

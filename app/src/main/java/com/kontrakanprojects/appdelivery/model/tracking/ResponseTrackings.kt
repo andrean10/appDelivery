@@ -54,6 +54,9 @@ data class ResultsItem(
 
     @field:SerializedName("longitude")
     val longitude: String? = null,
+
+    @field:SerializedName("distance")
+    val distance: String? = null,
 )
 
 data class TrackingItem(

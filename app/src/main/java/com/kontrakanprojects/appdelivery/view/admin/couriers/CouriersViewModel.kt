@@ -100,8 +100,9 @@ class CouriersViewModel : ViewModel() {
                     _kurir?.postValue(result!!)
                 } else {
                     val errResult = response.errorBody()?.string()
-                    val status = JSONObject(errResult!!).getInt("status")
-                    val message = JSONObject(errResult).getString("message")
+                    val status = JSONObject(errResult ?: "500").getInt("status")
+                    val message =
+                        JSONObject(errResult ?: "Internal Server Error").getString("message")
                     val responseKurir = ResponseKurir(message = message, status = status)
                     _kurir?.postValue(responseKurir)
 

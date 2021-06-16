@@ -1,6 +1,7 @@
 package com.kontrakanprojects.appdelivery.view.admin.dashboard
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.FragmentDashboardBinding
 import com.kontrakanprojects.appdelivery.db.User
@@ -22,7 +27,6 @@ import com.kontrakanprojects.appdelivery.view.home.HomeActivity
 import www.sanju.motiontoast.MotionToast
 
 class DashboardFragment : Fragment(), View.OnClickListener {
-
 
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
@@ -82,12 +86,36 @@ class DashboardFragment : Fragment(), View.OnClickListener {
         resultDetail = result
         with(binding) {
             Glide.with(requireContext())
-                .load(ApiConfig.URL + result.fotoProfil)
+                .load(ApiConfig.IMG_URL + result.fotoProfil)
+                .listener(listenerImage)
                 .placeholder(R.drawable.no_profile_images)
                 .error(R.drawable.no_profile_images)
                 .into(imgProfile)
 
             tvNameWelcoming.text = getString(R.string.home_admin, result.namaLengkap)
+        }
+    }
+
+    private val listenerImage = object : RequestListener<Drawable> {
+        override fun onLoadFailed(
+            e: GlideException?,
+            model: Any?,
+            target: Target<Drawable>?,
+            isFirstResource: Boolean,
+        ): Boolean {
+            binding.progressBarImage.visibility = View.GONE
+            return false
+        }
+
+        override fun onResourceReady(
+            resource: Drawable?,
+            model: Any?,
+            target: Target<Drawable>?,
+            dataSource: DataSource?,
+            isFirstResource: Boolean,
+        ): Boolean {
+            binding.progressBarImage.visibility = View.GONE
+            return false
         }
     }
 
@@ -128,7 +156,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                     ChooseLoginFragment.ROLE_COURIER -> {
                         val toCourier =
                             DashboardFragmentDirections.actionDashboardFragmentToBarangKurirFragment()
-                        toCourier.idKurir = user.idUser ?:0
+                        toCourier.idKurir = user.idUser ?: 0
                         findNavController().navigate(toCourier)
                     }
                 }

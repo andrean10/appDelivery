@@ -29,45 +29,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
-        <ScrollView
+        <com.google.android.material.circularreveal.CircularRevealRelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/appBarLayout"
             android:padding="16dp">
 
-            <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_courier_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_barier"
+                tools:itemCount="4"
+                tools:listitem="@layout/rv_courier_list" />
+        </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_list_courier"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="List Semua Kurir"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-                <View
-                    android:id="@+id/view_barier"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/tv_list_courier"
-                    android:layout_marginEnd="120dp"
-                    android:layout_marginBottom="15dp"
-                    android:background="@color/black" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_courier_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/view_barier"
-                    tools:itemCount="4"
-                    tools:listitem="@layout/rv_courier_list" />
-            </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
-
-        </ScrollView>
     </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -6,11 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.RvTrackingListBinding
-import com.kontrakanprojects.appdelivery.model.kurir.ResultKurir
-import com.kontrakanprojects.appdelivery.model.tracking.ResponseTrackings
 import com.kontrakanprojects.appdelivery.model.tracking.ResultsItem
-import com.kontrakanprojects.appdelivery.network.ApiConfig
-import com.kontrakanprojects.appdelivery.view.admin.couriers.ListCouriersAdapter
 
 class TrackingBarangAdapter(val activity:Activity): RecyclerView.Adapter<TrackingBarangAdapter.TrackingBarangAdapterViewHolder>() {
 
@@ -57,23 +53,26 @@ class TrackingBarangAdapter(val activity:Activity): RecyclerView.Adapter<Trackin
 //                    .into(circlePhotoProfile)
 
                 tvNameCostumerRecycler.text = resultsItem.penerima
-                var z = resultsItem.kodePelanggan.toString()
+                val z = resultsItem.kodePelanggan.toString()
                 var a = ""
-                if (resultsItem.statusBarang == "1"){
-                    a = activity.getString(R.string.rb_001)
-                    tvStatusBarang.setText("Nomor Resi : $z")
-                }else if (resultsItem.statusBarang == "2"){
-                    a = activity.getString(R.string.rb_002)
-                    tvStatusBarang.setText("Nomor Resi : $z")
-                }else if (resultsItem.statusBarang == "3"){
-                    a = activity.getString(R.string.rb_003)
-                    tvStatusBarang.setText("Nomor Resi : $z")
-                }else if (resultsItem.statusBarang == "4"){
-                    a = activity.getString(R.string.rb_004)
-                    tvStatusBarang.setText("Nomor Resi : $z")
+                when (resultsItem.statusBarang) {
+                    "1" -> {
+                        a = activity.getString(R.string.rb_001)
+                    }
+                    "2" -> {
+                        a = activity.getString(R.string.rb_002)
+                    }
+                    "3" -> {
+                        a = activity.getString(R.string.rb_003)
+                    }
+                    "4" -> {
+                        a = activity.getString(R.string.rb_004)
+                    }
                 }
 
-                tvStatusPackageRecycler.setText("[${resultsItem.createdAt}] $a")
+                tvStatusBarang.text = "Nomor Resi : $z"
+                tvDistance.text = activity.getString(R.string.km, resultsItem.distance)
+                tvStatusPackageRecycler.text = "[${resultsItem.createdAt}] $a"
             }
 
             itemView.setOnClickListener { onItemClickCallBack?.onItemClicked(resultsItem) }

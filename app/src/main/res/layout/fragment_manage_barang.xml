@@ -20,7 +20,8 @@
                 android:id="@+id/topAppBar"
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:titleTextColor="@color/black" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -175,8 +176,15 @@
                     android:id="@+id/btn_save_package"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Simpan"
+                    android:text="@string/simpan"
                     android:textColor="@color/black" />
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
 
             </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 

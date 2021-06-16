@@ -2,11 +2,13 @@ package com.kontrakanprojects.appdelivery.view.admin.tracking.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kontrakanprojects.appdelivery.databinding.FragmentDetailTrackingBinding
 import com.kontrakanprojects.appdelivery.model.tracking.ResultTracking
@@ -86,15 +88,23 @@ class DetailTrackingFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            findNavController().navigateUp()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setToolbarTitle() {
         (activity as AppCompatActivity?)!!.setSupportActionBar(binding.topAppBar)
         if ((activity as AppCompatActivity?)!!.supportActionBar != null) {
             (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Detail Tracking"
+            (activity as AppCompatActivity?)!!.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

@@ -35,4 +35,8 @@
     <string name="edit">Edit</string>
     <string name="km">%s Km</string>
     <string name="latlong">Latitude: %s\nLongitude: %s</string>
+    <string name="tab_text_1">Belum Dikirim</string>
+    <string name="tab_text_2">Sudah Dikirim</string>
+    <string name="simpan">Simpan</string>
+    <string name="not_found">Not Found</string>
 </resources>

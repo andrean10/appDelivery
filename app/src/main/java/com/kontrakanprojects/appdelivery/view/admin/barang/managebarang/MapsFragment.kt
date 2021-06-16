@@ -32,7 +32,6 @@ import com.kontrakanprojects.appdelivery.utils.showMessage
 import com.kontrakanprojects.appdelivery.view.admin.barang.BarangViewModel
 import www.sanju.motiontoast.MotionToast
 import java.util.*
-import kotlin.collections.HashMap
 import kotlin.math.PI
 import kotlin.math.acos
 import kotlin.math.cos
@@ -53,23 +52,43 @@ class MapsFragment : Fragment() {
     private var myLocationLatLong: LatLng? = null
     private var myDirectionLatLong: LatLng? = null
     private var distance: String = ""
-
-
     private var isLocationPermissionGranted = false
 
     companion object {
+        const val REQUEST_EDIT = 200
         private val DEFAULT_INDONESIA = LatLng(-2.3196972, 99.4100731)
         private const val DEFAULT_ZOOM = 5f
+        private const val ZOOM_MARKER = 15f
     }
 
     private val TAG = MapsFragment::class.simpleName
 
     @SuppressLint("MissingPermission")
     private val callback = OnMapReadyCallback { googleMap ->
+        val args = MapsFragmentArgs.fromBundle(arguments as Bundle)
+        val idRequest = args.idRequest
+        val latLong = args.latLong
+
+        Log.d(TAG, "$idRequest: ")
+        Log.d(TAG, "$latLong: ")
+
         gMap = googleMap
         if (!isLocationPermissionGranted) {
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_INDONESIA,
-                DEFAULT_ZOOM))
+            if (idRequest == REQUEST_EDIT) {
+                val markerOptions = MarkerOptions().apply {
+                    position(LatLng(latLong!!.latitude, latLong.longitude))
+                    title("My Destination")
+                }
+                destinationMarker = googleMap.addMarker(markerOptions)
+
+                with(binding) {
+                    cvMaps.visibility = View.VISIBLE
+                    tvDistanceLocation.text = getString(R.string.km, distance)
+                }
+            } else { // default jika request tambah
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_INDONESIA,
+                    DEFAULT_ZOOM))
+            }
         }
 
         // enable zoom controls for the map
@@ -101,7 +120,7 @@ class MapsFragment : Fragment() {
                 title("My Destination")
             }
             destinationMarker = googleMap.addMarker(markerOptions)
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, ZOOM_MARKER))
 
             // init distance
             distance = distance(
@@ -215,10 +234,11 @@ class MapsFragment : Fragment() {
             val addresses = geoCoder.getFromLocation(
                 location.latitude, location.longitude, 1
             )
+
             myLocationLatLong = LatLng(addresses.first().latitude, addresses.first().longitude)
             myLocationMarker =
                 gMap!!.addMarker(MarkerOptions().position(myLocationLatLong).title("My Location"))
-            gMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocationLatLong, 15f))
+            gMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocationLatLong, ZOOM_MARKER))
         }
     }
 
@@ -283,14 +303,13 @@ class MapsFragment : Fragment() {
         // jarak dalam km
         distance *= 1.609344
         // set to distance
-        return String.format(Locale.US, "%.2f", distance)
+        return String.format(Locale.US, "%.1f", distance)
     }
 
     private fun rad2deg(distance: Double) = (distance * 180.0 / PI)
 
     // konversi degree ke radian
     private fun deg2rad(lat1: Double) = (lat1 * PI / 180.0)
-
 
     override fun onDestroy() {
         super.onDestroy()

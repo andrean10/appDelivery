@@ -14,8 +14,8 @@ import retrofit2.Response
 
 class BarangViewModel : ViewModel() {
 
-    private var _location = MutableLiveData<Map<String, Any>>()
-    val location: LiveData<Map<String, Any>>
+    private var _location = MutableLiveData<Map<String, Any>?>()
+    val location: LiveData<Map<String, Any>?>
         get() = _location
 
     private var _barang: MutableLiveData<ResponseDetailBarang>? = null
@@ -23,7 +23,7 @@ class BarangViewModel : ViewModel() {
 
     private val TAG = BarangViewModel::class.simpleName
 
-    fun setLocation(latLong: HashMap<String, Any>) {
+    fun setLocation(latLong: HashMap<String, Any>?) {
         _location.postValue(latLong)
     }
 

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.admin.barang.detail.DetailBarangFragment">
 
     <com.google.android.material.circularreveal.CircularRevealRelativeLayout
@@ -19,7 +20,8 @@
                 android:id="@+id/topAppBar"
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:titleTextColor="@color/black" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -174,6 +176,26 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/courier_send"
                     android:layout_marginBottom="3dp"
+                    android:text="Jarak Barang Ke Lokasi Pengiriman"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_distance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_06"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:text="1 Km" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_07"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_distance"
+                    android:layout_marginBottom="3dp"
                     android:text="Detail Barang"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -182,14 +204,14 @@
                     android:id="@+id/tv_detail_package"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_06"
+                    android:layout_below="@+id/tv_07"
                     android:layout_marginBottom="10dp"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     tools:text="Barang Mudah Pecah Janngan Dihemap" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_07"
+                    android:id="@+id/tv_08"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_detail_package"
@@ -202,7 +224,7 @@
                     android:id="@+id/tv_status_package"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_07"
+                    android:layout_below="@+id/tv_08"
                     android:layout_marginBottom="10dp"
                     android:textColor="@color/black"
                     android:textSize="18sp"

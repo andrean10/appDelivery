@@ -50,12 +50,11 @@ class BarangKurirSecondAdapter(val activity: Activity):
                 if (resultsBarangKurir.statusBarang == "4"){
                     var a = ""
                     a = activity.getString(R.string.rb_004)
-                    tvStatusBarang01.setText(a)
+                    tvStatusBarang01.text = a
                     tvNameCostumerRecycler.text = resultsBarangKurir.penerima
                 }else{
                     //nothing
                 }
-
             }
 
             itemView.setOnClickListener { onItemClickCallBack?.onItemClicked(resultsBarangKurir) }

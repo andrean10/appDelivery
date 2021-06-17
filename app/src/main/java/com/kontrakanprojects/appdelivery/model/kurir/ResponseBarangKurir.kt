@@ -61,24 +61,24 @@ data class ResultsBarangKurir(
 
 data class TrackingItem(
 
-	@field:SerializedName("updated_at")
+    @field:SerializedName("updated_at")
 	val updatedAt: Any? = null,
 
-	@field:SerializedName("id_barang")
+    @field:SerializedName("id_barang")
 	val idBarang: Int? = null,
 
-	@field:SerializedName("id_tracking")
+    @field:SerializedName("id_tracking")
 	val idTracking: Int? = null,
 
-	@field:SerializedName("latitude")
-	val latitude: String? = null,
+    @field:SerializedName("latitude")
+    val latitude: String? = null,
 
-	@field:SerializedName("created_at")
-	val createdAt: String? = null,
+    @field:SerializedName("created_at")
+    val createdAt: String? = null,
 
-	@field:SerializedName("detail")
-	val detail: String? = null,
+    @field:SerializedName("detail")
+    val detail: String? = null,
 
-	@field:SerializedName("longitude")
-	val longitude: String? = null
+    @field:SerializedName("longitude")
+    val longitude: String? = null,
 )

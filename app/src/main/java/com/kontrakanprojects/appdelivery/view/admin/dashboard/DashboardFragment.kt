@@ -50,15 +50,17 @@ class DashboardFragment : Fragment(), View.OnClickListener {
 
         with(binding) {
             if (user.idRole == ChooseLoginFragment.ROLE_COURIER) {
-                btnTracking.visibility = View.GONE
-                btnCourier.visibility = View.GONE
+                gridLayout.visibility = View.GONE
+                gridLayoutKurir.visibility = View.VISIBLE
             }
 
             imgProfile.setOnClickListener(this@DashboardFragment)
             btnCourier.setOnClickListener(this@DashboardFragment)
             btnTracking.setOnClickListener(this@DashboardFragment)
             btnBarang.setOnClickListener(this@DashboardFragment)
+            btnBarangByKurir.setOnClickListener(this@DashboardFragment)
             btnLogout.setOnClickListener(this@DashboardFragment)
+            btnLogoutByKurir.setOnClickListener(this@DashboardFragment)
         }
     }
 
@@ -147,19 +149,15 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                 findNavController().navigate(R.id.action_dashboardFragment_to_trackingBarangFragment)
             }
             R.id.btn_barang -> {
-                when (user.idRole) {
-                    ChooseLoginFragment.ROLE_ADMIN -> {
-                        val toAdmin =
-                            DashboardFragmentDirections.actionDashboardFragmentToBarangFragment()
-                        findNavController().navigate(toAdmin)
-                    }
-                    ChooseLoginFragment.ROLE_COURIER -> {
-                        val toCourier =
-                            DashboardFragmentDirections.actionDashboardFragmentToKurirBarangActivity()
-                        toCourier.idKurir = user.idUser ?: 0
-                        findNavController().navigate(toCourier)
-                    }
-                }
+                val toAdmin =
+                    DashboardFragmentDirections.actionDashboardFragmentToBarangFragment()
+                findNavController().navigate(toAdmin)
+            }
+            R.id.btn_barang_by_kurir -> {
+                val toCourier =
+                    DashboardFragmentDirections.actionDashboardFragmentToKurirBarangActivity()
+                toCourier.idKurir = user.idUser ?: 0
+                findNavController().navigate(toCourier)
             }
             R.id.btn_logout -> {
                 // delete preferences
@@ -171,7 +169,16 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                 startActivity(Intent(requireContext(), HomeActivity::class.java))
                 activity?.finish()
             }
+            R.id.btn_logout_by_kurir -> {
+                // delete preferences
+                UserPreference(requireContext()).apply {
+                    removeLogin()
+                    removeUser()
+                }
 
+                startActivity(Intent(requireContext(), HomeActivity::class.java))
+                activity?.finish()
+            }
         }
     }
 

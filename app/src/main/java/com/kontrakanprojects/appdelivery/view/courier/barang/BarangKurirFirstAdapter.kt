@@ -1,17 +1,12 @@
 package com.kontrakanprojects.appdelivery.view.courier.barang
 
 import android.app.Activity
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.RvCourierPackageListFirstBinding
-import com.kontrakanprojects.appdelivery.databinding.RvPackageListBinding
-import com.kontrakanprojects.appdelivery.model.barang.ResultDetailBarang
 import com.kontrakanprojects.appdelivery.model.kurir.ResultsBarangKurir
-import com.kontrakanprojects.appdelivery.view.admin.barang.ListBarangAdapter
 
 class BarangKurirFirstAdapter(val activity: Activity):
     RecyclerView.Adapter<BarangKurirFirstAdapter.BarangKurirFirstAdapterViewHolder>() {
@@ -26,8 +21,6 @@ class BarangKurirFirstAdapter(val activity: Activity):
         notifyDataSetChanged()
     }
 
-    fun getData(position: Int) = listBarang[position]
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -37,7 +30,7 @@ class BarangKurirFirstAdapter(val activity: Activity):
         return BarangKurirFirstAdapterViewHolder(binding)
     }
 
-    fun setOnItemClickCallBack(onItemClickCallBack: BarangKurirFirstAdapter.OnItemClickCallBack) {
+    fun setOnItemClickCallBack(onItemClickCallBack: OnItemClickCallBack) {
         this.onItemClickCallBack = onItemClickCallBack
     }
 
@@ -52,34 +45,23 @@ class BarangKurirFirstAdapter(val activity: Activity):
         fun bind(resultsBarangKurir: ResultsBarangKurir) {
             with(binding) {
 
-                if (resultsBarangKurir.statusBarang == "1"){
-                    var a = ""
-                    a = activity.getString(R.string.rb_001)
-                    tvStatusBarang01.setText(a)
-
-                    location.text = resultsBarangKurir.distance
-                    tvNameCostumerRecycler.text = resultsBarangKurir.penerima
-                }else if (resultsBarangKurir.statusBarang == "2"){
-                    var a = ""
-                    a = activity.getString(R.string.rb_002)
-                    tvStatusBarang01.setText(a)
-
-                    location.text = resultsBarangKurir.distance
-                    tvNameCostumerRecycler.text = resultsBarangKurir.penerima
-                }else if (resultsBarangKurir.statusBarang == "3"){
-                    var a = ""
-                    a = activity.getString(R.string.rb_003)
-                    tvStatusBarang01.setText(a)
-
-                    location.text = resultsBarangKurir.distance
-                    tvNameCostumerRecycler.text = resultsBarangKurir.penerima
+                var a = ""
+                when (resultsBarangKurir.statusBarang) {
+                    "1" -> {
+                        a = activity.getString(R.string.rb_001)
+                    }
+                    "2" -> {
+                        a = activity.getString(R.string.rb_002)
+                    }
+                    "3" -> {
+                        a = activity.getString(R.string.rb_003)
+                    }
                 }
 
-                Log.d("testing1", "bind: $resultsBarangKurir")
-
+                tvStatusBarang01.text = a
+                tvLocation.text = activity.getString(R.string.kmm, resultsBarangKurir.distance)
+                tvNameCostumerRecycler.text = resultsBarangKurir.penerima
             }
-
-            itemView.setOnClickListener { onItemClickCallBack?.onItemClicked(resultsBarangKurir) }
         }
     }
 

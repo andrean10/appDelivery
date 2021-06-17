@@ -105,13 +105,6 @@ interface ApiService {
     @GET("admin/detail/{id_login}")
     fun detailAdmin(@Path("id_login") idLogin: Int): Call<ResponseProfileAdmin>
 
-    @FormUrlEncoded
-    @PATCH("admin/edit/{id_login}")
-    fun editAdmin(
-        @Path("id") idLogin: Int,
-        @FieldMap params: HashMap<String, String>,
-    ): Call<ResponseProfileAdmin>
-
     @GET("kurir/tracking/{id_kurir}")
     fun listDataBarangAdmin(@Path("id_kurir") idKurir: Int): Call<ResponseBarangKurir>
 }

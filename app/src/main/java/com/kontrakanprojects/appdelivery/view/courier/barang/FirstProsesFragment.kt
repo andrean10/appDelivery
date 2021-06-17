@@ -47,19 +47,12 @@ class FirstProsesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         user = UserPreference(requireContext()).getUser().idUser!!
         init()
-
-        barangKurirFirstAdapter.setOnItemClickCallBack(object :
-            BarangKurirFirstAdapter.OnItemClickCallBack {
-            override fun onItemClicked(resultsBarangKurir: ResultsBarangKurir) {
-                Toast.makeText(context, "ada", Toast.LENGTH_SHORT).show()
-            }
-        })
     }
 
     private fun init(){
         Log.d("asdasd", "init: dijalankan")
         with(binding){
-            barangKurirFirstAdapter = BarangKurirFirstAdapter(requireActivity())
+            barangKurirFirstAdapter = BarangKurirFirstAdapter(requireActivity(), requireContext())
             with(rvCourirListFirst){
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)

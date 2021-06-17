@@ -1,6 +1,8 @@
 package com.kontrakanprojects.appdelivery.view.courier.barang
 
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +10,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.RvCourierPackageListFirstBinding
-import com.kontrakanprojects.appdelivery.databinding.RvPackageListBinding
-import com.kontrakanprojects.appdelivery.model.barang.ResultDetailBarang
 import com.kontrakanprojects.appdelivery.model.kurir.ResultsBarangKurir
 import com.kontrakanprojects.appdelivery.view.admin.barang.ListBarangAdapter
 
-class BarangKurirFirstAdapter(val activity: Activity):
+class BarangKurirFirstAdapter(val activity: Activity, val context: Context):
     RecyclerView.Adapter<BarangKurirFirstAdapter.BarangKurirFirstAdapterViewHolder>() {
 
     private val listBarang = ArrayList<ResultsBarangKurir>()
@@ -24,6 +24,12 @@ class BarangKurirFirstAdapter(val activity: Activity):
         listBarang.clear()
         listBarang.addAll(barangs)
         notifyDataSetChanged()
+    }
+
+    private lateinit var itemClickListener: ItemClickListener
+
+    fun setItemClickListener(itemClickListener: ItemClickListener) {
+        this.itemClickListener = itemClickListener
     }
 
     fun getData(position: Int) = listBarang[position]
@@ -77,8 +83,20 @@ class BarangKurirFirstAdapter(val activity: Activity):
 
                 Log.d("testing1", "bind: $resultsBarangKurir")
 
-            }
+                val idBarang = resultsBarangKurir.idBarang.toString()
+                val statusBarang = resultsBarangKurir.statusBarang
 
+                Log.d("anjir", "bind: $idBarang")
+
+                relativeLayout02.setOnClickListener(object : View.OnClickListener {
+                    override fun onClick(view: View?) {
+                        val intent = Intent(context, ManageTrackingKurirActivity::class.java)
+                        intent.putExtra("id_barang", idBarang)
+                        intent.putExtra("status_barang", statusBarang)
+                        context.startActivity(intent)
+                    }
+                })
+            }
             itemView.setOnClickListener { onItemClickCallBack?.onItemClicked(resultsBarangKurir) }
         }
     }

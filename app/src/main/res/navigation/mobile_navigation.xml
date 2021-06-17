@@ -137,6 +137,10 @@
             android:name="idRequest"
             android:defaultValue="0"
             app:argType="integer" />
+        <argument
+            android:name="distance"
+            android:defaultValue='""'
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/barangKurirFragment"

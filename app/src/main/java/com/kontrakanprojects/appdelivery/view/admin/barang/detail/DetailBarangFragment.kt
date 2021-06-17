@@ -84,15 +84,12 @@ class DetailBarangFragment : Fragment() {
                     }
                 }
 
-                if (result.distance?.toDouble()!! >= 1.00) {
-                    tvDistance.text = getString(R.string.km, result.distance)
-                }
-
                 tvCodeCostumer.text = result.kodePelanggan.toString()
                 tvNameCostumer.text = result.penerima
                 tvNumberPhone.text = result.nomorHp
                 tvAddressCostumer.text = result.alamat
                 courierSend.text = result.namaLengkap
+                tvDistance.text = getString(R.string.km, result.distance)
                 tvDetailPackage.text = result.detailBarang
             }
         }

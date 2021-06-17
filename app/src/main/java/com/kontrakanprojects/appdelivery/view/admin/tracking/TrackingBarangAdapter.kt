@@ -46,12 +46,6 @@ class TrackingBarangAdapter(val activity:Activity): RecyclerView.Adapter<Trackin
         RecyclerView.ViewHolder(binding.root) {
         fun bind(resultsItem: ResultsItem) {
             with(binding) {
-//                Glide.with(itemView.context)
-//                    .load(ApiConfig.URL + resultKurir.fotoProfil)
-//                    .placeholder(R.drawable.no_profile_images)
-//                    .error(R.drawable.no_profile_images)
-//                    .into(circlePhotoProfile)
-
                 tvNameCostumerRecycler.text = resultsItem.penerima
                 val z = resultsItem.kodePelanggan.toString()
                 var a = ""
@@ -71,7 +65,7 @@ class TrackingBarangAdapter(val activity:Activity): RecyclerView.Adapter<Trackin
                 }
 
                 tvStatusBarang.text = "Nomor Resi : $z"
-                tvDistance.text = activity.getString(R.string.km, resultsItem.distance)
+                tvDistance.text = activity.getString(R.string.kmm, resultsItem.distance)
                 tvStatusPackageRecycler.text = "[${resultsItem.createdAt}] $a"
             }
 

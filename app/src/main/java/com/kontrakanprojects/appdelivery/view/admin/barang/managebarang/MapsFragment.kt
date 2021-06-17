@@ -9,8 +9,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -21,10 +21,10 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.FragmentMapsBinding
 import com.kontrakanprojects.appdelivery.db.LatLong
@@ -50,7 +50,10 @@ class MapsFragment : Fragment() {
     private var myLocationMarker: Marker? = null
     private var destinationMarker: Marker? = null
     private var myLocationLatLong: LatLng? = null
-    private var myDirectionLatLong: LatLng? = null
+    private var myDestinationLatLong: LatLng? = null
+    private lateinit var geocoder: Geocoder
+
+    private var idRequest = 0
     private var distance: String = ""
     private var isLocationPermissionGranted = false
 
@@ -65,20 +68,24 @@ class MapsFragment : Fragment() {
 
     @SuppressLint("MissingPermission")
     private val callback = OnMapReadyCallback { googleMap ->
-        val args = MapsFragmentArgs.fromBundle(arguments as Bundle)
-        val idRequest = args.idRequest
-        val latLong = args.latLong
-
-        Log.d(TAG, "$idRequest: ")
-        Log.d(TAG, "$latLong: ")
-
         gMap = googleMap
-        if (!isLocationPermissionGranted) {
+        googleMap.isTrafficEnabled = true
+        googleMap.isBuildingsEnabled = true
+        googleMap.uiSettings.apply {
+            isCompassEnabled = true
+            isMapToolbarEnabled = false
+        }
+
+        if (isLocationPermissionGranted) {
             if (idRequest == REQUEST_EDIT) {
+                Log.d(TAG, "Dijalankan saat pada izin lokasi diaktifkan: ")
+
                 val markerOptions = MarkerOptions().apply {
-                    position(LatLng(latLong!!.latitude, latLong.longitude))
+                    position(LatLng(myDestinationLatLong!!.latitude,
+                        myDestinationLatLong!!.longitude))
                     title("My Destination")
                 }
+
                 destinationMarker = googleMap.addMarker(markerOptions)
 
                 with(binding) {
@@ -91,28 +98,8 @@ class MapsFragment : Fragment() {
             }
         }
 
-        // enable zoom controls for the map
-        googleMap.uiSettings.apply {
-            isCompassEnabled = true
-            isMapToolbarEnabled = false
-        }
-        googleMap.isTrafficEnabled = true
-        googleMap.isBuildingsEnabled = true
-//        googleMap.isMyLocationEnabled = true
-//        googleMap.setOnMyLocationButtonClickListener {
-//            Toast.makeText(requireContext(), "MyLocation button clicked", Toast.LENGTH_SHORT)
-//                .show()
-//            // Return false so that we don't consume the event and the default behavior still occurs
-//            // (the camera animates to the user's current position).
-//            false
-//        }
-//        googleMap.setOnMyLocationClickListener { location ->
-//            Toast.makeText(requireContext(), "Current location:\n$location", Toast.LENGTH_LONG)
-//                .show()
-//        }
-
         googleMap.setOnMapClickListener { latLng ->
-            myDirectionLatLong = latLng
+            myDestinationLatLong = latLng
             destinationMarker?.remove()
 
             val markerOptions = MarkerOptions().apply {
@@ -126,8 +113,8 @@ class MapsFragment : Fragment() {
             distance = distance(
                 myLocationLatLong!!.latitude,
                 myLocationLatLong!!.longitude,
-                myDirectionLatLong!!.latitude,
-                myDirectionLatLong!!.longitude,
+                myDestinationLatLong!!.latitude,
+                myDestinationLatLong!!.longitude,
             )
 
             with(binding) {
@@ -154,11 +141,22 @@ class MapsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         permission()
+
+        val args = MapsFragmentArgs.fromBundle(arguments as Bundle)
+        idRequest = args.idRequest
+
+        if (idRequest == REQUEST_EDIT) {
+            myDestinationLatLong = LatLng(args.latLong?.latitude!!, args.latLong?.longitude!!)
+            distance = args.distance
+        }
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
 
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
+
+        geocoder = Geocoder(requireContext(), Locale.getDefault())
 
         with(binding) {
             fabMyLocation.setOnClickListener {
@@ -167,24 +165,48 @@ class MapsFragment : Fragment() {
                 }
             }
 
+            searchLocation.setOnQueryTextListener(searchMaps)
+
             btnPickRouteLocation.setOnClickListener {
-                if (myLocationLatLong != null && myDirectionLatLong != null) { // check null latlong
+                if (myLocationLatLong != null && myDestinationLatLong != null) { // check null latlong
                     // set to viewmodel
                     val location = HashMap<String, Any>()
                     location["location"] =
                         LatLong(myLocationLatLong!!.latitude, myLocationLatLong!!.longitude)
                     location["destination"] =
-                        LatLong(myDirectionLatLong!!.latitude, myDirectionLatLong!!.longitude)
+                        LatLong(myDestinationLatLong!!.latitude, myDestinationLatLong!!.longitude)
                     location["distance"] = distance
                     viewModel?.setLocation(location)
 
-                    // kembali ke halaman manage fragment
-                    findNavController().navigateUp()
+                    Log.d(TAG, "onViewCreated: $location")
 
-//                showBottomSheet(distance)
+                    findNavController().navigateUp()
                 }
             }
         }
+    }
+
+    private val searchMaps = object : SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(query: String?): Boolean {
+            val address = geocoder.getFromLocationName(query, 1)
+
+            try {
+                myDestinationLatLong = LatLng(address.first().latitude, address.first().longitude)
+                destinationMarker =
+                    gMap!!.addMarker(MarkerOptions()
+                        .position(myDestinationLatLong)
+                        .title("My Destination"))
+                gMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(myDestinationLatLong,
+                    ZOOM_MARKER))
+            } catch (e: Exception) {
+                showMessage(requireActivity(), getString(R.string.not_found),
+                    "Lokasi tidak ditemukan", MotionToast.TOAST_ERROR)
+            }
+            return false
+        }
+
+        override fun onQueryTextChange(newText: String?) = false
+
     }
 
     private fun checkGPS() {
@@ -227,34 +249,28 @@ class MapsFragment : Fragment() {
     @SuppressLint("MissingPermission")
     private fun getMyLocation() {
         fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
+            myLocationMarker = null
             val location = task.result
-            val geoCoder = Geocoder(requireContext(), Locale.getDefault())
 
-            // Initialize address list
-            val addresses = geoCoder.getFromLocation(
-                location.latitude, location.longitude, 1
-            )
+            try {
+                // Initialize address list
+                val address = geocoder.getFromLocation(
+                    location.latitude, location.longitude, 1
+                )
 
-            myLocationLatLong = LatLng(addresses.first().latitude, addresses.first().longitude)
-            myLocationMarker =
-                gMap!!.addMarker(MarkerOptions().position(myLocationLatLong).title("My Location"))
-            gMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocationLatLong, ZOOM_MARKER))
+                myLocationLatLong = LatLng(address.first().latitude, address.first().longitude)
+                myLocationMarker =
+                    gMap!!.addMarker(MarkerOptions()
+                        .position(myLocationLatLong)
+                        .title("My Location")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_driver)))
+                gMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocationLatLong,
+                    ZOOM_MARKER))
+            } catch (e: Exception) {
+                showMessage(requireActivity(), getString(R.string.not_found),
+                    "Lokasi tidak ditemukan", MotionToast.TOAST_ERROR)
+            }
         }
-    }
-
-    private fun showBottomSheet(distance: String) {
-        // init bottomsheet distance
-        val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
-        val bottomSheetView = LayoutInflater.from(requireContext()).inflate(
-            R.layout.bottom_sheet_distance, activity?.findViewById(R.id.bottomSheetContainer)
-        )
-
-        // set to textview
-        val tvDistance = bottomSheetView.findViewById<TextView>(R.id.tv_distance_location)
-        tvDistance.text = distance
-
-        bottomSheetDialog.setContentView(bottomSheetView)
-        bottomSheetDialog.show()
     }
 
     private fun permission() {
@@ -303,7 +319,7 @@ class MapsFragment : Fragment() {
         // jarak dalam km
         distance *= 1.609344
         // set to distance
-        return String.format(Locale.US, "%.1f", distance)
+        return String.format(Locale.US, "%.2f", distance)
     }
 
     private fun rad2deg(distance: Double) = (distance * 180.0 / PI)

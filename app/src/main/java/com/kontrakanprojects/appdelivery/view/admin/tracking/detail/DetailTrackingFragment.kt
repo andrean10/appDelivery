@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.FragmentDetailTrackingBinding
-import com.kontrakanprojects.appdelivery.model.tracking.ResultTracking
 import com.kontrakanprojects.appdelivery.utils.showMessage
 import com.kontrakanprojects.appdelivery.view.admin.tracking.DetailTrackingAdapter
 import com.kontrakanprojects.appdelivery.view.admin.tracking.TrackingBarangViewModel
@@ -23,9 +23,6 @@ class DetailTrackingFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel by viewModels<TrackingBarangViewModel>()
     private lateinit var detailTrackingAdapter: DetailTrackingAdapter
-
-    private val resultDetailTracking: ResultTracking? = null
-
     private var idBarang = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,12 +64,13 @@ class DetailTrackingFragment : Fragment() {
                         detailTrackingAdapter.setData(result)
                     } else {
                         showMessage(requireActivity(),
-                            "Failed",
+                            getString(R.string.failed),
                             response.message,
                             MotionToast.TOAST_ERROR)
                     }
                 } else { // failed mengambil data
-                    showMessage(requireActivity(), "Failed", style = MotionToast.TOAST_ERROR)
+                    showMessage(requireActivity(), getString(R.string.failed),
+                        style = MotionToast.TOAST_ERROR)
                 }
             })
         }

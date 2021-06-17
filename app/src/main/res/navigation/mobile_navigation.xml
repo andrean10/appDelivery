@@ -112,6 +112,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_barangKurirFragment"
             app:destination="@id/barangKurirFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_kurirBarangActivity"
+            app:destination="@id/kurirBarangActivity" />
     </fragment>
     <fragment
         android:id="@+id/adminProfileFragment"
@@ -169,4 +172,14 @@
         android:name="com.kontrakanprojects.appdelivery.view.admin.tracking.manage.ManageFragment"
         android:label="fragment_manage_tracking"
         tools:layout="@layout/fragment_manage_tracking" />
+    <activity
+        android:id="@+id/kurirBarangActivity"
+        android:name="com.kontrakanprojects.appdelivery.view.courier.barang.KurirBarangActivity"
+        android:label="activity_kurir_barang"
+        tools:layout="@layout/activity_kurir_barang">
+        <argument
+            android:name="idKurir"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </activity>
 </navigation>

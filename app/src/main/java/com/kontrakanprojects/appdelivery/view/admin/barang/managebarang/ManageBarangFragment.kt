@@ -207,7 +207,7 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
                 if (isAdd) {
                     params["latitude_tracking"] = myLocationLat
                     params["longitude_tracking"] = myLocationLong
-
+                    Log.d("agaa", "checkField: $params")
                     addBarang(params)
                 } else {
                     params["status_barang"] = statusBarang

@@ -26,12 +26,6 @@ class BarangKurirFirstAdapter(val activity: Activity, val context: Context):
         notifyDataSetChanged()
     }
 
-    private lateinit var itemClickListener: ItemClickListener
-
-    fun setItemClickListener(itemClickListener: ItemClickListener) {
-        this.itemClickListener = itemClickListener
-    }
-
     fun getData(position: Int) = listBarang[position]
 
     override fun onCreateViewHolder(
@@ -61,7 +55,7 @@ class BarangKurirFirstAdapter(val activity: Activity, val context: Context):
                 if (resultsBarangKurir.statusBarang == "1"){
                     var a = ""
                     a = activity.getString(R.string.rb_001)
-                    tvStatusBarang01.setText(a)
+                    tvStatusBarang01.text = a
 
                     location.text = resultsBarangKurir.distance
                     tvNameCostumerRecycler.text = resultsBarangKurir.penerima

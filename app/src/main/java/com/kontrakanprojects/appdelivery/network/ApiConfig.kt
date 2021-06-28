@@ -8,7 +8,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiConfig {
     companion object {
         // hosting
-        const val URL = "http://192.168.100.8:8000"
+        //const val URL = "http://delivery.rproject-dev.com"
+        // hosting backup
+        const val URL = "https://aruvin.000webhostapp.com"
+        // local
+        // const val URL = "http://192.168.43.24:8000"
         const val IMG_URL = "$URL/public"
 
         private const val ENDPOINT = "$URL/api/"

@@ -11,6 +11,8 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
+import java.util.*
+import kotlin.collections.HashMap
 
 interface ApiService {
 
@@ -102,4 +104,8 @@ interface ApiService {
 
     @GET("kurir/tracking/{id_kurir}")
     fun listDataBarangAdmin(@Path("id_kurir") idKurir: Int): Call<ResponseBarangKurir>
+
+    @FormUrlEncoded
+    @POST("/tracking")
+    fun addTracking(@FieldMap params: HashMap<String, String>): Call<ResponseTracking>
 }

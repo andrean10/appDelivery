@@ -1,11 +1,15 @@
-package com.kontrakanprojects.appdelivery.view.courier.viewmodel
+package com.kontrakanprojects.appdelivery.view.courier.barang
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.kontrakanprojects.appdelivery.model.barang.ResponseDetailBarang
 import com.kontrakanprojects.appdelivery.model.kurir.ResponseBarangKurir
+import com.kontrakanprojects.appdelivery.model.kurir.ResponseKurir
+import com.kontrakanprojects.appdelivery.model.tracking.ResponseTracking
 import com.kontrakanprojects.appdelivery.network.ApiConfig
+import com.kontrakanprojects.appdelivery.view.admin.barang.BarangViewModel
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,6 +18,7 @@ import retrofit2.Response
 class BarangKurirViewModel: ViewModel() {
 
     private var _barang: MutableLiveData<ResponseBarangKurir>? = null
+    private var _tracking: MutableLiveData<ResponseTracking>? = null
 
     private val TAG = BarangKurirViewModel::class.simpleName
 
@@ -23,7 +28,44 @@ class BarangKurirViewModel: ViewModel() {
         return _barang as MutableLiveData<ResponseBarangKurir>
     }
 
+    fun addTracking(params: HashMap<String, String>): LiveData<ResponseTracking>{
+        _tracking = MutableLiveData<ResponseTracking>()
+        trackings(params = params)
+        return  _tracking as MutableLiveData<ResponseTracking>
+    }
+
+    private fun trackings(params: HashMap<String, String>) {
+        Log.d("param", "trackings: $params")
+        val client = ApiConfig.getApiService().addTracking(params)
+
+        client.enqueue(object : Callback<ResponseTracking> {
+            override fun onResponse(
+                call: Call<ResponseTracking>,
+                response: Response<ResponseTracking>
+            ) {
+                if (response.isSuccessful){
+                    val result = response.body()
+                    _tracking?.postValue(result!!)
+                }else{
+                    val errResult = response.errorBody()?.string()
+                    val status = JSONObject(errResult!!).getInt("status")
+                    val message = JSONObject(errResult).getString("message")
+                    val responseTracking = ResponseTracking(message = message, status = status)
+                    _tracking?.postValue(responseTracking)
+
+                    Log.e(TAG, "onFailure: $responseTracking")
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseTracking>, t: Throwable) {
+                _tracking?.postValue(null)
+                Log.e(TAG, "onFailure: ${t.message}")
+            }
+        })
+    }
+
     private fun barangKurir(idBarang: Int) {
+
         val client = ApiConfig.getApiService().listDataBarangAdmin(idBarang)
 
         client.enqueue(object : Callback<ResponseBarangKurir> {

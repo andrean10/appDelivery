@@ -29,7 +29,7 @@ class ListBarangAdapter : RecyclerView.Adapter<ListBarangAdapter.ListBarangAdapt
         return ListBarangAdapterViewHolder(binding)
     }
 
-    fun setOnItemClickCallBack(onItemClickCallBack: ListBarangAdapter.OnItemClickCallBack) {
+    fun setOnItemClickCallBack(onItemClickCallBack: OnItemClickCallBack) {
         this.onItemClickCallBack = onItemClickCallBack
     }
 

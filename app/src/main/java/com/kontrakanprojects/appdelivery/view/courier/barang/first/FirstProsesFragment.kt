@@ -1,11 +1,11 @@
-package com.kontrakanprojects.appdelivery.view.courier.barang
+package com.kontrakanprojects.appdelivery.view.courier.barang.first
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +14,9 @@ import com.kontrakanprojects.appdelivery.databinding.FragmentFirstProsesBinding
 import com.kontrakanprojects.appdelivery.model.kurir.ResultsBarangKurir
 import com.kontrakanprojects.appdelivery.sessions.UserPreference
 import com.kontrakanprojects.appdelivery.utils.showMessage
+import com.kontrakanprojects.appdelivery.view.courier.barang.ManageTrackingKurirActivity
+import com.kontrakanprojects.appdelivery.view.courier.barang.adapter.BarangKurirFirstAdapter
+import com.kontrakanprojects.appdelivery.view.courier.viewmodel.BarangKurirViewModel
 import www.sanju.motiontoast.MotionToast
 
 class FirstProsesFragment : Fragment() {
@@ -44,7 +47,10 @@ class FirstProsesFragment : Fragment() {
         barangKurirFirstAdapter.setOnItemClickCallBack(object :
             BarangKurirFirstAdapter.OnItemClickCallBack {
             override fun onItemClicked(resultsBarangKurir: ResultsBarangKurir) {
-                Toast.makeText(context, "ada", Toast.LENGTH_SHORT).show()
+                val intent = Intent(requireContext(), ManageTrackingKurirActivity::class.java)
+//                intent.putExtra("id_barang", idBarang)
+//                intent.putExtra("status_barang", statusBarang)
+                activity?.startActivity(intent)
             }
         })
     }

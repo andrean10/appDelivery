@@ -1,4 +1,4 @@
-package com.kontrakanprojects.appdelivery.view.courier.barang
+package com.kontrakanprojects.appdelivery.view.courier.barang.adapter
 
 import android.app.Activity
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.RvCourierPackageListFirstBinding
 import com.kontrakanprojects.appdelivery.model.kurir.ResultsBarangKurir
 
-class BarangKurirFirstAdapter(val activity: Activity):
+class BarangKurirFirstAdapter(val activity: Activity) :
     RecyclerView.Adapter<BarangKurirFirstAdapter.BarangKurirFirstAdapterViewHolder>() {
 
     private val listBarang = ArrayList<ResultsBarangKurir>()
@@ -21,20 +21,25 @@ class BarangKurirFirstAdapter(val activity: Activity):
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): BarangKurirFirstAdapter.BarangKurirFirstAdapterViewHolder {
-        val binding =
-            RvCourierPackageListFirstBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return BarangKurirFirstAdapterViewHolder(binding)
-    }
-
     fun setOnItemClickCallBack(onItemClickCallBack: OnItemClickCallBack) {
         this.onItemClickCallBack = onItemClickCallBack
     }
 
-    override fun onBindViewHolder(holder: BarangKurirFirstAdapter.BarangKurirFirstAdapterViewHolder, position: Int) {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): BarangKurirFirstAdapterViewHolder {
+        val binding =
+            RvCourierPackageListFirstBinding.inflate(LayoutInflater.from(parent.context),
+                parent,
+                false)
+        return BarangKurirFirstAdapterViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(
+        holder: BarangKurirFirstAdapterViewHolder,
+        position: Int,
+    ) {
         holder.bind(listBarang[position])
     }
 
@@ -42,6 +47,7 @@ class BarangKurirFirstAdapter(val activity: Activity):
 
     inner class BarangKurirFirstAdapterViewHolder(private val binding: RvCourierPackageListFirstBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(resultsBarangKurir: ResultsBarangKurir) {
             with(binding) {
 
@@ -62,6 +68,8 @@ class BarangKurirFirstAdapter(val activity: Activity):
                 tvLocation.text = activity.getString(R.string.kmm, resultsBarangKurir.distance)
                 tvNameCostumerRecycler.text = resultsBarangKurir.penerima
             }
+
+            itemView.setOnClickListener { onItemClickCallBack?.onItemClicked(resultsBarangKurir) }
         }
     }
 

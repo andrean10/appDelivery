@@ -1,14 +1,11 @@
-package com.kontrakanprojects.appdelivery.view.courier.barang
+package com.kontrakanprojects.appdelivery.view.courier.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kontrakanprojects.appdelivery.model.barang.ResponseDetailBarang
 import com.kontrakanprojects.appdelivery.model.kurir.ResponseBarangKurir
-import com.kontrakanprojects.appdelivery.model.kurir.ResponseKurir
 import com.kontrakanprojects.appdelivery.network.ApiConfig
-import com.kontrakanprojects.appdelivery.view.admin.barang.BarangViewModel
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback

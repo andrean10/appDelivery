@@ -1,4 +1,4 @@
-package com.kontrakanprojects.appdelivery.view.courier.barang
+package com.kontrakanprojects.appdelivery.view.courier.barang.second
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +12,8 @@ import com.kontrakanprojects.appdelivery.databinding.FragmentSecondDoneBinding
 import com.kontrakanprojects.appdelivery.model.kurir.ResultsBarangKurir
 import com.kontrakanprojects.appdelivery.sessions.UserPreference
 import com.kontrakanprojects.appdelivery.utils.showMessage
+import com.kontrakanprojects.appdelivery.view.courier.barang.BarangKurirSecondAdapter
+import com.kontrakanprojects.appdelivery.view.courier.viewmodel.BarangKurirViewModel
 import www.sanju.motiontoast.MotionToast
 
 class SecondDoneFragment : Fragment() {

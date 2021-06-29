@@ -4,7 +4,6 @@ import com.kontrakanprojects.appdelivery.model.auth.ResponseAuth
 import com.kontrakanprojects.appdelivery.model.barang.ResponseDetailBarang
 import com.kontrakanprojects.appdelivery.model.kurir.ResponseBarangKurir
 import com.kontrakanprojects.appdelivery.model.kurir.ResponseKurir
-import com.kontrakanprojects.appdelivery.model.profile.ResponseProfileAdmin
 import com.kontrakanprojects.appdelivery.model.profile.ResponseProfileDetail
 import com.kontrakanprojects.appdelivery.model.tracking.ResponseTracking
 import com.kontrakanprojects.appdelivery.model.tracking.ResponseTrackings
@@ -100,10 +99,6 @@ interface ApiService {
     // dapatkan tracking berdasarkan id barang DESC
     @GET("trackings/{id_barang}")
     fun listTrackingbrg(@Path("id_barang") idBarang: Int): Call<ResponseTracking>
-
-    //detail admin
-    @GET("admin/detail/{id_login}")
-    fun detailAdmin(@Path("id_login") idLogin: Int): Call<ResponseProfileAdmin>
 
     @GET("kurir/tracking/{id_kurir}")
     fun listDataBarangAdmin(@Path("id_kurir") idKurir: Int): Call<ResponseBarangKurir>

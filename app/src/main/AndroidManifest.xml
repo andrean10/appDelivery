@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.kontrakanprojects.appdelivery">
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -26,9 +27,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppDelivery"
-        android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".view.courier.barang.KurirBarangActivity" />
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -41,7 +41,11 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".view.courier.CourierActivity" />
+        <activity
+            android:name=".view.courier.barang.manage.MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".view.courier.KurirBarangActivity" />
+        <activity android:name=".view.courier.barang.manage.ManageTrackingKurirActivity" />
         <activity android:name=".view.admin.AdminActivity" />
         <activity android:name=".view.splash.SplashActivity">
             <intent-filter>

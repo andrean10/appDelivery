@@ -78,8 +78,6 @@ class MapsFragment : Fragment() {
 
         if (isLocationPermissionGranted) {
             if (idRequest == REQUEST_EDIT) {
-                Log.d(TAG, "Dijalankan saat pada izin lokasi diaktifkan: ")
-
                 val markerOptions = MarkerOptions().apply {
                     position(LatLng(myDestinationLatLong!!.latitude,
                         myDestinationLatLong!!.longitude))
@@ -177,8 +175,6 @@ class MapsFragment : Fragment() {
                         LatLong(myDestinationLatLong!!.latitude, myDestinationLatLong!!.longitude)
                     location["distance"] = distance
                     viewModel?.setLocation(location)
-
-                    Log.d(TAG, "onViewCreated: $location")
 
                     findNavController().navigateUp()
                 }

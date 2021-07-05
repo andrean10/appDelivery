@@ -8,11 +8,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiConfig {
     companion object {
         // hosting main
-//        private const val URL = "https://delivery.rproject-dev.com"
+        private const val URL = "https://delivery.rproject-dev.com"
 
-        // hosting second
-        private const val URL = "https://aruvin.000webhostapp.com"
+        // secondary hosting
+//        private const val URL = "https://keqing123.000webhostapp.com"
 
+//        private const val URL = "https://aruvin.000webhostapp.com"
+
+        // second hosting
         const val IMG_URL = "$URL/public"
 
         private const val ENDPOINT = "$URL/api/"
@@ -20,7 +23,6 @@ class ApiConfig {
         private fun client(): OkHttpClient {
             val logging = HttpLoggingInterceptor()
                 .setLevel(HttpLoggingInterceptor.Level.BODY)
-
             return OkHttpClient.Builder()
                 .addInterceptor(logging)
                 .build()

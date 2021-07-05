@@ -14,9 +14,9 @@ import com.kontrakanprojects.appdelivery.databinding.FragmentFirstProsesBinding
 import com.kontrakanprojects.appdelivery.model.kurir.ResultsBarangKurir
 import com.kontrakanprojects.appdelivery.sessions.UserPreference
 import com.kontrakanprojects.appdelivery.utils.showMessage
+import com.kontrakanprojects.appdelivery.view.courier.barang.BarangKurirViewModel
 import com.kontrakanprojects.appdelivery.view.courier.barang.ManageTrackingKurirActivity
 import com.kontrakanprojects.appdelivery.view.courier.barang.adapter.BarangKurirFirstAdapter
-import com.kontrakanprojects.appdelivery.view.courier.viewmodel.BarangKurirViewModel
 import www.sanju.motiontoast.MotionToast
 
 class FirstProsesFragment : Fragment() {

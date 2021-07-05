@@ -57,21 +57,21 @@ class BarangKurirFirstAdapter(val activity: Activity, val context: Context):
                     a = activity.getString(R.string.rb_001)
                     tvStatusBarang01.text = a
 
-                    location.text = resultsBarangKurir.distance
+                    tvLocation.text = resultsBarangKurir.distance
                     tvNameCostumerRecycler.text = resultsBarangKurir.penerima
                 }else if (resultsBarangKurir.statusBarang == "2"){
                     var a = ""
                     a = activity.getString(R.string.rb_002)
                     tvStatusBarang01.setText(a)
 
-                    location.text = resultsBarangKurir.distance
+                    tvLocation.text = resultsBarangKurir.distance
                     tvNameCostumerRecycler.text = resultsBarangKurir.penerima
                 }else if (resultsBarangKurir.statusBarang == "3"){
                     var a = ""
                     a = activity.getString(R.string.rb_003)
                     tvStatusBarang01.setText(a)
 
-                    location.text = resultsBarangKurir.distance
+                    tvLocation.text = resultsBarangKurir.distance
                     tvNameCostumerRecycler.text = resultsBarangKurir.penerima
                 }
 

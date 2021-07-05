@@ -28,7 +28,7 @@
         android:theme="@style/Theme.AppDelivery"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".view.courier.barang.KurirBarangActivity" />
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -41,7 +41,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".view.courier.CourierActivity" />
+        <activity android:name=".view.courier.KurirBarangActivity"/>
+        <activity android:name=".view.courier.barang.ManageTrackingKurirActivity"/>
         <activity android:name=".view.admin.AdminActivity" />
         <activity android:name=".view.splash.SplashActivity">
             <intent-filter>

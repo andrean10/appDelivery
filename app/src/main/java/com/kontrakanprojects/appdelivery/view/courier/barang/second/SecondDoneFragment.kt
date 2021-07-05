@@ -13,7 +13,7 @@ import com.kontrakanprojects.appdelivery.model.kurir.ResultsBarangKurir
 import com.kontrakanprojects.appdelivery.sessions.UserPreference
 import com.kontrakanprojects.appdelivery.utils.showMessage
 import com.kontrakanprojects.appdelivery.view.courier.barang.BarangKurirSecondAdapter
-import com.kontrakanprojects.appdelivery.view.courier.viewmodel.BarangKurirViewModel
+import com.kontrakanprojects.appdelivery.view.courier.barang.BarangKurirViewModel
 import www.sanju.motiontoast.MotionToast
 
 class SecondDoneFragment : Fragment() {

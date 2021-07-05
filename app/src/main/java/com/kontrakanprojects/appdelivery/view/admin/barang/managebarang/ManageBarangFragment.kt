@@ -56,9 +56,6 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
 
             findNavController().navigateUp()
         }
-
-        Log.d(TAG, "onCreate: $cb")
-        Log.d(TAG, "onCreate: Tombol kembali dijalankan")
     }
 
     override fun onCreateView(
@@ -133,6 +130,7 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
                         toMaps.idRequest = MapsFragment.REQUEST_EDIT
                         toMaps.latLong =
                             LatLong(destinationLat.toDouble(), destinationLong.toDouble())
+                        toMaps.distance = distance
                         findNavController().navigate(toMaps)
                     }
                 }

@@ -61,8 +61,9 @@
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_below="@+id/rr_welcome01"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="78dp"
+                    android:layout_marginTop="57dp"
                     android:layout_marginBottom="20dp"
                     app:lottie_autoPlay="true"
                     app:lottie_loop="true"
@@ -81,6 +82,7 @@
                     android:textStyle="bold" />
 
                 <com.google.android.material.circularreveal.CircularRevealGridLayout
+                    android:id="@+id/grid_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_menu_selection"
@@ -230,7 +232,95 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="12dp"
-                                android:text="Keluar"
+                                android:text="@string/keluar"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </com.google.android.material.circularreveal.CircularRevealGridLayout>
+
+                <com.google.android.material.circularreveal.CircularRevealGridLayout
+                    android:id="@+id/grid_layout_kurir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_menu_selection"
+                    android:layout_marginTop="10dp"
+                    android:alignmentMode="alignMargins"
+                    android:columnCount="2"
+                    android:columnOrderPreserved="false"
+                    android:rowCount="6"
+                    android:visibility="gone">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/btn_barang_by_kurir"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="12dp"
+                        app:cardBackgroundColor="#F6B900"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="6dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <com.airbnb.lottie.LottieAnimationView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                app:lottie_autoPlay="true"
+                                app:lottie_loop="true"
+                                app:lottie_rawRes="@raw/box_ani" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:text="@string/home_box"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/btn_logout_by_kurir"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="12dp"
+                        app:cardBackgroundColor="#F6B900"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="6dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <com.airbnb.lottie.LottieAnimationView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                app:lottie_autoPlay="true"
+                                app:lottie_loop="true"
+                                app:lottie_rawRes="@raw/log_out" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:text="@string/keluar"
                                 android:textColor="#000000"
                                 android:textSize="18sp" />
 

@@ -52,6 +52,4 @@ class ChooseLoginFragment : Fragment(), View.OnClickListener {
             }
         }
     }
-
-
 }

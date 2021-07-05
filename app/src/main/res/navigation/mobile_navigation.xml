@@ -140,6 +140,10 @@
             android:name="idRequest"
             android:defaultValue="0"
             app:argType="integer" />
+        <argument
+            android:name="distance"
+            android:defaultValue='""'
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/barangKurirFragment"
@@ -156,7 +160,7 @@
     </fragment>
     <fragment
         android:id="@+id/firstProsesFragment"
-        android:name="com.kontrakanprojects.appdelivery.view.courier.barang.FirstProsesFragment"
+        android:name="com.kontrakanprojects.appdelivery.view.courier.barang.first.FirstProsesFragment"
         android:label="fragment_first_proses"
         tools:layout="@layout/fragment_first_proses" >
         <action
@@ -170,7 +174,7 @@
         tools:layout="@layout/fragment_manage_tracking" />
     <activity
         android:id="@+id/kurirBarangActivity"
-        android:name="com.kontrakanprojects.appdelivery.view.courier.barang.KurirBarangActivity"
+        android:name="com.kontrakanprojects.appdelivery.view.courier.KurirBarangActivity"
         android:label="activity_kurir_barang"
         tools:layout="@layout/activity_kurir_barang">
         <argument

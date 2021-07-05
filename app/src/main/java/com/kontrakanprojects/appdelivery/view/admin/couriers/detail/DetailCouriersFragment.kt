@@ -77,9 +77,6 @@ class DetailCouriersFragment : Fragment(), View.OnClickListener {
         const val REQUEST_ADD = 100
         const val REQUEST_EDIT = 200
         private const val REQUEST_CODE_PERMISSIONS = 111
-        private const val REQUEST_CODE_CAPTURE_IMAGE = 222
-        private const val REQUEST_CODE_SELECT_IMAGE = 333
-        private const val ALERT_DIALOG_DELETE = 10
         private const val OLD_PASSWORD_IS_REQUIRED = "Password Lama Harus Di Isi"
         private const val NEW_PASSWORD_IS_REQUIRED = "Password Baru Harus Di Isi"
         private const val NEWAGAIN_PASSWORD_IS_REQUIRED = "Password Baru Harus Di Isi Ulang"

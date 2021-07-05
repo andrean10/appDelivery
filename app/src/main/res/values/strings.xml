@@ -44,4 +44,8 @@
     <string name="keluar">Keluar</string>
     <string name="empty_send_barang_kurir">Tidak Ada Barang Yang Akan Diantar</string>
     <string name="empty_send_done_barang_kurir">Daftar Barang Yang Sudah Diantar Tidak Ada</string>
+    <string name="pilih_lokasi_saya_sekarang">Pilih Lokasi Saya Sekarang</string>
+    <string name="save">Simpan</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="pick_now_location">Pilih Lokasi Anda Sekarang</string>
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.courier.barang.ManageTrackingKurirActivity">
+    tools:context=".view.courier.barang.manage.ManageTrackingKurirActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout01"
@@ -21,7 +21,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/appBarLayout01"
@@ -31,20 +31,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Manage Tracking"
-                android:textColor="@color/black"
-                android:textSize="21sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginEnd="200dp"
-                android:layout_marginBottom="20dp"
-                android:background="@color/black" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
@@ -59,13 +45,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:orientation="vertical">
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_track_01"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="@string/rb_001" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/rb_track_02"
@@ -105,19 +84,17 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_choose_location"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lokasi"
+                    android:text="@string/pilih_lokasi_saya_sekarang"
                     android:textColor="@color/black" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_failed_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginStart="6dp"
-                    android:layout_toEndOf="@+id/btn_choose_location"
-                    android:gravity="center"
+                    android:layout_below="@+id/btn_choose_location"
+                    android:layout_marginTop="6dp"
                     android:text="Pilih Lokasi Terlebih Dahulu"
                     android:textColor="@android:color/holo_red_light"
                     android:textSize="15sp"
@@ -127,38 +104,29 @@
                     android:id="@+id/tv_location_latlong"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:layout_below="@id/btn_choose_location"
                     android:layout_marginStart="6dp"
-                    android:layout_toEndOf="@+id/btn_choose_location"
+                    android:layout_marginTop="6dp"
                     android:gravity="center"
-                    android:textSize="15sp"
                     tools:text="Latitude: -1.91231239\nLongitude: 1.12312311" />
             </RelativeLayout>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Barang"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/et_id_barang"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="1"
-                android:textColor="@color/black"
-                android:textSize="17sp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_save_package"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Simpan"
+                android:layout_marginTop="12dp"
+                android:text="@string/save"
                 android:textColor="@color/black" />
 
+            <ProgressBar
+                android:id="@+id/pb_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
         </com.google.android.material.circularreveal.CircularRevealLinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </com.google.android.material.circularreveal.CircularRevealRelativeLayout>

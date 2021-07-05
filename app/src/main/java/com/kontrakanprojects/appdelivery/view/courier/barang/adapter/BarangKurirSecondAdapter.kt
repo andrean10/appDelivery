@@ -1,4 +1,4 @@
-package com.kontrakanprojects.appdelivery.view.courier.barang
+package com.kontrakanprojects.appdelivery.view.courier.barang.adapter
 
 import android.app.Activity
 import android.view.LayoutInflater
@@ -21,22 +21,27 @@ class BarangKurirSecondAdapter(val activity: Activity):
         notifyDataSetChanged()
     }
 
-    fun getData(position: Int) = listBarang[position]
+    fun clearData() {
+        listBarang.clear()
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): BarangKurirSecondAdapter.BarangKurirFirstAdapterViewHolder {
+    ): BarangKurirFirstAdapterViewHolder {
         val binding =
-            RvCourierPackageListSecondBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            RvCourierPackageListSecondBinding.inflate(LayoutInflater.from(parent.context),
+                parent,
+                false)
         return BarangKurirFirstAdapterViewHolder(binding)
     }
 
-    fun setOnItemClickCallBack(onItemClickCallBack: BarangKurirSecondAdapter.OnItemClickCallBack) {
+    fun setOnItemClickCallBack(onItemClickCallBack: OnItemClickCallBack) {
         this.onItemClickCallBack = onItemClickCallBack
     }
 
-    override fun onBindViewHolder(holder: BarangKurirSecondAdapter.BarangKurirFirstAdapterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BarangKurirFirstAdapterViewHolder, position: Int) {
         holder.bind(listBarang[position])
     }
 
@@ -48,12 +53,9 @@ class BarangKurirSecondAdapter(val activity: Activity):
             with(binding) {
 
                 if (resultsBarangKurir.statusBarang == "4"){
-                    var a = ""
-                    a = activity.getString(R.string.rb_004)
+                    val a = activity.getString(R.string.rb_004)
                     tvStatusBarang01.text = a
                     tvNameCostumerRecycler.text = resultsBarangKurir.penerima
-                }else{
-                    //nothing
                 }
             }
 

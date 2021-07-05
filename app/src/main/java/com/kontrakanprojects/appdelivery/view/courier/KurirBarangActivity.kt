@@ -1,8 +1,7 @@
 package com.kontrakanprojects.appdelivery.view.courier
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.kontrakanprojects.appdelivery.R
+import androidx.appcompat.app.AppCompatActivity
 import com.kontrakanprojects.appdelivery.databinding.ActivityKurirBarangBinding
 import com.kontrakanprojects.appdelivery.view.courier.barang.adapter.ViewPagerAdapter
 

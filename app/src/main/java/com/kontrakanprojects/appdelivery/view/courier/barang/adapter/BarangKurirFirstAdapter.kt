@@ -21,6 +21,11 @@ class BarangKurirFirstAdapter(val activity: Activity) :
         notifyDataSetChanged()
     }
 
+    fun clearData() {
+        listBarang.clear()
+        notifyDataSetChanged()
+    }
+
     fun setOnItemClickCallBack(onItemClickCallBack: OnItemClickCallBack) {
         this.onItemClickCallBack = onItemClickCallBack
     }

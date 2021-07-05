@@ -1,15 +1,12 @@
-package com.kontrakanprojects.appdelivery.view.courier.barang
+package com.kontrakanprojects.appdelivery.view.courier.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kontrakanprojects.appdelivery.model.barang.ResponseDetailBarang
 import com.kontrakanprojects.appdelivery.model.kurir.ResponseBarangKurir
-import com.kontrakanprojects.appdelivery.model.kurir.ResponseKurir
 import com.kontrakanprojects.appdelivery.model.tracking.ResponseTracking
 import com.kontrakanprojects.appdelivery.network.ApiConfig
-import com.kontrakanprojects.appdelivery.view.admin.barang.BarangViewModel
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,7 +32,6 @@ class BarangKurirViewModel: ViewModel() {
     }
 
     private fun trackings(params: HashMap<String, String>) {
-        Log.d("param", "trackings: $params")
         val client = ApiConfig.getApiService().addTracking(params)
 
         client.enqueue(object : Callback<ResponseTracking> {
@@ -65,7 +61,6 @@ class BarangKurirViewModel: ViewModel() {
     }
 
     private fun barangKurir(idBarang: Int) {
-
         val client = ApiConfig.getApiService().listDataBarangAdmin(idBarang)
 
         client.enqueue(object : Callback<ResponseBarangKurir> {
@@ -86,7 +81,6 @@ class BarangKurirViewModel: ViewModel() {
 
                     Log.e(TAG, "onFailure: $responseBarangKurir")
                 }
-
             }
 
             override fun onFailure(call: Call<ResponseBarangKurir>, t: Throwable) {

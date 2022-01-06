@@ -67,6 +67,20 @@
                     android:layout_marginBottom="5dp"
                     android:text="@string/rb_004" />
 
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_track_05"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/rb_005" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_track_06"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/rb_006" />
+
             </RadioGroup>
 
             <com.google.android.material.textview.MaterialTextView
@@ -109,6 +123,22 @@
                     android:layout_marginTop="6dp"
                     android:gravity="center"
                     tools:text="Latitude: -1.91231239\nLongitude: 1.12312311" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_choose_image_deliver"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_location_latlong"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/ambil_gambar_barang_sudah_tiba"
+                    android:textColor="@color/black" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_image_deliver"
+                    android:layout_width="210dp"
+                    android:layout_height="210dp"
+                    android:layout_below="@+id/btn_choose_image_deliver"
+                    android:layout_centerHorizontal="true" />
             </RelativeLayout>
 
             <com.google.android.material.button.MaterialButton

@@ -103,7 +103,10 @@ interface ApiService {
     @GET("kurir/tracking/{id_kurir}")
     fun listDataBarangAdmin(@Path("id_kurir") idKurir: Int): Call<ResponseBarangKurir>
 
-    @FormUrlEncoded
+    @Multipart
     @POST("tracking")
-    fun addTracking(@FieldMap params: HashMap<String, String>): Call<ResponseTracking>
+    fun addTracking(
+        @PartMap params: HashMap<String, RequestBody>,
+        @Part imagesParams: MultipartBody.Part?
+    ): Call<ResponseTracking>
 }

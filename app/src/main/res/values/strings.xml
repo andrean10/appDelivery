@@ -26,7 +26,9 @@
     <string name="rb_001">Barang Masih Di Gudang</string>
     <string name="rb_002">Barang Sedang Diambil Oleh Kurir Di Gudang</string>
     <string name="rb_003">Barang Sedang Di Perjalanan</string>
-    <string name="rb_004">Barang Sudah Diterima Pembeli</string>
+    <string name="rb_004">Kondisi Jalan Macet</string>
+    <string name="rb_005">Barang Akan Tiba Dilokasi</string>
+    <string name="rb_006">Barang Sudah Diterima Pembeli</string>
     <string name="default_info_title">Default Location</string>
     <string name="default_info_snippet">No places found, because location permission is disabled</string>
     <string name="distance">Jarak Dari Lokasi Ke Destinasi Tujuan</string>
@@ -45,6 +47,7 @@
     <string name="empty_send_barang_kurir">Tidak Ada Barang Yang Akan Diantar</string>
     <string name="empty_send_done_barang_kurir">Daftar Barang Yang Sudah Diantar Tidak Ada</string>
     <string name="pilih_lokasi_saya_sekarang">Pilih Lokasi Saya Sekarang</string>
+    <string name="ambil_gambar_barang_sudah_tiba">Ambil Gambar</string>
     <string name="save">Simpan</string>
     <string name="title_activity_maps">Map</string>
     <string name="pick_now_location">Pilih Lokasi Anda Sekarang</string>

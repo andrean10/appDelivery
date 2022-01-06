@@ -52,8 +52,8 @@ class BarangKurirSecondAdapter(val activity: Activity):
         fun bind(resultsBarangKurir: ResultsBarangKurir) {
             with(binding) {
 
-                if (resultsBarangKurir.statusBarang == "4"){
-                    val a = activity.getString(R.string.rb_004)
+                if (resultsBarangKurir.statusBarang == "6"){
+                    val a = activity.getString(R.string.rb_006)
                     tvStatusBarang01.text = a
                     tvNameCostumerRecycler.text = resultsBarangKurir.penerima
                 }

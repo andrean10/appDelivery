@@ -67,6 +67,12 @@ class BarangKurirFirstAdapter(val activity: Activity) :
                     "3" -> {
                         a = activity.getString(R.string.rb_003)
                     }
+                    "4" -> {
+                        a = activity.getString(R.string.rb_004)
+                    }
+                    "5" -> {
+                        a = activity.getString(R.string.rb_005)
+                    }
                 }
 
                 tvStatusBarang01.text = a

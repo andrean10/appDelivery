@@ -61,7 +61,7 @@ class SecondDoneFragment : Fragment() {
                     val result = response.results
                     val a = ArrayList<ResultsBarangKurir>();
                     result.forEach {
-                        if (it.statusBarang!!.toInt() == 4) {
+                        if (it.statusBarang!!.toInt() == 6) {
                             a.add(it)
                         }
                     }

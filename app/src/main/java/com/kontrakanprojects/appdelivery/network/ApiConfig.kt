@@ -13,7 +13,7 @@ class ApiConfig {
         // local
         //const val URL = "http://192.168.100.8:8000"
 
-        const val IMG_URL = "$URL/public"
+        const val IMG_URL = URL
 
         private const val ENDPOINT = "$URL/api/"
 

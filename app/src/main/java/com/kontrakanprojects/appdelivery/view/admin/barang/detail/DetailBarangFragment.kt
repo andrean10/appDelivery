@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.FragmentDetailBarangBinding
 import com.kontrakanprojects.appdelivery.model.barang.ResultDetailBarang
 import com.kontrakanprojects.appdelivery.model.kurir.ResultKurir
+import com.kontrakanprojects.appdelivery.network.ApiConfig
 import com.kontrakanprojects.appdelivery.sessions.UserPreference
 import com.kontrakanprojects.appdelivery.utils.showMessage
 import com.kontrakanprojects.appdelivery.view.admin.barang.BarangViewModel
@@ -72,15 +74,36 @@ class DetailBarangFragment : Fragment() {
                 when (result.statusBarang) {
                     "1" -> {
                         tvStatusPackage.text = getString(R.string.rb_001)
+                        tv09.visibility = View.GONE
+                        ivImageDeliver.visibility = View.GONE
                     }
                     "2" -> {
                         tvStatusPackage.text = getString(R.string.rb_002)
+                        tv09.visibility = View.GONE
+                        ivImageDeliver.visibility = View.GONE
                     }
                     "3" -> {
                         tvStatusPackage.text = getString(R.string.rb_003)
+                        tv09.visibility = View.GONE
+                        ivImageDeliver.visibility = View.GONE
                     }
                     "4" -> {
                         tvStatusPackage.text = getString(R.string.rb_004)
+                        tv09.visibility = View.GONE
+                        ivImageDeliver.visibility = View.GONE
+                    }
+                    "5" -> {
+                        tvStatusPackage.text = getString(R.string.rb_005)
+                        tv09.visibility = View.GONE
+                        ivImageDeliver.visibility = View.GONE
+                    }
+                    "6" -> {
+                        tvStatusPackage.text = getString(R.string.rb_006)
+                        Glide.with(requireContext())
+                            .load(ApiConfig.IMG_URL + result.fotoDiterima)
+                            .placeholder(R.drawable.no_profile_images)
+                            .error(R.drawable.no_profile_images)
+                            .into(ivImageDeliver)
                     }
                 }
 

@@ -49,6 +49,9 @@ data class ResultDetailBarang(
     @field:SerializedName("alamat")
     val alamat: String? = null,
 
+    @field:SerializedName("foto_diterima")
+    val fotoDiterima: String? = null,
+
     @field:SerializedName("longitude")
     val longitude: String? = null,
 

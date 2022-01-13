@@ -22,6 +22,9 @@ data class ResultsBarangKurir(
 	@field:SerializedName("penerima")
 	val penerima: String? = null,
 
+	@field:SerializedName("foto_diterima")
+	val foto_diterima: String? = null,
+
 	@field:SerializedName("kode_pelanggan")
 	val kodePelanggan: Int? = null,
 

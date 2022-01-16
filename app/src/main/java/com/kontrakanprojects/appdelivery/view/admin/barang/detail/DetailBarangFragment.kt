@@ -114,6 +114,7 @@ class DetailBarangFragment : Fragment() {
                 courierSend.text = result.namaLengkap
                 tvDistance.text = getString(R.string.km, result.distance)
                 tvDetailPackage.text = result.detailBarang
+                tvStatusEstimination.text = result.estiminasi + " Hari"
             }
         }
     }

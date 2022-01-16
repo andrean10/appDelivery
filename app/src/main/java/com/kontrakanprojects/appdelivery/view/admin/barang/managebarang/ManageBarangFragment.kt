@@ -32,11 +32,13 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
     private var destinationLong = ""
     private var distance = ""
     private var statusBarang = ""
+    private var statusEstiminasi = ""
 
     private var idBarang = 0
     private var request = 0
     private var idKurirFromSpinner = 0
     private var valid = true
+    private var isValid = true
 
     companion object {
         const val REQUEST_ADD = 100
@@ -158,6 +160,26 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
 
     private fun checkField(isAdd: Boolean = false) {
         with(binding) {
+            when{
+                rbOneDay.isChecked -> {
+                    statusEstiminasi = "1"
+                }
+                rbTwoDay.isChecked -> {
+                    statusEstiminasi = "2"
+                }
+                rbThreeDay.isChecked -> {
+                    statusEstiminasi = "3"
+                }
+                rbFourDay.isChecked -> {
+                    statusEstiminasi = "4"
+                }
+                rbFifthDay.isChecked -> {
+                    statusEstiminasi = "5"
+                }
+                else -> {
+                    isValid = false
+                }
+            }
             val kodePelanggan = etCostumerCode.text.toString().trim()
             val penerima = etCostumerName.text.toString().trim()
             val noHp = etPhoneNumber.text.toString().trim()
@@ -198,7 +220,8 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
                 "longitude" to destinationLong,
                 "distance" to distance,
                 "id_kurir" to idKurirFromSpinner.toString(),
-                "detail_barang" to detailBarang
+                "detail_barang" to detailBarang,
+                "estiminasi" to statusEstiminasi
             )
 
             if (valid) {
@@ -242,6 +265,27 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
             etPhoneNumber.setText(result.nomorHp)
             etFullAddress.setText(result.alamat)
             etPackageDetail.setText(result.detailBarang)
+
+            statusEstiminasi = result.estiminasi.toString()
+
+            when{
+                (statusEstiminasi == "1") -> {
+                    rbOneDay.isChecked = true
+                }
+                (statusEstiminasi == "2") -> {
+                    rbTwoDay.isChecked = true
+                }
+                (statusEstiminasi == "3") -> {
+                    rbThreeDay.isChecked = true
+                }
+                (statusEstiminasi == "4") -> {
+                    rbFourDay.isChecked = true
+                }
+                (statusEstiminasi == "5") -> {
+                    rbFifthDay.isChecked = true
+                }
+            }
+
 
             // passing data lokasi dan jarak ke textview dan variabel
             tvLocationLatlong.text = getString(R.string.latlong, result.latitude, result.longitude)

@@ -60,4 +60,7 @@ data class ResultDetailBarang(
 
     @field:SerializedName("nama_lengkap")
     val namaLengkap: String? = null,
+
+    @field:SerializedName("estiminasi")
+    val estiminasi: String? = null,
 )

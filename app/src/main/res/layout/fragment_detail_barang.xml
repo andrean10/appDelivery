@@ -248,6 +248,26 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="10dp" />
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_image_deliver"
+                    android:layout_marginBottom="3dp"
+                    android:text="Estiminasi"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_status_estimination"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_10"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:text="3 Hari" />
+
             </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
         </ScrollView>
     </com.google.android.material.circularreveal.CircularRevealRelativeLayout>

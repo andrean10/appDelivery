@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.google.android.material.textfield.TextInputEditText
 import com.kontrakanprojects.appdelivery.R
 import com.kontrakanprojects.appdelivery.databinding.FragmentManageBarangBinding
@@ -24,6 +25,9 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentManageBarangBinding? = null
     private val binding get() = _binding!!
     private var viewModel: BarangViewModel? = null
+
+    var estiminationList: MutableList<String>? = null
+    var spin: SmartMaterialSpinner<String>? = null
 
     private var resultBarang: ResultDetailBarang? = null
     private var myLocationLat = ""
@@ -88,14 +92,64 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
             }
         }
 
+        spin = view.findViewById(R.id.spinner1)
+
         setToolbarTitle(titleToolbar)
         prepareSpinnerItem()
+        setAdapterSpinnerEstimation(spin)
 
         with(binding) {
             btnChooseLocation.setOnClickListener(this@ManageBarangFragment)
             btnSavePackage.setOnClickListener(this@ManageBarangFragment)
         }
     }
+
+    private fun setAdapterSpinnerEstimation(spin: SmartMaterialSpinner<String>?) {
+        estiminationList = ArrayList()
+        estiminationList?.add("1 Hari")
+        estiminationList?.add("2 Hari")
+        estiminationList?.add("3 Hari")
+        estiminationList?.add("4 Hari")
+        estiminationList?.add("5 Hari")
+
+        spin?.item = estiminationList
+
+        if(request == REQUEST_EDIT){
+            with(binding){
+                tvEst.visibility = View.GONE
+            }
+            spin?.visibility = View.GONE
+        }
+
+        spin?.onItemSelectedListener = object : AdapterView.OnItemClickListener,
+            AdapterView.OnItemSelectedListener {
+            override fun onItemClick(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long,
+            ) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long,
+            ) {
+                val itemEstimation = parent?.selectedItem
+
+                statusEstiminasi = itemEstimation.toString()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+    }
+
 
     private fun observeLocation() {
         // observe location maps
@@ -159,6 +213,7 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
     }
 
     private fun checkField(isAdd: Boolean = false) {
+
         with(binding) {
             when{
                 rbOneDay.isChecked -> {
@@ -180,6 +235,7 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
                     isValid = false
                 }
             }
+
             val kodePelanggan = etCostumerCode.text.toString().trim()
             val penerima = etCostumerName.text.toString().trim()
             val noHp = etPhoneNumber.text.toString().trim()

@@ -14,16 +14,20 @@
         <entry key="..\:/Kerja/Dev/Delivery/app/src/main/res/layout/bottom_sheet_editprofile.xml" value="0.21041666666666667" />
         <entry key="..\:/Kerja/Dev/Delivery/app/src/main/res/layout/bottom_sheet_editprofilepass.xml" value="0.21041666666666667" />
         <entry key="..\:/Kerja/Dev/Delivery/app/src/main/res/layout/bottom_sheet_pick.xml" value="0.22083333333333333" />
+        <entry key="..\:/Kerja/Dev/Delivery/app/src/main/res/layout/fragment_barang.xml" value="0.19444444444444445" />
         <entry key="..\:/Kerja/Dev/Delivery/app/src/main/res/layout/fragment_dashboard.xml" value="0.17592592592592593" />
         <entry key="..\:/Kerja/Dev/Delivery/app/src/main/res/layout/fragment_detail_barang.xml" value="0.19907407407407407" />
         <entry key="..\:/Kerja/Dev/Delivery/app/src/main/res/layout/fragment_detail_couriers.xml" value="0.22083333333333333" />
+        <entry key="..\:/Kerja/Dev/Delivery/app/src/main/res/layout/fragment_first_proses.xml" value="0.21041666666666667" />
         <entry key="..\:/Kerja/Dev/Delivery/app/src/main/res/layout/fragment_home.xml" value="0.20677083333333332" />
         <entry key="..\:/Kerja/Dev/Delivery/app/src/main/res/layout/fragment_login.xml" value="0.20185185185185187" />
         <entry key="..\:/Kerja/Dev/Delivery/app/src/main/res/layout/fragment_manage_barang.xml" value="0.22" />
+        <entry key="..\:/Kerja/Dev/Delivery/app/src/main/res/layout/fragment_tracking_barang.xml" value="0.17037037037037037" />
         <entry key="..\:/Kerja/Dev/Delivery/app/src/main/res/layout/rv_courier_list.xml" value="0.20677083333333332" />
         <entry key="..\:/Kerja/Dev/Delivery/app/src/main/res/layout/rv_courier_package_list_first.xml" value="0.1685185185185185" />
         <entry key="..\:/Kerja/Dev/Delivery/app/src/main/res/layout/rv_courier_package_list_second.xml" value="0.1685185185185185" />
         <entry key="..\:/Kerja/Dev/Delivery/app/src/main/res/layout/rv_package_list.xml" value="0.22" />
+        <entry key="..\:/Kerja/Dev/Delivery/app/src/main/res/layout/rv_waybill.xml" value="0.21041666666666667" />
       </map>
     </option>
   </component>

@@ -141,6 +141,7 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
                 val itemEstimation = parent?.selectedItem
 
                 statusEstiminasi = itemEstimation.toString()
+                Log.d(TAG, "Apasii $statusEstiminasi")
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -217,19 +218,19 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
         with(binding) {
             when{
                 rbOneDay.isChecked -> {
-                    statusEstiminasi = "1"
+                    statusEstiminasi = "1 Hari"
                 }
                 rbTwoDay.isChecked -> {
-                    statusEstiminasi = "2"
+                    statusEstiminasi = "2 Hari"
                 }
                 rbThreeDay.isChecked -> {
-                    statusEstiminasi = "3"
+                    statusEstiminasi = "3 Hari"
                 }
                 rbFourDay.isChecked -> {
-                    statusEstiminasi = "4"
+                    statusEstiminasi = "4 Hari"
                 }
                 rbFifthDay.isChecked -> {
-                    statusEstiminasi = "5"
+                    statusEstiminasi = "5 Hari"
                 }
                 else -> {
                     isValid = false
@@ -323,24 +324,25 @@ class ManageBarangFragment : Fragment(), View.OnClickListener {
             etPackageDetail.setText(result.detailBarang)
 
             statusEstiminasi = result.estiminasi.toString()
+            Log.d(TAG, "apasii2: $statusEstiminasi")
 
-            when{
-                (statusEstiminasi == "1") -> {
-                    rbOneDay.isChecked = true
-                }
-                (statusEstiminasi == "2") -> {
-                    rbTwoDay.isChecked = true
-                }
-                (statusEstiminasi == "3") -> {
-                    rbThreeDay.isChecked = true
-                }
-                (statusEstiminasi == "4") -> {
-                    rbFourDay.isChecked = true
-                }
-                (statusEstiminasi == "5") -> {
-                    rbFifthDay.isChecked = true
-                }
-            }
+//            when{
+//                (statusEstiminasi == "1") -> {
+//                    rbOneDay.isChecked = true
+//                }
+//                (statusEstiminasi == "2") -> {
+//                    rbTwoDay.isChecked = true
+//                }
+//                (statusEstiminasi == "3") -> {
+//                    rbThreeDay.isChecked = true
+//                }
+//                (statusEstiminasi == "4") -> {
+//                    rbFourDay.isChecked = true
+//                }
+//                (statusEstiminasi == "5") -> {
+//                    rbFifthDay.isChecked = true
+//                }
+//            }
 
 
             // passing data lokasi dan jarak ke textview dan variabel

@@ -82,7 +82,6 @@ class ManageTrackingKurirActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityManageTrackingKurirBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setToolbarTitle()
-
         idBarang = intent.getIntExtra(EXTRA_ID_BARANG, 0)
         statusBarang = intent.getIntExtra(EXTRA_STATUS_BARANG, 0)
 

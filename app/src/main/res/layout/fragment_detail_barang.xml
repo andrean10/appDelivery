@@ -76,6 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/barrier_01"
                     android:layout_marginBottom="3dp"
+                    android:textStyle="bold"
                     android:text="Kode Pelanggan"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -96,6 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_code_costumer"
                     android:layout_marginBottom="3dp"
+                    android:textStyle="bold"
                     android:text="Nama "
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -116,6 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_name_costumer"
                     android:layout_marginBottom="3dp"
+                    android:textStyle="bold"
                     android:text="Nomor HP"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -136,6 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_number_phone"
                     android:layout_marginBottom="3dp"
+                    android:textStyle="bold"
                     android:text="Alamat "
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -156,6 +160,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_address_costumer"
                     android:layout_marginBottom="3dp"
+                    android:textStyle="bold"
                     android:text="Kurir Yang Mengirim"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -176,6 +181,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/courier_send"
                     android:layout_marginBottom="3dp"
+                    android:textStyle="bold"
                     android:text="Jarak Barang Ke Lokasi Pengiriman"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -196,6 +202,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_distance"
                     android:layout_marginBottom="3dp"
+                    android:textStyle="bold"
                     android:text="Detail Barang"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -216,6 +223,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_detail_package"
                     android:layout_marginBottom="3dp"
+                    android:textStyle="bold"
                     android:text="Status Barang"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -234,8 +242,9 @@
                     android:id="@+id/tv_09"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_status_package"
+                    android:layout_below="@+id/tv_status_estimination"
                     android:layout_marginBottom="3dp"
+                    android:textStyle="bold"
                     android:text="Foto Barang Sudah Diterima"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
@@ -252,8 +261,9 @@
                     android:id="@+id/tv_10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/iv_image_deliver"
+                    android:layout_below="@+id/tv_status_package"
                     android:layout_marginBottom="3dp"
+                    android:textStyle="bold"
                     android:text="Estiminasi"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
